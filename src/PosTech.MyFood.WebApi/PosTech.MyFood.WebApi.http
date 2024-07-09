@@ -1,0 +1,6 @@
+@PosTech.MyFood.WebApi_HostAddress = http://localhost:5293
+
+GET {{PosTech.MyFood.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

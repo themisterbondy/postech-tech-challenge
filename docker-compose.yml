@@ -1,0 +1,6 @@
+﻿services:
+  postech.myfood.webapi:
+    image: postech.myfood.webapi
+    build:
+      context: .
+      dockerfile: src/PosTech.MyFood.WebApi/Dockerfile
