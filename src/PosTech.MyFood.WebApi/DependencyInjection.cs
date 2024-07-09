@@ -51,7 +51,7 @@ public static class DependencyInjection
             {
                 Description = "PosTech MyFood API",
                 Version = "v1",
-                Title = "DocHub PosTech MyFood API"
+                Title = "PosTech MyFood API"
             });
         });
 
