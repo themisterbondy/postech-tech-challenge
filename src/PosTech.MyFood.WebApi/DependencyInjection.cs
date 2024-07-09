@@ -1,9 +1,12 @@
 using System.Reflection;
+using Carter;
+using DocHub.DocumentStorage.WebApi.Common;
+using FluentValidation;
 using MediatR;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using PosTech.MyFood.WebApi.Behavior;
+using PosTech.MyFood.WebApi.Common.Behavior;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
@@ -17,20 +20,27 @@ public static class DependencyInjection
 
     public static IServiceCollection AddWebApi(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddMediatRConfiguration();
         services.AddSwaggerConfiguration();
         services.AddOpenTelemetryConfiguration();
+
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddUseHealthChecksConfiguration(configuration);
+        services.AddValidatorsFromAssembly(Assembly);
+
+        services.AddProblemDetails();
+        services.AddCarter();
 
         return services;
     }
 
-    public static IServiceCollection AddMediatoRConfiguration(this IServiceCollection services)
+    private static IServiceCollection AddMediatRConfiguration(this IServiceCollection services)
     {
         services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         return services;
     }
-
 
     private static IServiceCollection AddSwaggerConfiguration(this IServiceCollection services)
     {

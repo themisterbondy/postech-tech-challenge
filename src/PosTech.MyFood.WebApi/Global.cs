@@ -1,1 +1,1 @@
-global using PosTech.MyFood.SharedKernel;
+global using PosTech.MyFood.WebApi.Common.ResultPattern;
