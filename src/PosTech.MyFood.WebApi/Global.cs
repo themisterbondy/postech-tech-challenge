@@ -1,0 +1,1 @@
+global using PosTech.MyFood.SharedKernel;
