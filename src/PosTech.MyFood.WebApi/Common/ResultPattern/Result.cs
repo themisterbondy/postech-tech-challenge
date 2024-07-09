@@ -1,4 +1,4 @@
-﻿namespace PosTech.MyFood.SharedKernel;
+﻿namespace PosTech.MyFood.WebApi.Common.ResultPattern;
 
 /// <summary>
 ///     Represents a result of some operation, with status information and possibly an error.

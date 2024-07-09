@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
+using PosTech.MyFood.WebApi.Common.Validation;
 
-namespace PosTech.MyFood.WebApi.Behavior;
+namespace PosTech.MyFood.WebApi.Common.Behavior;
 
 public class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>

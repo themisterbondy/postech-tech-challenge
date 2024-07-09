@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.SharedKernel;
+namespace PosTech.MyFood.WebApi.Common.ResultPattern;
 
 /// <summary>
 /// Represents an error with its code, message, and type.

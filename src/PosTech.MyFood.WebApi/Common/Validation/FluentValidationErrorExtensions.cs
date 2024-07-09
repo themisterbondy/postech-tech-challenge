@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace PosTech.MyFood.SharedKernel;
+namespace PosTech.MyFood.WebApi.Common.Validation;
 
 public static class FluentValidationErrorExtensions
 {

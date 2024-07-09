@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.SharedKernel;
+namespace PosTech.MyFood.WebApi.Common.ResultPattern;
 
 /// <summary>
 ///     Represents a result that can contain a value of type TValue.

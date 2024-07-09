@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Serilog.Context;
 
-namespace PosTech.MyFood.WebApi.Behavior;
+namespace PosTech.MyFood.WebApi.Common.Behavior;
 
 public class LoggingPipelineBehavior<TRequest, TResponse>(
     ILogger<LoggingPipelineBehavior<TRequest, TResponse>> logger)

@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.SharedKernel;
+namespace PosTech.MyFood.WebApi.Common.Validation;
 
 /// <summary>
 ///     Represents the result of a validation.
