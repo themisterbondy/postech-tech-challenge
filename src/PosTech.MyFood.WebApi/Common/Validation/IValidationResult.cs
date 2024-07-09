@@ -22,5 +22,5 @@ public interface IValidationResult
     /// <returns>
     ///     An array of Error objects.
     /// </returns>
-    Error[] Errors { get; }
+    Error[]? Errors { get; }
 }

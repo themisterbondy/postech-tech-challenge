@@ -52,10 +52,10 @@ public static class DependencyInjection
     {
         var serviceName = Assembly.GetName().Name;
         services.AddOpenTelemetry()
-            .ConfigureResource(resourceBuilder => resourceBuilder.AddService(serviceName))
+            .ConfigureResource(resourceBuilder => resourceBuilder.AddService(serviceName!))
             .WithTracing(tracing =>
             {
-                tracing.AddSource(serviceName);
+                tracing.AddSource(serviceName!);
                 tracing.AddAspNetCoreInstrumentation();
                 tracing.AddEntityFrameworkCoreInstrumentation();
                 tracing.AddHttpClientInstrumentation(builder =>

@@ -8,7 +8,7 @@ public class ValidationResult : Result, IValidationResult
     /// <summary>
     ///     Represents the result of a validation operation.
     /// </summary>
-    private ValidationResult(Error[] errors) : base(false, IValidationResult.ValidationError, errors)
+    private ValidationResult(Error[]? errors) : base(false, IValidationResult.ValidationError, errors!)
     {
     }
 

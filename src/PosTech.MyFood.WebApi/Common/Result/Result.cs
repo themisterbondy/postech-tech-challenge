@@ -82,9 +82,9 @@ public class Result
     /// <value>
     ///     The error.
     /// </value>
-    public Error Error { get; }
+    public Error? Error { get; }
 
-    public Error[] Errors { get; }
+    public Error[]? Errors { get; }
 
     /// <summary>
     ///     Creates a new instance of the Result class with a successful result and no error.
