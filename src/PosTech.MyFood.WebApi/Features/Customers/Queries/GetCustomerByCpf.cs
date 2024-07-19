@@ -1,13 +1,13 @@
 using FluentValidation;
-using PosTech.MyFood.Features.Customers.Repository;
 using PosTech.MyFood.WebApi.Common.Validation;
 using PosTech.MyFood.WebApi.Features.Customers.Contracts;
+using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
 namespace PosTech.MyFood.Features.Customers.Queries;
 
 public class GetCustomerByCpf
 {
-    public class Query : IRequest<Result<CreateCustomerResponse>>
+    public class Query : IRequest<Result<CustomerResponse>>
     {
         public string CPF { get; set; }
     }
@@ -25,17 +25,17 @@ public class GetCustomerByCpf
     }
 
     public class GetCustomerByCpfHandler(ICustomerRepository customerRepository)
-        : IRequestHandler<Query, Result<CreateCustomerResponse>>
+        : IRequestHandler<Query, Result<CustomerResponse>>
     {
-        public async Task<Result<CreateCustomerResponse>> Handle(Query request,
+        public async Task<Result<CustomerResponse>> Handle(Query request,
             CancellationToken cancellationToken)
         {
             var customer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
 
             if (customer.IsFailure)
-                return Result.Failure<CreateCustomerResponse>(customer.Error);
+                return Result.Failure<CustomerResponse>(customer.Error);
 
-            return new CreateCustomerResponse
+            return new CustomerResponse
             {
                 Id = customer.Value.Id.Value,
                 Name = customer.Value.Name,

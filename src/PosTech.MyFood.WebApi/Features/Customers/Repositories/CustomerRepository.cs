@@ -2,16 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using PosTech.MyFood.WebApi.Features.Customers.Entities;
 using PosTech.MyFood.WebApi.Persistence;
 
-namespace PosTech.MyFood.Features.Customers.Repository;
+namespace PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
 public class CustomerRepository(ApplicationDbContext _context) : ICustomerRepository
 {
-    public async Task<Result<Customer>> CreateAsync(Customer customer, CancellationToken cancellationToken)
+    public async Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken)
     {
         _context.Customers.Add(customer);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Result.Success(customer);
+        return customer;
     }
 
     public async Task<Result<Customer>> GetByCPFAsync(string cpf, CancellationToken cancellationToken)

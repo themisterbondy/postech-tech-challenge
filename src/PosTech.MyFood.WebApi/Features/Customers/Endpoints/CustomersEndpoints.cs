@@ -10,7 +10,7 @@ public class CustomersEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/customers");
 
-        group.MapPost("/", async (CreateCustomerRequest request, IMediator mediator) =>
+        group.MapPost("/", async (CustomerRequest request, IMediator mediator) =>
             {
                 var Command = new CreateCustomer.Command
                 {
@@ -26,8 +26,8 @@ public class CustomersEndpoints : ICarterModule
                     : result.ToProblemDetails();
             })
             .WithName("CreateCustomer")
-            .Accepts<CreateCustomerRequest>("application/json")
-            .Produces<CreateCustomerResponse>(201)
+            .Accepts<CustomerRequest>("application/json")
+            .Produces<CustomerResponse>(201)
             .WithTags("Customers")
             .WithOpenApi();
 
@@ -40,7 +40,7 @@ public class CustomersEndpoints : ICarterModule
                     : result.ToProblemDetails();
             })
             .WithName("GetCustomerByCpf")
-            .Produces<CreateCustomerResponse>()
+            .Produces<CustomerResponse>()
             .WithTags("Customers")
             .WithOpenApi();
     }

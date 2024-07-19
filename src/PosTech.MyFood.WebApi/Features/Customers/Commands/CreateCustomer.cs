@@ -1,14 +1,14 @@
 using FluentValidation;
-using PosTech.MyFood.Features.Customers.Repository;
 using PosTech.MyFood.WebApi.Common.Validation;
 using PosTech.MyFood.WebApi.Features.Customers.Contracts;
 using PosTech.MyFood.WebApi.Features.Customers.Entities;
+using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
 namespace PosTech.MyFood.WebApi.Features.Customers.Commands;
 
 public class CreateCustomer
 {
-    public class Command : IRequest<Result<CreateCustomerResponse>>
+    public class Command : IRequest<Result<CustomerResponse>>
     {
         public string Name { get; set; }
         public string Email { get; set; }
@@ -35,15 +35,15 @@ public class CreateCustomer
     }
 
     public class CreateCustomerHandler(ICustomerRepository customerRepository)
-        : IRequestHandler<Command, Result<CreateCustomerResponse>>
+        : IRequestHandler<Command, Result<CustomerResponse>>
     {
-        public async Task<Result<CreateCustomerResponse>> Handle(Command request,
+        public async Task<Result<CustomerResponse>> Handle(Command request,
             CancellationToken cancellationToken)
         {
             var existingCustomer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
 
             if (existingCustomer.IsSuccess)
-                return Result.Failure<CreateCustomerResponse>(Error.Conflict("CreateCustomer.CreateCustomerHandler",
+                return Result.Failure<CustomerResponse>(Error.Conflict("CreateCustomer.CreateCustomerHandler",
                     "Customer already exists."));
 
             var customer = await customerRepository.CreateAsync(
@@ -53,15 +53,12 @@ public class CreateCustomer
                     request.CPF),
                 cancellationToken);
 
-            if (customer.IsFailure)
-                return Result.Failure<CreateCustomerResponse>(existingCustomer.Error);
-
-            return new CreateCustomerResponse
+            return new CustomerResponse
             {
-                Id = customer.Value.Id.Value,
-                Name = customer.Value.Name,
-                Email = customer.Value.Email,
-                CPF = customer.Value.CPF
+                Id = customer.Id.Value,
+                Name = customer.Name,
+                Email = customer.Email,
+                CPF = customer.CPF
             };
         }
     }
