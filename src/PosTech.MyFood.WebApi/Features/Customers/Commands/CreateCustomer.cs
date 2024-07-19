@@ -1,4 +1,5 @@
 using FluentValidation;
+using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.WebApi.Common.Validation;
 using PosTech.MyFood.WebApi.Features.Customers.Contracts;
 using PosTech.MyFood.WebApi.Features.Customers.Entities;
@@ -34,17 +35,17 @@ public class CreateCustomer
         }
     }
 
-    public class CreateCustomerHandler(ICustomerRepository customerRepository)
+    public class CreateCustomerHandler(ICustomerRepository customerRepository, ICustomerServices customerServices)
         : IRequestHandler<Command, Result<CustomerResponse>>
     {
         public async Task<Result<CustomerResponse>> Handle(Command request,
             CancellationToken cancellationToken)
         {
-            var existingCustomer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
+            var isUniqueCustomer =
+                await customerServices.IsUniqueCustomer(request.Email, request.CPF, cancellationToken);
 
-            if (existingCustomer.IsSuccess)
-                return Result.Failure<CustomerResponse>(Error.Conflict("CreateCustomer.CreateCustomerHandler",
-                    "Customer already exists."));
+            if (isUniqueCustomer.IsFailure)
+                return Result.Failure<CustomerResponse>(isUniqueCustomer.Error);
 
             var customer = await customerRepository.CreateAsync(
                 Customer.Create(CustomerId.New(),
