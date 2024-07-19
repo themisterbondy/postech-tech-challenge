@@ -1,4 +1,3 @@
-using Carter;
 using DocHub.DocumentStorage.WebApi.Common;
 using PosTech.MyFood;
 using PosTech.MyFood.WebApi.Common.Middleware;
@@ -11,6 +10,7 @@ builder.Services.AddWebApi(configuration);
 builder.Services.AddSerilogConfiguration(builder, configuration);
 
 var app = builder.Build();
+app.ApplyMigrations();
 app.UseHealthChecksConfiguration();
 app.UseSwagger();
 app.UseSwaggerUI();

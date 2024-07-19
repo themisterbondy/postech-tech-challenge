@@ -2,11 +2,14 @@ using System.Reflection;
 using Carter;
 using DocHub.DocumentStorage.WebApi.Common;
 using FluentValidation;
-using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using PosTech.MyFood.Features.Customers.Repository;
 using PosTech.MyFood.WebApi.Common.Behavior;
+using PosTech.MyFood.WebApi.Persistence;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
@@ -30,6 +33,10 @@ public static class DependencyInjection
 
         services.AddProblemDetails();
         services.AddCarter();
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("SQLConnection")));
+
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }
