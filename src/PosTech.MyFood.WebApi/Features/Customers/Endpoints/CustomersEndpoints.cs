@@ -11,7 +11,7 @@ public class CustomersEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/customers");
 
-        group.MapPost("/", async ([FromBody] CustomerRequest request, [FromServices] IMediator mediator) =>
+        group.MapPost("/", async (CustomerRequest request, [FromServices] IMediator mediator) =>
             {
                 var Command = new CreateCustomer.Command
                 {
@@ -32,7 +32,7 @@ public class CustomersEndpoints : ICarterModule
             .WithTags("Customers")
             .WithOpenApi();
 
-        group.MapGet("/{cpf}", async ([FromQuery] string cpf, [FromServices] IMediator mediator) =>
+        group.MapGet("/{cpf}", async (string cpf, [FromServices] IMediator mediator) =>
             {
                 var query = new GetCustomerByCpf.Query { CPF = cpf };
                 var result = await mediator.Send(query);
