@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using PosTech.MyFood.Features.Customers.Queries;
 using PosTech.MyFood.WebApi.Features.Customers.Commands;
 using PosTech.MyFood.WebApi.Features.Customers.Contracts;
@@ -10,7 +11,7 @@ public class CustomersEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/customers");
 
-        group.MapPost("/", async (CustomerRequest request, IMediator mediator) =>
+        group.MapPost("/", async ([FromBody] CustomerRequest request, [FromServices] IMediator mediator) =>
             {
                 var Command = new CreateCustomer.Command
                 {
@@ -31,7 +32,7 @@ public class CustomersEndpoints : ICarterModule
             .WithTags("Customers")
             .WithOpenApi();
 
-        group.MapGet("/{cpf}", async (string cpf, IMediator mediator) =>
+        group.MapGet("/{cpf}", async ([FromQuery] string cpf, [FromServices] IMediator mediator) =>
             {
                 var query = new GetCustomerByCpf.Query { CPF = cpf };
                 var result = await mediator.Send(query);
