@@ -12,8 +12,8 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240719040106_Product")]
-    partial class Product
+    [Migration("20240719043457_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f4991993-dab5-4066-81fa-a9052f16dfaa"),
+                            Id = new Guid("e13ef573-672d-4f90-b0ec-86b4a20c49e4"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -70,7 +70,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("99ffb616-5103-48e9-947c-0c67cf0de18b"),
+                            Id = new Guid("c099dd59-dc95-4826-869f-f37495f28689"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -79,7 +79,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7d6a1a43-bc38-40b1-8785-fbd2ee1ac376"),
+                            Id = new Guid("ab7ce4ee-ae32-46a0-8955-31b514324a6d"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -88,7 +88,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e3de7071-d9a6-476b-ac43-880283072683"),
+                            Id = new Guid("1fab33e7-0325-4c45-99bf-06cc6a526a09"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
@@ -121,12 +121,18 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CPF")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("42878b98-bacc-4d95-b3f5-bcd9829c5cdf"),
+                            Id = new Guid("cd0bcc12-07e2-4d16-a12c-1f38656265cd"),
                             CPF = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
