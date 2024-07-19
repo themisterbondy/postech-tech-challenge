@@ -1,5 +1,5 @@
 using System.Reflection;
-using Carter;
+using System.Text.Json.Serialization;
 using DocHub.DocumentStorage.WebApi.Common;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +26,7 @@ public static class DependencyInjection
         services.AddMediatRConfiguration();
         services.AddSwaggerConfiguration();
         services.AddOpenTelemetryConfiguration();
+        services.AddJsonOptions();
 
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddUseHealthChecksConfiguration(configuration);
@@ -73,6 +74,9 @@ public static class DependencyInjection
             .WithTracing(tracing =>
             {
                 tracing.AddSource(serviceName!);
+                tracing.ConfigureResource(resource => resource
+                    .AddService(serviceName)
+                    .AddTelemetrySdk());
                 tracing.AddAspNetCoreInstrumentation();
                 tracing.AddEntityFrameworkCoreInstrumentation();
                 tracing.AddHttpClientInstrumentation(builder =>
@@ -86,8 +90,6 @@ public static class DependencyInjection
                         activity.SetTag("http.response_content", message.Content?.ReadAsStringAsync().Result);
                     };
                 });
-
-                tracing.AddOtlpExporter();
             });
 
         return services;
@@ -113,6 +115,21 @@ public static class DependencyInjection
 
         builder.Logging.ClearProviders();
         builder.Host.UseSerilog(Log.Logger, true);
+
+        return services;
+    }
+
+    public static IServiceCollection AddJsonOptions(this IServiceCollection services)
+    {
+        services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+
+        services.Configure<JsonOptions>(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
 
         return services;
     }
