@@ -14,13 +14,15 @@ public class CustomerRepository(ApplicationDbContext _context) : ICustomerReposi
         return customer;
     }
 
-    public async Task<Result<Customer>> GetByCPFAsync(string cpf, CancellationToken cancellationToken)
+    public async Task<Customer> GetByCPFAsync(string cpf, CancellationToken cancellationToken)
     {
-        var existingCustomer =
+        return
             await _context.Customers.FirstOrDefaultAsync(x => x.CPF == cpf, cancellationToken);
+    }
 
-        return existingCustomer == null
-            ? Result.Failure<Customer>(Error.NotFound("CustomerRepository.GetByCPFAsync", "Customer not found."))
-            : Result.Success(existingCustomer);
+    public async Task<Customer> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return
+            await _context.Customers.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
     }
 }
