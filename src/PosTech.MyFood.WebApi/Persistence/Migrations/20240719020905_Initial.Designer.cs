@@ -12,7 +12,7 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240719000302_Initial")]
+    [Migration("20240719020905_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,7 +20,6 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("myfood")
                 .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -51,12 +50,12 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers", "myfood");
+                    b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2a953268-9fb3-4234-8e93-c24e5f4e5942"),
+                            Id = new Guid("514de985-d317-4bcf-b660-acbe9530ee46"),
                             CPF = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
