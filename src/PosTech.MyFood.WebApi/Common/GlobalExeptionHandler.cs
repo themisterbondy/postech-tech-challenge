@@ -16,7 +16,11 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         {
             Status = StatusCodes.Status500InternalServerError,
             Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
-            Title = "Internal Server Error"
+            Title = "Internal Server Error",
+            Extensions = new Dictionary<string, object?>
+            {
+                { "error", exception.Message }
+            }
         };
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
