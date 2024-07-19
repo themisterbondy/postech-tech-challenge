@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Common.Behavior;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
@@ -39,6 +40,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("SQLConnection")));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<ICustomerServices, CustomerServices>();
         services.AddScoped<IProductRepository, ProductRepository>();
 
         return services;
