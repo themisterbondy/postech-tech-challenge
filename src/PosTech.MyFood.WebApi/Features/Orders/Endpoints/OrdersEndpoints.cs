@@ -31,8 +31,8 @@ public class OrdersEndpoints : ICarterModule
             .WithTags("Orders")
             .WithOpenApi();
 
-        group.MapPut("/{id}/status",
-                async ([FromQuery] Guid id, [FromQuery] OrderQueueStatus Status, IMediator mediator) =>
+        group.MapPut("/{id:guid}/status",
+                async (Guid id, [FromQuery] OrderQueueStatus Status, IMediator mediator) =>
                 {
                     var result = await mediator.Send(new UpdateOrderQueueStatusCommand.Command
                     {
@@ -48,7 +48,7 @@ public class OrdersEndpoints : ICarterModule
             .WithTags("Orders")
             .WithOpenApi();
 
-        group.MapGet("/{id}", async (Guid id, ISender sender) =>
+        group.MapGet("/{id:guid}", async (Guid id, ISender sender) =>
             {
                 var result = await sender.Send(new GetOrderQueueById.Query { Id = id });
                 return result.IsSuccess
