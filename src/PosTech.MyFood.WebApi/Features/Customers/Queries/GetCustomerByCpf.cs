@@ -3,7 +3,7 @@ using PosTech.MyFood.WebApi.Common.Validation;
 using PosTech.MyFood.WebApi.Features.Customers.Contracts;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
-namespace PosTech.MyFood.Features.Customers.Queries;
+namespace PosTech.MyFood.WebApi.Features.Customers.Queries;
 
 public class GetCustomerByCpf
 {

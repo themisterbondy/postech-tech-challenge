@@ -1,9 +1,9 @@
 using FluentValidation;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Common.Validation;
+using PosTech.MyFood.WebApi.Features.Products.Entities;
 
-namespace PosTech.MyFood.Features.Products.Commands;
+namespace PosTech.MyFood.WebApi.Features.Products.Commands;
 
 public class DeleteProduct
 {

@@ -4,6 +4,7 @@ using PosTech.MyFood.WebApi.Features.Customers.Entities;
 
 namespace PosTech.MyFood.WebApi.Persistence.Configurations;
 
+[ExcludeFromCodeCoverage]
 public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)

@@ -4,6 +4,7 @@ namespace PosTech.MyFood.WebApi.Common.Validation;
 ///     Represents the result of a validation operation.
 /// </summary>
 /// <typeparam name="TValue">The type of the validated value.</typeparam>
+[ExcludeFromCodeCoverage]
 public class ValidationResult<TValue> : Result<TValue>, IValidationResult
 {
     /// <summary>

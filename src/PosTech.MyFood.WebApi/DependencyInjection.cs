@@ -11,8 +11,10 @@ using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Common.Behavior;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
+using PosTech.MyFood.WebApi.Features.Customers.Services;
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Services;
+using PosTech.MyFood.WebApi.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Persistence;
 using Serilog;
 using Serilog.Events;
@@ -21,6 +23,7 @@ using Serilog.Filters;
 
 namespace PosTech.MyFood;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     private static readonly Assembly Assembly = typeof(Program).Assembly;

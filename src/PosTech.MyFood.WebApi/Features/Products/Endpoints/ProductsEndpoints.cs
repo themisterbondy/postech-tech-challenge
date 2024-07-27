@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using PosTech.MyFood.Features.Products.Commands;
 using PosTech.MyFood.Features.Products.Entities;
-using PosTech.MyFood.Features.Products.Queries;
+using PosTech.MyFood.WebApi.Features.Products.Commands;
 using PosTech.MyFood.WebApi.Features.Products.Contracts;
+using PosTech.MyFood.WebApi.Features.Products.Queries;
 
-namespace PosTech.MyFood.Features.Products.Endpoints;
+namespace PosTech.MyFood.WebApi.Features.Products.Endpoints;
 
 public class ProductsEndpoints : ICarterModule
 {

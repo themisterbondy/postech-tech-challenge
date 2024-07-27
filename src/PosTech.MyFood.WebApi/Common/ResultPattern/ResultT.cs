@@ -4,6 +4,7 @@ namespace PosTech.MyFood.WebApi.Common.ResultPattern;
 ///     Represents a result that can contain a value of type TValue.
 /// </summary>
 /// <typeparam name="TValue">The type of the value.</typeparam>
+[ExcludeFromCodeCoverage]
 public class Result<TValue> : Result
 {
     /// <summary>

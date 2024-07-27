@@ -4,6 +4,7 @@ using PosTech.MyFood.WebApi.Features.Orders.Entities;
 
 namespace PosTech.MyFood.WebApi.Persistence.Configurations;
 
+[ExcludeFromCodeCoverage]
 public class OrderConfiguration : IEntityTypeConfiguration<OrderQueue>
 {
     public void Configure(EntityTypeBuilder<OrderQueue> builder)

@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.MyFood.Features.Products.Entities;
+using PosTech.MyFood.Features.Products.Repositories;
+using PosTech.MyFood.WebApi.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Persistence;
 
-namespace PosTech.MyFood.Features.Products.Repositories;
+namespace PosTech.MyFood.WebApi.Features.Products.Repositories;
 
 public class ProductRepository(ApplicationDbContext context) : IProductRepository
 {

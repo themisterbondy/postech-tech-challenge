@@ -2,6 +2,7 @@ using Serilog.Context;
 
 namespace PosTech.MyFood.WebApi.Common.Middleware;
 
+[ExcludeFromCodeCoverage]
 public class RequestContextLoggingMiddleware(RequestDelegate next)
 {
     private const string CorrelationIdHeaderName = "X-Correlation-Id";

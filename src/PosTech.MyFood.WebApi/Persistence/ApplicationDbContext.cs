@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Customers.Entities;
 using PosTech.MyFood.WebApi.Features.Orders.Entities;
+using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.WebApi.Persistence;
 
+[ExcludeFromCodeCoverage]
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

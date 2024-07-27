@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using MediatR;
 using PosTech.MyFood.WebApi.Common.Validation;
 
 namespace PosTech.MyFood.WebApi.Common.Behavior;
 
+[ExcludeFromCodeCoverage]
 public class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

@@ -2,7 +2,7 @@ using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Features.Products.Contracts;
 
-namespace PosTech.MyFood.Features.Products.Queries;
+namespace PosTech.MyFood.WebApi.Features.Products.Queries;
 
 public class ListProducts
 {

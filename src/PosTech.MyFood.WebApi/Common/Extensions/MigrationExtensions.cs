@@ -3,6 +3,7 @@ using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Common.Extensions;
 
+[ExcludeFromCodeCoverage]
 public static class MigrationExtensions
 {
     public static async Task ApplyMigrations(this WebApplication app)

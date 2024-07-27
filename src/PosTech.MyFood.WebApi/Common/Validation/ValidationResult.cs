@@ -3,6 +3,7 @@ namespace PosTech.MyFood.WebApi.Common.Validation;
 /// <summary>
 ///     Represents the result of a validation.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ValidationResult : Result, IValidationResult
 {
     /// <summary>

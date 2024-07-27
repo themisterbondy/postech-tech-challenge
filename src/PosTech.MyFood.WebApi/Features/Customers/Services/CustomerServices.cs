@@ -1,6 +1,7 @@
+using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
-namespace PosTech.MyFood.Features.Customers.Services;
+namespace PosTech.MyFood.WebApi.Features.Customers.Services;
 
 public class CustomerServices(ICustomerRepository customerRepository) : ICustomerServices
 {

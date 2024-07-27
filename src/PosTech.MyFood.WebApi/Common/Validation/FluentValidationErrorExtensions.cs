@@ -2,6 +2,7 @@ using FluentValidation;
 
 namespace PosTech.MyFood.WebApi.Common.Validation;
 
+[ExcludeFromCodeCoverage]
 public static class FluentValidationErrorExtensions
 {
     public static IRuleBuilderOptions<T, TProperty> WithError<T, TProperty>(this IRuleBuilderOptions<T, TProperty> rule,
