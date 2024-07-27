@@ -1,0 +1,41 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PosTech.MyFood.Features.Products.Entities;
+using PosTech.MyFood.WebApi.Features.Orders.Entities;
+
+namespace PosTech.MyFood.WebApi.Persistence.Configurations;
+
+public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
+{
+    public void Configure(EntityTypeBuilder<OrderItem> builder)
+    {
+        builder.ToTable("OrderItems");
+
+        builder.HasKey(oi => oi.Id);
+
+        builder.Property(oi => oi.Id)
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasConversion(orderItemId => orderItemId.Value,
+                value => new OrderItemId(value));
+
+        builder.Property(oi => oi.ProductId)
+            .HasConversion(productId => productId.Value,
+                value => new ProductId(value))
+            .IsRequired();
+
+        builder.Property(oi => oi.ProductName)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(oi => oi.ProductDescription)
+            .HasMaxLength(500);
+
+        builder.Property(oi => oi.UnitPrice)
+            .IsRequired()
+            .HasColumnType("decimal(18,2)");
+
+        builder.Property(oi => oi.Quantity)
+            .IsRequired();
+    }
+}
