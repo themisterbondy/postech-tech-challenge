@@ -42,7 +42,6 @@ services:
     image: datalust/seq:latest
     environment:
       - ACCEPT_EULA=Y
-      - SEQ_FIRSTRUN_ADMINPASSWORDHASH=FKPPttXNciL8WEbCRot8IXDsGaYreDBRqX7qVdX+kDv0bCpg/g==   # --> 'password'
     ports:
       - 5341:5341
       - 3000:80
