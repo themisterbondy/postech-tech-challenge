@@ -30,18 +30,18 @@ public class GetCustomerByCpf
         public async Task<Result<CustomerResponse>> Handle(Query request,
             CancellationToken cancellationToken)
         {
-            var customer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
+            var getCustomer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
 
-            if (customer is null)
+            if (getCustomer.IsFailure)
                 return Result.Failure<CustomerResponse>(Error.NotFound("GetCustomerByCpfHandler.Handle",
                     "Customer not found."));
 
             return new CustomerResponse
             {
-                Id = customer.Id.Value,
-                Name = customer.Name,
-                Email = customer.Email,
-                CPF = customer.CPF
+                Id = getCustomer.Value.Id.Value,
+                Name = getCustomer.Value.Name,
+                Email = getCustomer.Value.Email,
+                CPF = getCustomer.Value.CPF
             };
         }
     }
