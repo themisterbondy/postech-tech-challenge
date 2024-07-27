@@ -32,7 +32,7 @@ public class GetCustomerByCpf
         {
             var getCustomer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
 
-            if (getCustomer.IsFailure)
+            if (getCustomer.IsFailure || getCustomer.Value == null)
                 return Result.Failure<CustomerResponse>(Error.NotFound("GetCustomerByCpfHandler.Handle",
                     "Customer not found."));
 

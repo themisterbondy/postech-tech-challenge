@@ -19,19 +19,15 @@ public class CustomerRepository(ApplicationDbContext _context) : ICustomerReposi
 
     public async Task<Result<Customer>?> GetByCPFAsync(string? cpf, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(cpf))
-            return Result.Failure<Customer>(Error.Failure("CustomerRepository.GetByCPFAsync", "CPF is null."));
-
-        return
-            await _context.Customers.FirstOrDefaultAsync(x => x.CPF == cpf, cancellationToken);
+        return string.IsNullOrEmpty(cpf)
+            ? Result.Failure<Customer>(Error.Failure("CustomerRepository.GetByCPFAsync", "CPF is null."))
+            : Result.Success(await _context.Customers.FirstOrDefaultAsync(x => x.CPF == cpf, cancellationToken));
     }
 
     public async Task<Result<Customer>?> GetByEmailAsync(string? email, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrEmpty(email))
-            return Result.Failure<Customer>(Error.Failure("CustomerRepository.GetByEmailAsync", "Email is null."));
-
-        return
-            await _context.Customers.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+        return string.IsNullOrEmpty(email)
+            ? Result.Failure<Customer>(Error.Failure("CustomerRepository.GetByEmailAsync", "Email is null."))
+            : Result.Success(await _context.Customers.FirstOrDefaultAsync(x => x.Email == email, cancellationToken));
     }
 }
