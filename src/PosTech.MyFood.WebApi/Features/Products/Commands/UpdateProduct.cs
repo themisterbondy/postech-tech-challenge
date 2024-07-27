@@ -38,6 +38,12 @@ public class UpdateProduct
     {
         public async Task<Result<ProductResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var getProduct = await productRepository.FindByIdAsync(new ProductId(request.Id), cancellationToken);
+
+            if (getProduct == null)
+                return Result.Failure<ProductResponse>(Error.NotFound("UpdateProductHandler.Handle",
+                    "Product not found."));
+
             var product = await productRepository.UpdateAsync(
                 Product.Create(new ProductId(request.Id),
                     request.Name,

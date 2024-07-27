@@ -8,7 +8,7 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
 {
     public async Task<Product?> FindByIdAsync(ProductId id, CancellationToken cancellationToken)
     {
-        return await context.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return await context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public Task<List<Product?>> FindByCategoryAsync(ProductCategory? category, CancellationToken cancellationToken)
