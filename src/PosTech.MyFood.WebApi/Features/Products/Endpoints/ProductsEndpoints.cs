@@ -53,8 +53,8 @@ public class ProductsEndpoints : ICarterModule
             .WithTags("Products")
             .WithOpenApi();
 
-        group.MapPut("/{id}",
-                async ([FromQuery] Guid id, [FromBody] ProductRequest request, [FromServices] IMediator mediator) =>
+        group.MapPut("/{id:guid}",
+                async (Guid id, [FromBody] ProductRequest request, [FromServices] IMediator mediator) =>
                 {
                     var command = new UpdateProduct.Command
                     {
@@ -78,7 +78,7 @@ public class ProductsEndpoints : ICarterModule
             .WithTags("Products")
             .WithOpenApi();
 
-        group.MapDelete("/{id}", async ([FromQuery] Guid id, [FromServices] IMediator mediator) =>
+        group.MapDelete("/{id:guid}", async (Guid id, [FromServices] IMediator mediator) =>
             {
                 var command = new DeleteProduct.Command
                 {
