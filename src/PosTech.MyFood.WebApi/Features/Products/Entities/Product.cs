@@ -3,7 +3,7 @@ namespace PosTech.MyFood.Features.Products.Entities;
 public class Product
 {
     private Product(ProductId id, string name, string description, decimal price, ProductCategory category,
-        string imageUrl)
+        string? imageUrl)
     {
         Id = id;
         Name = name;
@@ -22,10 +22,11 @@ public class Product
     public string Description { get; set; }
     public decimal Price { get; set; }
     public ProductCategory Category { get; set; }
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
-    public static Product Create(ProductId id, string name, string description, decimal price, ProductCategory category,
-        string imageUrl)
+    public static Product? Create(ProductId id, string name, string description, decimal price,
+        ProductCategory category,
+        string? imageUrl)
     {
         return new Product(id, name, description, price, category, imageUrl);
     }
