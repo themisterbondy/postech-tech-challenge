@@ -4,7 +4,7 @@ namespace PosTech.MyFood.WebApi.Features.Customers.Repositories;
 
 public interface ICustomerRepository
 {
-    Task<Customer> CreateAsync(Customer customer, CancellationToken cancellationToken);
-    Task<Customer> GetByCPFAsync(string cpf, CancellationToken cancellationToken);
-    Task<Customer> GetByEmailAsync(string email, CancellationToken cancellationToken);
+    Task<Result<Customer>> CreateAsync(Customer? customer, CancellationToken cancellationToken);
+    Task<Result<Customer>?> GetByCPFAsync(string? cpf, CancellationToken cancellationToken);
+    Task<Result<Customer>?> GetByEmailAsync(string? email, CancellationToken cancellationToken);
 }
