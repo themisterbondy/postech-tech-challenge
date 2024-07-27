@@ -53,7 +53,7 @@ public class ProductsEndpoints : ICarterModule
             .WithTags("Products")
             .WithOpenApi();
 
-        group.MapPut("/{id:guid}",
+        group.MapPut("/{id}",
                 async ([FromQuery] Guid id, [FromBody] ProductRequest request, [FromServices] IMediator mediator) =>
                 {
                     var command = new UpdateProduct.Command
