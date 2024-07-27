@@ -58,7 +58,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e13ef573-672d-4f90-b0ec-86b4a20c49e4"),
+                            Id = new Guid("b7d7d112-a680-48aa-bb79-6a5d320931d0"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -67,7 +67,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c099dd59-dc95-4826-869f-f37495f28689"),
+                            Id = new Guid("492744af-c4df-4393-9eb2-ec7b82ee835b"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -76,7 +76,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab7ce4ee-ae32-46a0-8955-31b514324a6d"),
+                            Id = new Guid("f8afe4e1-8a4d-490e-981f-f24367ec34aa"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -85,7 +85,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1fab33e7-0325-4c45-99bf-06cc6a526a09"),
+                            Id = new Guid("b75b1275-7661-47c7-9a9d-5409c2defae7"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
@@ -129,11 +129,88 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cd0bcc12-07e2-4d16-a12c-1f38656265cd"),
+                            Id = new Guid("c058b864-17f1-4798-8a0a-68e92e00cfe5"),
                             CPF = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
                         });
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Orders.Entities.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("UnitPrice")
+                        .IsRequired()
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems", (string)null);
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Orders.Entities.OrderQueue", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CustomerCpf")
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders", (string)null);
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Orders.Entities.OrderItem", b =>
+                {
+                    b.HasOne("PosTech.MyFood.WebApi.Features.Orders.Entities.OrderQueue", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Orders.Entities.OrderQueue", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
