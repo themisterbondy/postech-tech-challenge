@@ -9,7 +9,7 @@ public class GetCustomerByCpf
 {
     public class Query : IRequest<Result<CustomerResponse>>
     {
-        public string CPF { get; set; }
+        public required string CPF { get; set; }
     }
 
     public class CreateCustomerValidator : AbstractValidator<Query>
