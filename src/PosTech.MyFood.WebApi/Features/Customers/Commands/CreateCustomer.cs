@@ -47,19 +47,22 @@ public class CreateCustomer
             if (isUniqueCustomer.IsFailure)
                 return Result.Failure<CustomerResponse>(isUniqueCustomer.Error);
 
-            var customer = await customerRepository.CreateAsync(
+            var createCustomer = await customerRepository.CreateAsync(
                 Customer.Create(CustomerId.New(),
                     request.Name,
                     request.Email,
                     request.CPF),
                 cancellationToken);
 
+            if (createCustomer.IsFailure)
+                return Result.Failure<CustomerResponse>(createCustomer.Error);
+
             return new CustomerResponse
             {
-                Id = customer.Id.Value,
-                Name = customer.Name,
-                Email = customer.Email,
-                CPF = customer.CPF
+                Id = createCustomer.Value.Id.Value,
+                Name = createCustomer.Value.Name,
+                Email = createCustomer.Value.Email,
+                CPF = createCustomer.Value.CPF
             };
         }
     }
