@@ -12,7 +12,8 @@ public static class HealthChecks
     public static IServiceCollection AddUseHealthChecksConfiguration(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddHealthChecks();
+        services.AddHealthChecks()
+            .AddNpgSql(configuration.GetConnectionString("SQLConnection"), name: "Postgres");
 
         return services;
     }

@@ -58,6 +58,7 @@ Este projeto faz parte do Tech Challenge da Pós Tech da FIAP do curso de Softwa
 - **Serilog**
 - **MediatR**
 - **FluentValidation**
+- **HealthChecks**
 
 ## Estrutura do Projeto
 
@@ -149,3 +150,11 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
     - Descrição: Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.
     - Preço: $1.99
     - Imagem: ![Coca-Cola 300ml](https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br)
+
+## HealthChecks
+
+O sistema inclui configurações de HealthChecks para monitorar a saúde do sistema, incluindo o banco de dados PostgreSQL. Os endpoints de HealthCheck estão configurados para fornecer informações sobre o status do sistema e detalhes dos monitores de saúde.
+
+### Endpoint de HealthCheck
+
+- **Health Status**: [http://localhost:8080/health](http://localhost:8080/health)
