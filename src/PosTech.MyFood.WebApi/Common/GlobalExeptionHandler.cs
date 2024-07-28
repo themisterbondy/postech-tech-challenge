@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DocHub.DocumentStorage.WebApi.Common;
+namespace PosTech.MyFood.WebApi.Common;
 
 [ExcludeFromCodeCoverage]
 public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler

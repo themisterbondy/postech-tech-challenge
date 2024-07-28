@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace PosTech.MyFood.WebApi.Common.Extensions;
+﻿namespace PosTech.MyFood.WebApi.Common.Extensions;
 
 [ExcludeFromCodeCoverage]
 public static class ResultExtensions

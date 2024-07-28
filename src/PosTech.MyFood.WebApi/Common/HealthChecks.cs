@@ -1,10 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Net.Mime;
+﻿using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace DocHub.DocumentStorage.WebApi.Common;
+namespace PosTech.MyFood.WebApi.Common;
 
 [ExcludeFromCodeCoverage]
 public static class HealthChecks
