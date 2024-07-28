@@ -26,7 +26,6 @@ public class OrderQueueService(
         var orderQueue = OrderQueue.Create(
             OrderId.New(),
             DateTime.UtcNow,
-            OrderQueueStatus.Received,
             request.CustomerCpf,
             []
         );
@@ -111,6 +110,21 @@ public class OrderQueueService(
 
         await orderQueueRepository.UpdateStatusAsync(id, status, cancellationToken);
 
-        return await GetOrderByIdAsync(id, cancellationToken);
+        return new EnqueueOrderResponse
+        {
+            Id = orderQueue.Id.Value,
+            CreatedAt = orderQueue.CreatedAt,
+            CustomerCpf = orderQueue.CustomerCpf,
+            Status = status,
+            Items = orderQueue.Items.Select(item => new OrderItemDto
+            {
+                ProductId = item.ProductId.Value,
+                ProductName = item.ProductName,
+                ProductDescription = item.ProductDescription,
+                UnitPrice = item.UnitPrice,
+                Quantity = item.Quantity,
+                Category = item.Category
+            }).ToList()
+        };
     }
 }

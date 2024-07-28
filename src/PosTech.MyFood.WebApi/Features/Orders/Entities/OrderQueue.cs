@@ -22,9 +22,9 @@ public class OrderQueue
     public string? CustomerCpf { get; set; }
     public List<OrderItem> Items { get; set; }
 
-    public static OrderQueue Create(OrderId id, DateTime createdAt, OrderQueueStatus status, string? customerCpf,
+    public static OrderQueue Create(OrderId id, DateTime createdAt, string? customerCpf,
         List<OrderItem> items)
     {
-        return new OrderQueue(id, createdAt, status, customerCpf, items);
+        return new OrderQueue(id, createdAt, OrderQueueStatus.Received, customerCpf, items);
     }
 }
