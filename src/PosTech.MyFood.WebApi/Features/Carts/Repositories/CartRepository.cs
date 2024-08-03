@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.MyFood.Features.Carts.Entities;
-using PosTech.MyFood.Features.Carts.Repositories;
 using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Features.Carts.Repositories;
@@ -12,6 +11,11 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
         return await context.Carts
             .Include(c => c.Items)
             .FirstOrDefaultAsync(c => c.CustomerCpf == customerCpf);
+    }
+
+    public async Task<bool> ExistsAsync(CartId cartId)
+    {
+        return await context.Carts.AnyAsync(c => c.Id == cartId);
     }
 
     public async Task AddAsync(Cart cart)

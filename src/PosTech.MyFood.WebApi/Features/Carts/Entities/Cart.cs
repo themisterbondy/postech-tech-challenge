@@ -10,7 +10,7 @@ public class Cart
 
     public CartId Id { get; set; }
     public string CustomerCpf { get; set; }
-    public List<CartItem> Items { get; set; } = new();
+    public List<CartItem> Items { get; set; } = [];
 
     public static Cart Create(CartId id, string customerCpf)
     {

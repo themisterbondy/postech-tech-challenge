@@ -1,6 +1,6 @@
 using PosTech.MyFood.Features.Carts.Contracts;
 
-namespace PosTech.MyFood.Features.Carts.Services;
+namespace PosTech.MyFood.WebApi.Features.Carts.Services;
 
 public interface ICartService
 {

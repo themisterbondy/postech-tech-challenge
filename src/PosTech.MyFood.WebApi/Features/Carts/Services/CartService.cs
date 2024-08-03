@@ -1,29 +1,40 @@
 using PosTech.MyFood.Features.Carts.Contracts;
 using PosTech.MyFood.Features.Carts.Entities;
-using PosTech.MyFood.Features.Carts.Repositories;
 using PosTech.MyFood.Features.Products.Entities;
+using PosTech.MyFood.WebApi.Features.Carts.Repositories;
+using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
-
-namespace PosTech.MyFood.Features.Carts.Services;
 
 public class CartService(ICartRepository cartRepository) : ICartService
 {
     public async Task<CartResponse> AddToCartAsync(string customerCpf, CartItemDto cartItem)
     {
         var cart = await cartRepository.GetByCustomerCpfAsync(customerCpf);
-        if (cart == null) cart = Cart.Create(CartId.New(), customerCpf);
+        if (cart == null)
+            cart = Cart.Create(CartId.New(), customerCpf);
 
-        var existingItem = cart.Items.First(i => i.ProductId == new ProductId(cartItem.ProductId));
+        var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == new ProductId(cartItem.ProductId));
         if (existingItem != null)
+        {
             existingItem.Quantity += cartItem.Quantity;
+        }
         else
-            cart.Items.Add(CartItem.Create(CartItemId.New(), new ProductId(cartItem.ProductId), cartItem.ProductName,
-                cartItem.UnitPrice, cartItem.Quantity, ProductCategory.Lanche));
+        {
+            var newItem = CartItem.Create(
+                CartItemId.New(),
+                new ProductId(cartItem.ProductId),
+                cartItem.ProductName,
+                cartItem.UnitPrice,
+                cartItem.Quantity,
+                ProductCategory.Lanche); // Ajuste a categoria conforme necessário
+            newItem.CartId = cart.Id;
+            cart.AddItem(newItem);
+        }
 
-        if (cart.Id == default)
-            await cartRepository.AddAsync(cart);
-        else
+        if (await cartRepository.ExistsAsync(cart.Id))
             await cartRepository.UpdateAsync(cart);
+        else
+            await cartRepository.AddAsync(cart);
 
         return new CartResponse
         {
@@ -66,7 +77,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         var item = cart.Items.Find(i => i.ProductId == new ProductId(productId));
         if (item != null)
         {
-            cart.Items.Remove(item);
+            cart.RemoveItem(item.Id);
             await cartRepository.UpdateAsync(cart);
         }
 

@@ -1,7 +1,8 @@
 using FluentValidation;
 using PosTech.MyFood.Features.Carts.Contracts;
-using PosTech.MyFood.Features.Carts.Services;
 using PosTech.MyFood.Features.Products.Repositories;
+using PosTech.MyFood.WebApi.Common.Validation;
+using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.Features.Carts.Commands;
@@ -19,9 +20,17 @@ public class AddToCart
     {
         public AddToCartValidator()
         {
-            RuleFor(x => x.CustomerCpf).NotEmpty().WithMessage("CustomerCpf is required.");
-            RuleFor(x => x.ProductId).NotEmpty().WithMessage("ProductId is required.");
-            RuleFor(x => x.Quantity).GreaterThan(0).WithMessage("Quantity must be greater than zero.");
+            When(x => !string.IsNullOrEmpty(x.CustomerCpf),
+                () =>
+                {
+                    RuleFor(x => x.CustomerCpf)
+                        .NotEmpty().WithError(Error.Validation("CPF", "CPF is required."))
+                        .Matches("^[0-9]*$").WithError(Error.Validation("CPF", "CPF must contain only numbers."))
+                        .Length(11).WithError(Error.Validation("CPF", "CPF must have 11 characters."))
+                        .Must(GlobalValidations.BeAValidCPF).WithMessage("CPF is invalid.");
+                });
+            RuleFor(x => x.ProductId).NotEmpty().WithError(Error.Validation("ProductId", "ProductId is required."));
+            RuleFor(x => x.Quantity).GreaterThan(0).WithMessage("Quantity must be greater than 0.");
         }
     }
 

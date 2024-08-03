@@ -17,8 +17,7 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
             .IsRequired();
 
         builder.Property(c => c.CustomerCpf)
-            .HasMaxLength(11)
-            .IsRequired();
+            .HasMaxLength(11);
 
         builder.HasMany(c => c.Items)
             .WithOne()
