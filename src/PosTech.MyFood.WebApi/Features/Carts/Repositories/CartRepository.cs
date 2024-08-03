@@ -30,4 +30,14 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
         context.Carts.Update(cart);
         await context.SaveChangesAsync();
     }
+
+    public async Task DeleteCartsOlderThanAsync(DateTime threshold)
+    {
+        var cartsToDelete = await context.Carts
+            .Where(c => c.CreatedAt < threshold)
+            .ToListAsync();
+
+        context.Carts.RemoveRange(cartsToDelete);
+        await context.SaveChangesAsync();
+    }
 }

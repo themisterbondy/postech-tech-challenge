@@ -20,6 +20,9 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
         builder.Property(c => c.CustomerId)
             .HasMaxLength(36);
 
+        builder.Property(c => c.CreatedAt)
+            .IsRequired();
+
         builder.HasMany(c => c.Items)
             .WithOne()
             .HasForeignKey(ci => ci.CartId)

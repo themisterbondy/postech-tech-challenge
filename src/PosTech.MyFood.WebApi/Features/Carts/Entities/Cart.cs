@@ -8,10 +8,12 @@ public class Cart
     {
         Id = id;
         CustomerId = customerId;
+        CreatedAt = DateTime.UtcNow;
     }
 
     public CartId Id { get; set; }
     public string CustomerId { get; set; }
+    public DateTime CreatedAt { get; set; }
     public List<CartItem> Items { get; set; } = new();
 
     public static Cart Create(CartId id, string customerId)

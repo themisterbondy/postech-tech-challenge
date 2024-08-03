@@ -9,4 +9,5 @@ public interface ICartRepository
     Task<bool> ExistsAsync(CartId cartId);
     Task AddAsync(Cart cart);
     Task UpdateAsync(Cart cart);
+    Task DeleteCartsOlderThanAsync(DateTime threshold);
 }

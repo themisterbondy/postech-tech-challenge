@@ -10,6 +10,7 @@ using PosTech.MyFood.Features.Carts.Repositories;
 using PosTech.MyFood.Features.Carts.Services;
 using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.Features.Products.Repositories;
+using PosTech.MyFood.Jobs;
 using PosTech.MyFood.WebApi.Common;
 using PosTech.MyFood.WebApi.Common.Behavior;
 using PosTech.MyFood.WebApi.Features.Carts.Services;
@@ -21,6 +22,8 @@ using PosTech.MyFood.WebApi.Features.Payments.Services;
 using PosTech.MyFood.WebApi.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Persistence;
 using PosTech.MyFood.WebApi.Persistence.Repositories;
+using Quartz;
+using Quartz.AspNetCore;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
@@ -57,7 +60,29 @@ public static class DependencyInjection
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<IPaymentService, FakePaymentService>();
+        services.AddJobs();
 
+
+        return services;
+    }
+
+    private static IServiceCollection AddJobs(this IServiceCollection services)
+    {
+        services.AddQuartz(q =>
+        {
+            q.UseMicrosoftDependencyInjectionJobFactory();
+            var jobKey = new JobKey("CartCleanupJob");
+            q.AddJob<CartCleanupJob>(opts => opts.WithIdentity(jobKey));
+            q.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity("CartCleanupJob-trigger")
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInMinutes(5)
+                    .RepeatForever())
+            );
+        });
+
+        services.AddQuartzServer(options => { options.WaitForJobsToComplete = true; });
 
         return services;
     }
