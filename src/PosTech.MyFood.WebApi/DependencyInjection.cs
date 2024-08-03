@@ -17,6 +17,7 @@ using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Services;
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Services;
+using PosTech.MyFood.WebApi.Features.Payments.Services;
 using PosTech.MyFood.WebApi.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Persistence;
 using Serilog;
@@ -54,6 +55,7 @@ public static class DependencyInjection
         services.AddScoped<IOrderQueueService, OrderQueueService>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<ICartService, CartService>();
+        services.AddScoped<IPaymentService, FakePaymentService>();
 
 
         return services;

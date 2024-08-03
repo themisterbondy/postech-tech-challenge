@@ -71,5 +71,19 @@ public class OrdersEndpoints : ICarterModule
             .Produces<ListOrdersResponse>(200)
             .WithTags("Orders")
             .WithOpenApi();
+
+        group.MapPost("/checkout",
+                async (FakeCheckout.Command command, ISender sender) =>
+                {
+                    var result = await sender.Send(command);
+                    return result.IsSuccess
+                        ? Results.Created($"/Order/{result.Value.OrderId}", result.Value)
+                        : result.ToProblemDetails();
+                })
+            .WithName("FakeCheckout")
+            .Accepts<FakeCheckout.Command>("application/json")
+            .Produces<CheckoutResponse>(201)
+            .WithTags("Orders")
+            .WithOpenApi();
     }
 }
