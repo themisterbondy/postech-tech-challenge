@@ -6,10 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using PosTech.MyFood.Features.Carts.Repositories;
+using PosTech.MyFood.Features.Carts.Services;
 using PosTech.MyFood.Features.Customers.Services;
 using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Common;
 using PosTech.MyFood.WebApi.Common.Behavior;
+using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Services;
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
@@ -49,6 +52,9 @@ public static class DependencyInjection
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IOrderQueueRepository, OrderQueueRepository>();
         services.AddScoped<IOrderQueueService, OrderQueueService>();
+        services.AddScoped<ICartRepository, CartRepository>();
+        services.AddScoped<ICartService, CartService>();
+
 
         return services;
     }
