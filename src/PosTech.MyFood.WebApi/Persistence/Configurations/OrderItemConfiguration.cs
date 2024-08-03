@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Orders.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
@@ -29,14 +30,17 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(oi => oi.ProductDescription)
-            .HasMaxLength(500);
-
         builder.Property(oi => oi.UnitPrice)
             .IsRequired()
             .HasColumnType("decimal(18,2)");
 
         builder.Property(oi => oi.Quantity)
             .IsRequired();
+
+        builder.Property(oi => oi.Category)
+            .IsRequired()
+            .HasConversion<string>(
+                category => category.ToString(),
+                value => (ProductCategory)Enum.Parse(typeof(ProductCategory), value));
     }
 }

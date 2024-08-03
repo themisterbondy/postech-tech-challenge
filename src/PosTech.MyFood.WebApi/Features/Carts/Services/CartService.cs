@@ -1,6 +1,7 @@
 using PosTech.MyFood.Features.Carts.Contracts;
 using PosTech.MyFood.Features.Carts.Entities;
 using PosTech.MyFood.Features.Carts.Repositories;
+using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.Features.Carts.Services;
@@ -17,7 +18,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
             existingItem.Quantity += cartItem.Quantity;
         else
             cart.Items.Add(CartItem.Create(CartItemId.New(), new ProductId(cartItem.ProductId), cartItem.ProductName,
-                cartItem.UnitPrice, cartItem.Quantity));
+                cartItem.UnitPrice, cartItem.Quantity, ProductCategory.Lanche));
 
         if (cart.Id == default)
             await cartRepository.AddAsync(cart);

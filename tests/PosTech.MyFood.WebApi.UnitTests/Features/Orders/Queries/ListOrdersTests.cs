@@ -35,7 +35,6 @@ public class ListOrdersTests
                     new OrderId(Guid.NewGuid()),
                     new ProductId(Guid.NewGuid()),
                     "Test Product",
-                    "Test Description",
                     10.99m,
                     1,
                     ProductCategory.Lanche)

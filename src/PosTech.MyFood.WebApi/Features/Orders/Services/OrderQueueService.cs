@@ -44,7 +44,6 @@ public class OrderQueueService(
                 orderQueue.Id,
                 product.Id,
                 product.Name,
-                product.Description,
                 product.Price,
                 item.Quantity,
                 product.Category
@@ -65,7 +64,6 @@ public class OrderQueueService(
             {
                 ProductId = item.ProductId.Value,
                 ProductName = item.ProductName,
-                ProductDescription = item.ProductDescription,
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
                 Category = item.Category
@@ -91,7 +89,6 @@ public class OrderQueueService(
             {
                 ProductId = item.ProductId.Value,
                 ProductName = item.ProductName,
-                ProductDescription = item.ProductDescription,
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
                 Category = item.Category
@@ -120,7 +117,6 @@ public class OrderQueueService(
             {
                 ProductId = item.ProductId.Value,
                 ProductName = item.ProductName,
-                ProductDescription = item.ProductDescription,
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
                 Category = item.Category

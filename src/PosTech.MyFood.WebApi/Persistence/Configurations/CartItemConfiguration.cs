@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PosTech.MyFood.Features.Carts.Entities;
+using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.Data.Configurations;
@@ -35,6 +36,12 @@ public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>
         builder.Property(ci => ci.CartId)
             .HasConversion(id => id.Value, value => new CartId(value))
             .IsRequired();
+
+        builder.Property(oi => oi.Category)
+            .IsRequired()
+            .HasConversion<string>(
+                category => category.ToString(),
+                value => (ProductCategory)Enum.Parse(typeof(ProductCategory), value));
 
         builder.HasOne<Cart>()
             .WithMany(c => c.Items)

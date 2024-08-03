@@ -32,12 +32,11 @@ public class OrderItemTests
         var orderId = new OrderId(Guid.NewGuid());
         var productId = new ProductId(Guid.NewGuid());
         var productName = "Test Product";
-        var productDescription = "Test Description";
         var unitPrice = 10.99m;
         var quantity = 2;
         var category = ProductCategory.Lanche;
 
-        var orderItem = OrderItem.Create(id, orderId, productId, productName, productDescription, unitPrice, quantity,
+        var orderItem = OrderItem.Create(id, orderId, productId, productName, unitPrice, quantity,
             category);
 
         orderItem.Should().NotBeNull();
@@ -45,7 +44,6 @@ public class OrderItemTests
         orderItem.OrderId.Should().Be(orderId);
         orderItem.ProductId.Should().Be(productId);
         orderItem.ProductName.Should().Be(productName);
-        orderItem.ProductDescription.Should().Be(productDescription);
         orderItem.UnitPrice.Should().Be(unitPrice);
         orderItem.Quantity.Should().Be(quantity);
         orderItem.Category.Should().Be(category);
@@ -58,12 +56,11 @@ public class OrderItemTests
         var orderId = new OrderId(Guid.NewGuid());
         var productId = new ProductId(Guid.NewGuid());
         var productName = "Test Product";
-        var productDescription = "Test Description";
         decimal? unitPrice = null;
         var quantity = 2;
         var category = ProductCategory.Lanche;
 
-        var orderItem = OrderItem.Create(id, orderId, productId, productName, productDescription, unitPrice, quantity,
+        var orderItem = OrderItem.Create(id, orderId, productId, productName, unitPrice, quantity,
             category);
 
         orderItem.Should().NotBeNull();
@@ -71,7 +68,6 @@ public class OrderItemTests
         orderItem.OrderId.Should().Be(orderId);
         orderItem.ProductId.Should().Be(productId);
         orderItem.ProductName.Should().Be(productName);
-        orderItem.ProductDescription.Should().Be(productDescription);
         orderItem.UnitPrice.Should().BeNull();
         orderItem.Quantity.Should().Be(quantity);
         orderItem.Category.Should().Be(category);
@@ -84,12 +80,11 @@ public class OrderItemTests
         var orderId = new OrderId(Guid.NewGuid());
         var productId = new ProductId(Guid.NewGuid());
         var productName = "Test Product";
-        string productDescription = null;
         var unitPrice = 10.99m;
         var quantity = 2;
         var category = ProductCategory.Lanche;
 
-        var orderItem = OrderItem.Create(id, orderId, productId, productName, productDescription, unitPrice, quantity,
+        var orderItem = OrderItem.Create(id, orderId, productId, productName, unitPrice, quantity,
             category);
 
         orderItem.Should().NotBeNull();
@@ -97,7 +92,6 @@ public class OrderItemTests
         orderItem.OrderId.Should().Be(orderId);
         orderItem.ProductId.Should().Be(productId);
         orderItem.ProductName.Should().Be(productName);
-        orderItem.ProductDescription.Should().BeNull();
         orderItem.UnitPrice.Should().Be(unitPrice);
         orderItem.Quantity.Should().Be(quantity);
         orderItem.Category.Should().Be(category);

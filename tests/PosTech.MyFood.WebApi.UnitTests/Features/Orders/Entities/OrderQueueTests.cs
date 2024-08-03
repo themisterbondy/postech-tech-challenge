@@ -35,7 +35,7 @@ public class OrderQueueTests
         var items = new List<OrderItem>
         {
             OrderItem.Create(new OrderItemId(Guid.NewGuid()), id, new ProductId(Guid.NewGuid()), "Test Product",
-                "Test Description", 10.99m, 2, ProductCategory.Lanche)
+                10.99m, 2, ProductCategory.Lanche)
         };
 
         var orderQueue = OrderQueue.Create(id, createdAt, customerCpf, items);
@@ -58,7 +58,7 @@ public class OrderQueueTests
         var items = new List<OrderItem>
         {
             OrderItem.Create(new OrderItemId(Guid.NewGuid()), id, new ProductId(Guid.NewGuid()), "Test Product",
-                "Test Description", 10.99m, 2, ProductCategory.Lanche)
+                10.99m, 2, ProductCategory.Lanche)
         };
 
         var orderQueue = OrderQueue.Create(id, createdAt, customerCpf, items);
