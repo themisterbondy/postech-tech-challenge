@@ -1,20 +1,22 @@
-namespace PosTech.MyFood.Features.Carts.Entities;
+using PosTech.MyFood.Features.Carts.Entities;
+
+namespace PosTech.MyFood.WebApi.Features.Carts.Entities;
 
 public class Cart
 {
-    private Cart(CartId id, string customerCpf)
+    private Cart(CartId id, string customerId)
     {
         Id = id;
-        CustomerCpf = customerCpf;
+        CustomerId = customerId;
     }
 
     public CartId Id { get; set; }
-    public string CustomerCpf { get; set; }
-    public List<CartItem> Items { get; set; } = [];
+    public string CustomerId { get; set; }
+    public List<CartItem> Items { get; set; } = new();
 
-    public static Cart Create(CartId id, string customerCpf)
+    public static Cart Create(CartId id, string customerId)
     {
-        return new Cart(id, customerCpf);
+        return new Cart(id, customerId);
     }
 
     public void AddItem(CartItem item)

@@ -2,7 +2,7 @@ namespace PosTech.MyFood.Features.Carts.Contracts;
 
 public class CartRequest
 {
-    public string CustomerCpf { get; set; }
+    public string? CustomerId { get; set; }
     public Guid ProductId { get; set; }
     public int Quantity { get; set; }
 }
@@ -18,6 +18,6 @@ public class CartItemDto
 public class CartResponse
 {
     public Guid Id { get; set; }
-    public string CustomerCpf { get; set; }
+    public string CustomerId { get; set; }
     public List<CartItemDto> Items { get; set; }
 }

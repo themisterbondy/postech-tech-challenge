@@ -12,25 +12,6 @@ public class OrdersEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/orders");
 
-        group.MapPost("/",
-                async (EnqueueOrderRequest request, ISender sender) =>
-                {
-                    var command = new CreateOrderCommand.Command
-                    {
-                        CustomerCpf = request.CustomerCpf,
-                        Items = request.Items
-                    };
-                    var result = await sender.Send(command);
-                    return result.IsSuccess
-                        ? Results.Created($"/Order/{result.Value.Id}", result.Value)
-                        : result.ToProblemDetails();
-                })
-            .WithName("CreateOrder")
-            .Accepts<EnqueueOrderRequest>("application/json")
-            .Produces<EnqueueOrderResponse>(201)
-            .WithTags("Orders")
-            .WithOpenApi();
-
         group.MapPut("/{id:guid}/status",
                 async (Guid id, [FromQuery] OrderQueueStatus Status, IMediator mediator) =>
                 {
@@ -73,15 +54,14 @@ public class OrdersEndpoints : ICarterModule
             .WithOpenApi();
 
         group.MapPost("/checkout",
-                async (FakeCheckout.Command command, ISender sender) =>
+                async ([FromQuery] string CustomerId, ISender sender) =>
                 {
-                    var result = await sender.Send(command);
+                    var result = await sender.Send(new FakeCheckout.Command { CustomerId = CustomerId });
                     return result.IsSuccess
                         ? Results.Created($"/Order/{result.Value.OrderId}", result.Value)
                         : result.ToProblemDetails();
                 })
             .WithName("FakeCheckout")
-            .Accepts<FakeCheckout.Command>("application/json")
             .Produces<CheckoutResponse>(201)
             .WithTags("Orders")
             .WithOpenApi();

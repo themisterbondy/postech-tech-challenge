@@ -11,7 +11,7 @@ public class AddToCart
 {
     public class Command : IRequest<Result<CartResponse>>
     {
-        public string CustomerCpf { get; set; }
+        public string CustomerId { get; set; }
         public Guid ProductId { get; set; }
         public int Quantity { get; set; }
     }
@@ -20,10 +20,10 @@ public class AddToCart
     {
         public AddToCartValidator()
         {
-            When(x => !string.IsNullOrEmpty(x.CustomerCpf),
+            When(x => !string.IsNullOrEmpty(x.CustomerId),
                 () =>
                 {
-                    RuleFor(x => x.CustomerCpf)
+                    RuleFor(x => x.CustomerId)
                         .NotEmpty().WithError(Error.Validation("CPF", "CPF is required."))
                         .Matches("^[0-9]*$").WithError(Error.Validation("CPF", "CPF must contain only numbers."))
                         .Length(11).WithError(Error.Validation("CPF", "CPF must have 11 characters."))
@@ -34,12 +34,20 @@ public class AddToCart
         }
     }
 
-    public class Handler(ICartService cartService, IProductRepository productRepository)
-        : IRequestHandler<Command, Result<CartResponse>>
+    public class Handler : IRequestHandler<Command, Result<CartResponse>>
     {
+        private readonly ICartService _cartService;
+        private readonly IProductRepository _productRepository;
+
+        public Handler(ICartService cartService, IProductRepository productRepository)
+        {
+            _cartService = cartService;
+            _productRepository = productRepository;
+        }
+
         public async Task<Result<CartResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var product = await productRepository.FindByIdAsync(new ProductId(request.ProductId), cancellationToken);
+            var product = await _productRepository.FindByIdAsync(new ProductId(request.ProductId), cancellationToken);
             if (product == null)
                 return Result.Failure<CartResponse>(Error.NotFound("AddToCart.Handler",
                     $"Product with ID {request.ProductId} not found."));
@@ -52,7 +60,7 @@ public class AddToCart
                 Quantity = request.Quantity
             };
 
-            return await cartService.AddToCartAsync(request.CustomerCpf, cartItem);
+            return await _cartService.AddToCartAsync(request.CustomerId, cartItem);
         }
     }
 }

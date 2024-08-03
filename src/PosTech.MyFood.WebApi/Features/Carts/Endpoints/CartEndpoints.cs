@@ -13,7 +13,7 @@ public class CartEndpoints : ICarterModule
             {
                 var Command = new AddToCart.Command
                 {
-                    CustomerCpf = request.CustomerCpf,
+                    CustomerId = request.CustomerId,
                     ProductId = request.ProductId,
                     Quantity = request.Quantity
                 };

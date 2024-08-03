@@ -1,17 +1,19 @@
 using PosTech.MyFood.Features.Carts.Contracts;
 using PosTech.MyFood.Features.Carts.Entities;
+using PosTech.MyFood.Features.Carts.Repositories;
 using PosTech.MyFood.Features.Products.Entities;
-using PosTech.MyFood.WebApi.Features.Carts.Repositories;
+using PosTech.MyFood.WebApi.Features.Carts.Entities;
 using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
+namespace PosTech.MyFood.Features.Carts.Services;
+
 public class CartService(ICartRepository cartRepository) : ICartService
 {
-    public async Task<CartResponse> AddToCartAsync(string customerCpf, CartItemDto cartItem)
+    public async Task<CartResponse> AddToCartAsync(string? customerId, CartItemDto cartItem)
     {
-        var cart = await cartRepository.GetByCustomerCpfAsync(customerCpf);
-        if (cart == null)
-            cart = Cart.Create(CartId.New(), customerCpf);
+        var customer = customerId ?? Guid.NewGuid().ToString();
+        var cart = await cartRepository.GetByCustomerIdAsync(customerId) ?? Cart.Create(CartId.New(), customer);
 
         var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == new ProductId(cartItem.ProductId));
         if (existingItem != null)
@@ -39,7 +41,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         return new CartResponse
         {
             Id = cart.Id.Value,
-            CustomerCpf = cart.CustomerCpf,
+            CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
@@ -50,15 +52,15 @@ public class CartService(ICartRepository cartRepository) : ICartService
         };
     }
 
-    public async Task<CartResponse> GetCartByCustomerCpfAsync(string customerCpf)
+    public async Task<CartResponse> GetCartByCustomerIdAsync(string customerId)
     {
-        var cart = await cartRepository.GetByCustomerCpfAsync(customerCpf);
+        var cart = await cartRepository.GetByCustomerIdAsync(customerId);
         if (cart == null) return null;
 
         return new CartResponse
         {
             Id = cart.Id.Value,
-            CustomerCpf = cart.CustomerCpf,
+            CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
@@ -69,9 +71,9 @@ public class CartService(ICartRepository cartRepository) : ICartService
         };
     }
 
-    public async Task<CartResponse> RemoveFromCartAsync(string customerCpf, Guid productId)
+    public async Task<CartResponse> RemoveFromCartAsync(string customerId, Guid productId)
     {
-        var cart = await cartRepository.GetByCustomerCpfAsync(customerCpf);
+        var cart = await cartRepository.GetByCustomerIdAsync(customerId);
         if (cart == null) return null;
 
         var item = cart.Items.Find(i => i.ProductId == new ProductId(productId));
@@ -84,7 +86,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         return new CartResponse
         {
             Id = cart.Id.Value,
-            CustomerCpf = cart.CustomerCpf,
+            CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
@@ -95,9 +97,9 @@ public class CartService(ICartRepository cartRepository) : ICartService
         };
     }
 
-    public async Task<CartResponse> ClearCartAsync(string customerCpf)
+    public async Task<CartResponse> ClearCartAsync(string customerId)
     {
-        var cart = await cartRepository.GetByCustomerCpfAsync(customerCpf);
+        var cart = await cartRepository.GetByCustomerIdAsync(customerId);
         if (cart == null) return null;
 
         cart.Items.Clear();
@@ -106,7 +108,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         return new CartResponse
         {
             Id = cart.Id.Value,
-            CustomerCpf = cart.CustomerCpf,
+            CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
