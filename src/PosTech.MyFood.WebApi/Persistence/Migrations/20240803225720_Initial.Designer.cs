@@ -12,8 +12,8 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240803195716_Remove_ProductDescription_and_addCategory_to_OrderItem_and_CartItem")]
-    partial class Remove_ProductDescription_and_addCategory_to_OrderItem_and_CartItem
+    [Migration("20240803225720_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,21 +25,6 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.Cart", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CustomerCpf")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Carts", (string)null);
-                });
 
             modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.CartItem", b =>
                 {
@@ -72,6 +57,21 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasIndex("CartId");
 
                     b.ToTable("CartItems", (string)null);
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Customers.Entities.Customer", b =>
@@ -109,7 +109,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7ab01f4a-d0f4-466b-a1b9-a9fa274ede48"),
+                            Id = new Guid("bb9ff95d-53ea-4d18-8831-ff6672247f33"),
                             CPF = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
@@ -210,7 +210,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cbf000e7-183d-4da1-8b4a-af09879a0500"),
+                            Id = new Guid("ddb4a9a5-66bd-495c-ba95-e19955203500"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -219,7 +219,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9c491ac1-f568-40a5-b8df-5b12ce1c597c"),
+                            Id = new Guid("41271808-b044-4880-8d01-8c8e1cbfd524"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -228,7 +228,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c37507f7-4cb0-4bc7-8263-bc3a854a64da"),
+                            Id = new Guid("3eb30302-fcef-410e-902d-b3784ca9b9d4"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -237,7 +237,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2e26c145-d44d-4371-8615-2c5b02ee49f8"),
+                            Id = new Guid("decf08dd-57df-4a2a-abca-c812ed9d0df2"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
@@ -248,7 +248,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
             modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.CartItem", b =>
                 {
-                    b.HasOne("PosTech.MyFood.Features.Carts.Entities.Cart", null)
+                    b.HasOne("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", null)
                         .WithMany("Items")
                         .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -264,7 +264,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.Cart", b =>
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", b =>
                 {
                     b.Navigation("Items");
                 });

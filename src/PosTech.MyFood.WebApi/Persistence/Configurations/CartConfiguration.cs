@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PosTech.MyFood.Features.Carts.Entities;
+using PosTech.MyFood.WebApi.Features.Carts.Entities;
 
 namespace PosTech.MyFood.Data.Configurations;
 
@@ -16,8 +17,8 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
             .HasConversion(id => id.Value, value => new CartId(value))
             .IsRequired();
 
-        builder.Property(c => c.CustomerCpf)
-            .HasMaxLength(11);
+        builder.Property(c => c.CustomerId)
+            .HasMaxLength(36);
 
         builder.HasMany(c => c.Items)
             .WithOne()
