@@ -5,5 +5,6 @@ public enum OrderQueueStatus
     Received,
     Preparing,
     Ready,
-    Completed
+    Completed,
+    Cancelled
 }

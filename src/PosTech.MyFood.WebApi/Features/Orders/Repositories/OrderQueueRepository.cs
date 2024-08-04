@@ -28,4 +28,16 @@ public class OrderQueueRepository(ApplicationDbContext context) : IOrderQueueRep
             await context.SaveChangesAsync(cancellationToken);
         }
     }
+
+    public async Task CancelOrdersNotPreparingWithinAsync(DateTime threshold)
+    {
+        var ordersToCancel = await context.OrderQueue
+            .Where(o => o.CreatedAt < threshold && o.Status == OrderQueueStatus.Received)
+            .ToListAsync();
+
+        foreach (var order in ordersToCancel) order.Status = OrderQueueStatus.Cancelled;
+
+        context.OrderQueue.UpdateRange(ordersToCancel);
+        await context.SaveChangesAsync();
+    }
 }

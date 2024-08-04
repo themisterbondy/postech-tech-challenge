@@ -71,13 +71,23 @@ public static class DependencyInjection
         services.AddQuartz(q =>
         {
             q.UseMicrosoftDependencyInjectionJobFactory();
-            var jobKey = new JobKey("CartCleanupJob");
-            q.AddJob<CartCleanupJob>(opts => opts.WithIdentity(jobKey));
+            var cartJobKey = new JobKey("CartCleanupJob");
+            q.AddJob<CartCleanupJob>(opts => opts.WithIdentity(cartJobKey));
             q.AddTrigger(opts => opts
-                .ForJob(jobKey)
+                .ForJob(cartJobKey)
                 .WithIdentity("CartCleanupJob-trigger")
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(5)
+                    .RepeatForever())
+            );
+
+            var orderJobKey = new JobKey("OrderCleanupJob");
+            q.AddJob<OrderCleanupJob>(opts => opts.WithIdentity(orderJobKey));
+            q.AddTrigger(opts => opts
+                .ForJob(orderJobKey)
+                .WithIdentity("OrderCleanupJob-trigger")
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInMinutes(30)
                     .RepeatForever())
             );
         });
