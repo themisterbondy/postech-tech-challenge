@@ -8,7 +8,7 @@ O MyFood é um sistema de pedidos de comida desenvolvido utilizando ASP.NET Core
 
 Este projeto faz parte do Tech Challenge da Pós Tech da FIAP do curso de Software Architecture. Trata-se de uma atividade obrigatória que deve ser desenvolvida em grupo e vale 90% da nota de todas as disciplinas da fase. É importante atentar-se ao prazo de entrega.
 
-O repositório do projeto pode ser encontrado [aqui](https://github.com/themisterbondy/postech-tech-challenge).
+O repositório do projeto pode ser encontrado [https://github.com/themisterbondy/postech-tech-challenge](https://github.com/themisterbondy/postech-tech-challenge).
 
 ## Tecnologias Utilizadas
 
@@ -22,6 +22,7 @@ O repositório do projeto pode ser encontrado [aqui](https://github.com/themiste
 - **MediatR**
 - **FluentValidation**
 - **HealthChecks**
+- **Quartz.NET** (para gerenciamento de jobs)
 
 ## Estrutura do Projeto
 
@@ -68,11 +69,28 @@ O repositório do projeto pode ser encontrado [aqui](https://github.com/themiste
 - **Fake Checkout**
 - **Listar Pedidos**
 
+## Carrinho de Compras
+
+O sistema permite que os clientes adicionem itens ao carrinho, e o carrinho pode ser recuperado ou modificado até que o checkout seja realizado.
+
+- **Adicionar ao Carrinho**: Permite que os clientes adicionem produtos ao carrinho.
+- **Remover do Carrinho**: Permite que os clientes removam itens do carrinho.
+- **Limpar Carrinho**: Remove todos os itens do carrinho.
+- **Checkout Fake**: Simula o processo de checkout, onde os itens no carrinho são processados para criar um pedido. O pagamento é simulado, podendo ser aceito ou rejeitado.
+
+### Limpeza de Carrinho
+
+Um job é executado a cada 5 minutos para verificar e remover carrinhos que foram criados há mais de 15 minutos e não foram utilizados.
+
+### Cancelamento de Pedidos
+
+Um segundo job é executado a cada 30 minutos para cancelar pedidos na fila (`OrderQueue`) que foram criados há mais de 30 minutos e ainda estão com o status "Recebido". Esses pedidos são automaticamente marcados como "Cancelados".
+
 ## Documentação
 
 A documentação do sistema foi desenvolvida seguindo os padrões de Domain-Driven Design (DDD) com Event Storming, cobrindo os fluxos de realização do pedido e pagamento, preparação e entrega do pedido.
 
-Os desenhos e diagramas do Event Storming podem ser encontrados [aqui](https://miro.com/app/board/uXjVK06l1is=/).
+Os desenhos e diagramas do Event Storming podem ser encontrados [https://miro.com/app/board/uXjVK06l1is=/](https://miro.com/app/board/uXjVK06l1is=/).
 
 ## Migrações e Dados Pré-Incluídos
 
@@ -81,39 +99,34 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
 ### Clientes Pré-Incluídos
 
 - **John Doe**
-  - ID: c058b864-17f1-4798-8a0a-68e92e00cfe5
   - CPF: 36697999071
   - Email: john.doe@email.com
 
 ### Produtos Pré-Incluídos
 
 - **McFritas Média**
-  - ID: 492744af-c4df-4393-9eb2-ec7b82ee835b
   - Categoria: Acompanhamento
   - Descrição: A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.
   - Preço: $2.99
-  - Imagem: ![McFritas Média](https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br)
+  - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br" alt="McFritas Média" style="width:200px;"/>
 
 - **Casquinha Chocolate**
-  - ID: b75b1275-7661-47c7-9a9d-5409c2defae7
   - Categoria: Sobremesa
   - Descrição: A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.
   - Preço: $1.49
-  - Imagem: ![Casquinha Chocolate](https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br)
+  - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br" alt="Casquinha Chocolate" style="width:200px;"/>
 
 - **Big Mac**
-  - ID: b7d7d112-a680-48aa-bb79-6a5d320931d0
   - Categoria: Lanche
   - Descrição: Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.
   - Preço: $5.99
-  - Imagem: ![Big Mac](https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br)
+  - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br" alt="Big Mac" style="width:200px;"/>
 
 - **Coca-Cola 300ml**
-  - ID: f8afe4e1-8a4d-490e-981f-f24367ec34aa
   - Categoria: Bebida
   - Descrição: Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.
   - Preço: $1.99
-  - Imagem: ![Coca-Cola 300ml](https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br)
+  - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br" alt="Coca-Cola 300ml" style="width:200px;"/>
 
 ## Instruções para Configuração
 
@@ -125,29 +138,24 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
 ### Passos para Configuração
 
 1. Clone o repositório:
-    ```sh
+    ```shell
     git clone https://github.com/themisterbondy/postech-tech-challenge.git
     cd postech-tech-challenge
     ```
 
-2. Configure o arquivo `docker-compose.yml` e o `Dockerfile` conforme necessário.
-
-3. Configure o certificado HTTPS executando os seguintes comandos:
-    ```sh
+2. Configure o certificado HTTPS executando os seguintes comandos:
+    ```shell
     dotnet dev-certs https --clean
     dotnet dev-certs https -ep $env:userprofile\.aspnet\https\aspnetapp.pfx -p password123
     dotnet dev-certs https --trust
     ```
 
-4. Suba os containers:
-    ```sh
+3. Suba os containers:
+    ```shell
     docker-compose up --build
     ```
 
-5. Acesse o Swagger para explorar as APIs:
-    ```
-    http://localhost:8080/swagger
-    ```
+4. Acesse o Swagger para explorar as APIs: [https://localhost:8081/swagger](https://localhost:8081/swagger)
 
 ## Validação da POC
 
@@ -162,8 +170,8 @@ O sistema inclui configurações de HealthChecks para monitorar a saúde do sist
 
 ### Endpoints de HealthCheck
 
-- **Status Text**: [http://localhost:8080/status-text](http://localhost:8080/status-text)
-- **Health Status**: [http://localhost:8080/health](http://localhost:8080/health)
+- **Status Text**: [https://localhost:8081/status-text](https://localhost:8081/status-text)
+- **Health Status**: [https://localhost:8081/health](https://localhost:8081/health)
 
 ## Middleware de Logging de Contexto de Requisição
 
