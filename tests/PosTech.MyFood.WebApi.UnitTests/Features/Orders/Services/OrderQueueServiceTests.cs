@@ -1,10 +1,10 @@
-using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Contracts;
 using PosTech.MyFood.WebApi.Features.Orders.Entities;
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Services;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
+using PosTech.MyFood.WebApi.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.UnitTests.Mocks;
 
 namespace PosTech.MyFood.WebApi.UnitTests.Features.Orders.Services;

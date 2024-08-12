@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Orders.Entities;
 using PosTech.MyFood.WebApi.Features.Orders.Queries;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
