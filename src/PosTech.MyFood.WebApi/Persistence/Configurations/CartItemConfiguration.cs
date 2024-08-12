@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PosTech.MyFood.Features.Carts.Entities;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Carts.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
-namespace PosTech.MyFood.Data.Configurations;
+namespace PosTech.MyFood.WebApi.Persistence.Configurations;
 
 public class CartItemConfiguration : IEntityTypeConfiguration<CartItem>
 {

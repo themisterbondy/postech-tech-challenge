@@ -1,8 +1,9 @@
-using PosTech.MyFood.Features.Carts.Repositories;
+using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using Quartz;
 
-namespace PosTech.MyFood.Jobs;
+namespace PosTech.MyFood.WebApi.Jobs;
 
+[ExcludeFromCodeCoverage]
 public class CartCleanupJob(ICartRepository cartRepository, ILogger<CartCleanupJob> logger)
     : IJob
 {

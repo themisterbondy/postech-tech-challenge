@@ -1,8 +1,9 @@
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using Quartz;
 
-namespace PosTech.MyFood.Jobs;
+namespace PosTech.MyFood.WebApi.Jobs;
 
+[ExcludeFromCodeCoverage]
 public class OrderCleanupJob(IOrderQueueRepository orderQueueRepository, ILogger<OrderCleanupJob> logger)
     : IJob
 {

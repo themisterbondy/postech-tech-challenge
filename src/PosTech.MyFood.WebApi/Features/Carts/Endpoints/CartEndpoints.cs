@@ -1,7 +1,7 @@
-using PosTech.MyFood.Features.Carts.Commands;
-using PosTech.MyFood.Features.Carts.Contracts;
+using PosTech.MyFood.WebApi.Features.Carts.Commands;
+using PosTech.MyFood.WebApi.Features.Carts.Contracts;
 
-namespace PosTech.MyFood.Features.Carts.Endpoints;
+namespace PosTech.MyFood.WebApi.Features.Carts.Endpoints;
 
 public class CartEndpoints : ICarterModule
 {

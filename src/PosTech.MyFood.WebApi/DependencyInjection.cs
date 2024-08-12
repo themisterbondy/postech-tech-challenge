@@ -6,13 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using PosTech.MyFood.Features.Carts.Repositories;
-using PosTech.MyFood.Features.Carts.Services;
-using PosTech.MyFood.Features.Customers.Services;
-using PosTech.MyFood.Features.Products.Repositories;
-using PosTech.MyFood.Jobs;
 using PosTech.MyFood.WebApi.Common;
 using PosTech.MyFood.WebApi.Common.Behavior;
+using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Services;
@@ -20,8 +16,8 @@ using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Services;
 using PosTech.MyFood.WebApi.Features.Payments.Services;
 using PosTech.MyFood.WebApi.Features.Products.Repositories;
+using PosTech.MyFood.WebApi.Jobs;
 using PosTech.MyFood.WebApi.Persistence;
-using PosTech.MyFood.WebApi.Persistence.Repositories;
 using Quartz;
 using Quartz.AspNetCore;
 using Serilog;
@@ -29,7 +25,7 @@ using Serilog.Events;
 using Serilog.Exceptions;
 using Serilog.Filters;
 
-namespace PosTech.MyFood;
+namespace PosTech.MyFood.WebApi;
 
 [ExcludeFromCodeCoverage]
 public static class DependencyInjection

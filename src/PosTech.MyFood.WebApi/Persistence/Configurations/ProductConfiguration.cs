@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.WebApi.Persistence.Configurations;

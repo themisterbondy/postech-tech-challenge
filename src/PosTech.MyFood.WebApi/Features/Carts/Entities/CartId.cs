@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.Features.Carts.Entities;
+namespace PosTech.MyFood.WebApi.Features.Carts.Entities;
 
 public record CartId(Guid Value)
 {

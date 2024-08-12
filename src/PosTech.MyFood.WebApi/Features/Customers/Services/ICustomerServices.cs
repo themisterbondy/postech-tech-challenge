@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.Features.Customers.Services;
+namespace PosTech.MyFood.WebApi.Features.Customers.Services;
 
 public interface ICustomerServices
 {

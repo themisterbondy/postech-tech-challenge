@@ -1,11 +1,11 @@
 using FluentValidation;
-using PosTech.MyFood.Features.Carts.Contracts;
-using PosTech.MyFood.Features.Products.Repositories;
 using PosTech.MyFood.WebApi.Common.Validation;
+using PosTech.MyFood.WebApi.Features.Carts.Contracts;
 using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
+using PosTech.MyFood.WebApi.Features.Products.Repositories;
 
-namespace PosTech.MyFood.Features.Carts.Commands;
+namespace PosTech.MyFood.WebApi.Features.Carts.Commands;
 
 public class AddToCart
 {

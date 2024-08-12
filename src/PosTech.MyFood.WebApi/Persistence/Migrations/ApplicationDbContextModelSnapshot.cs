@@ -11,6 +11,7 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
+    [ExcludeFromCodeCoverage]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

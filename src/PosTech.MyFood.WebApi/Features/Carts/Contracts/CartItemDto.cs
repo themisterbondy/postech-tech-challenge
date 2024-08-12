@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.Features.Carts.Contracts;
+namespace PosTech.MyFood.WebApi.Features.Carts.Contracts;
 
 public class CartRequest
 {

@@ -1,7 +1,6 @@
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
-namespace PosTech.MyFood.Features.Carts.Entities;
+namespace PosTech.MyFood.WebApi.Features.Carts.Entities;
 
 public class CartItem
 {

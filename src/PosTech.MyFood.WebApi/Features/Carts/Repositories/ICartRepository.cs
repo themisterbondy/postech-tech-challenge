@@ -1,7 +1,6 @@
-using PosTech.MyFood.Features.Carts.Entities;
 using PosTech.MyFood.WebApi.Features.Carts.Entities;
 
-namespace PosTech.MyFood.Features.Carts.Repositories;
+namespace PosTech.MyFood.WebApi.Features.Carts.Repositories;
 
 public interface ICartRepository
 {

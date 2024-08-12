@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Commands;
 using PosTech.MyFood.WebApi.Features.Products.Contracts;
+using PosTech.MyFood.WebApi.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Queries;
 
 namespace PosTech.MyFood.WebApi.Features.Products.Endpoints;

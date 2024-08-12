@@ -1,4 +1,4 @@
-namespace PosTech.MyFood.Features.Products.Entities;
+namespace PosTech.MyFood.WebApi.Features.Products.Entities;
 
 public enum ProductCategory
 {

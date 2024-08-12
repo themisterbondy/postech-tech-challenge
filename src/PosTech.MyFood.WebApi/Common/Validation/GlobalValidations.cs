@@ -1,5 +1,6 @@
 namespace PosTech.MyFood.WebApi.Common.Validation;
 
+[ExcludeFromCodeCoverage]
 public static class GlobalValidations
 {
     public static bool BeAValidCPF(string cpf)

@@ -1,12 +1,9 @@
-using PosTech.MyFood.Features.Carts.Contracts;
-using PosTech.MyFood.Features.Carts.Entities;
-using PosTech.MyFood.Features.Carts.Repositories;
-using PosTech.MyFood.Features.Products.Entities;
+using PosTech.MyFood.WebApi.Features.Carts.Contracts;
 using PosTech.MyFood.WebApi.Features.Carts.Entities;
-using PosTech.MyFood.WebApi.Features.Carts.Services;
+using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
-namespace PosTech.MyFood.Features.Carts.Services;
+namespace PosTech.MyFood.WebApi.Features.Carts.Services;
 
 public class CartService(ICartRepository cartRepository) : ICartService
 {
