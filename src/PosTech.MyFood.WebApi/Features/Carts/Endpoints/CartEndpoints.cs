@@ -3,6 +3,7 @@ using PosTech.MyFood.WebApi.Features.Carts.Contracts;
 
 namespace PosTech.MyFood.WebApi.Features.Carts.Endpoints;
 
+[ExcludeFromCodeCoverage]
 public class CartEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
