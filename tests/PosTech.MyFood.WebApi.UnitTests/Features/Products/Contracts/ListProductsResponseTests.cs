@@ -1,5 +1,5 @@
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Contracts;
+using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.WebApi.UnitTests.Features.Products.Contracts;
 

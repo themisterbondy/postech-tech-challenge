@@ -1,5 +1,4 @@
 using Bogus;
-using PosTech.MyFood.Features.Products.Entities;
 using PosTech.MyFood.WebApi.Features.Products.Entities;
 
 namespace PosTech.MyFood.WebApi.UnitTests.Mocks;
