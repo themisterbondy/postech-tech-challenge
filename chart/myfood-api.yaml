@@ -1,0 +1,12 @@
+apiVersion : v1
+kind: Pod
+metadata:
+  name: myFood-service
+  labels:
+    apps: myFood-service
+spec:
+  containers:
+    - name:  myfood-webapi
+      image:  postech.myfood.webapi
+      ports: 
+        - containerPort: 8080
