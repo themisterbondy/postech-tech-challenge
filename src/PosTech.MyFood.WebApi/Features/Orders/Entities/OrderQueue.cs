@@ -2,14 +2,14 @@ namespace PosTech.MyFood.WebApi.Features.Orders.Entities;
 
 public class OrderQueue
 {
-    private OrderQueue(OrderId id, DateTime createdAt, OrderQueueStatus status, string? customerCpf,
-        List<OrderItem> items)
+    private OrderQueue(OrderId id, string? customerCpf, List<OrderItem> items, string transactionId,
+        OrderQueueStatus status)
     {
         Id = id;
-        CreatedAt = createdAt;
-        Status = status;
         CustomerCpf = customerCpf;
         Items = items;
+        TransactionId = transactionId;
+        Status = status;
     }
 
     private OrderQueue()
@@ -17,14 +17,17 @@ public class OrderQueue
     }
 
     public OrderId Id { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; } = DateTime.UtcNow;
     public OrderQueueStatus Status { get; set; }
     public string? CustomerCpf { get; set; }
     public List<OrderItem> Items { get; set; }
 
-    public static OrderQueue Create(OrderId id, DateTime createdAt, string? customerCpf,
-        List<OrderItem> items)
+    public string? TransactionId { get; set; }
+
+    public static OrderQueue Create(OrderId orderId, string? customerCpf, List<OrderItem> orderItems,
+        string transactionId,
+        OrderQueueStatus status)
     {
-        return new OrderQueue(id, createdAt, OrderQueueStatus.Received, customerCpf, items);
+        return new OrderQueue(orderId, customerCpf, orderItems, transactionId, status);
     }
 }
