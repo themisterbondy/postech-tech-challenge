@@ -1,7 +1,7 @@
 using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using Quartz;
 
-namespace PosTech.MyFood.WebApi.Jobs;
+namespace PosTech.MyFood.WebApi.Features.Carts.Jobs;
 
 [ExcludeFromCodeCoverage]
 public class CartCleanupJob(ICartRepository cartRepository, ILogger<CartCleanupJob> logger)
@@ -12,7 +12,7 @@ public class CartCleanupJob(ICartRepository cartRepository, ILogger<CartCleanupJ
         logger.LogInformation("CartCleanupJob started.");
 
         var threshold = DateTime.UtcNow.AddMinutes(-15);
-        await cartRepository.DeleteCartsOlderThanAsync(threshold);
+        await cartRepository.DeleteUnpaidCartsOlderThanAsync(threshold);
 
         logger.LogInformation("CartCleanupJob finished.");
     }
