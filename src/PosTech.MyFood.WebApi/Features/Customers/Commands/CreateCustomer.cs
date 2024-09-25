@@ -13,7 +13,7 @@ public class CreateCustomer
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string CPF { get; set; }
+        public string Cpf { get; set; }
     }
 
     public class CreateCustomerValidator : AbstractValidator<Command>
@@ -27,11 +27,11 @@ public class CreateCustomer
                 .NotEmpty().WithError(Error.Validation("Email", "Email is required."))
                 .EmailAddress().WithError(Error.Validation("Email", "Email is invalid."));
 
-            RuleFor(x => x.CPF)
+            RuleFor(x => x.Cpf)
                 .NotEmpty().WithError(Error.Validation("CPF", "CPF is required."))
                 .Matches("^[0-9]*$").WithError(Error.Validation("CPF", "CPF must contain only numbers."))
                 .Length(11).WithError(Error.Validation("CPF", "CPF must have 11 characters."))
-                .Must(GlobalValidations.BeAValidCPF).WithMessage("CPF is invalid.");
+                .Must(GlobalValidations.BeAValidCpf).WithMessage("CPF is invalid.");
         }
     }
 
@@ -42,7 +42,7 @@ public class CreateCustomer
             CancellationToken cancellationToken)
         {
             var isUniqueCustomer =
-                await customerServices.IsUniqueCustomer(request.Email, request.CPF, cancellationToken);
+                await customerServices.IsUniqueCustomer(request.Email, request.Cpf, cancellationToken);
 
             if (isUniqueCustomer.IsFailure)
                 return Result.Failure<CustomerResponse>(isUniqueCustomer.Error);
@@ -51,7 +51,7 @@ public class CreateCustomer
                 Customer.Create(CustomerId.New(),
                     request.Name,
                     request.Email,
-                    request.CPF),
+                    request.Cpf),
                 cancellationToken);
 
             if (createCustomer.IsFailure)
@@ -62,7 +62,7 @@ public class CreateCustomer
                 Id = createCustomer.Value.Id.Value,
                 Name = createCustomer.Value.Name,
                 Email = createCustomer.Value.Email,
-                CPF = createCustomer.Value.CPF
+                Cpf = createCustomer.Value.Cpf
             };
         }
     }
