@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PosTech.MyFood.WebApi.Features.Carts.Entities;
+using PosTech.MyFood.WebApi.Features.Payments.Emun;
 
 namespace PosTech.MyFood.WebApi.Persistence.Configurations;
 
@@ -21,6 +22,16 @@ public class CartConfiguration : IEntityTypeConfiguration<Cart>
 
         builder.Property(c => c.CreatedAt)
             .IsRequired();
+
+        builder.Property(o => o.PaymentStatus)
+            .IsRequired()
+            .HasConversion(
+                v => v.ToString(),
+                v => (PaymentStatus)Enum.Parse(typeof(PaymentStatus), v));
+
+        builder.Property(c => c.TransactionId)
+            .IsRequired(false)
+            .HasMaxLength(36);
 
         builder.HasMany(c => c.Items)
             .WithOne()
