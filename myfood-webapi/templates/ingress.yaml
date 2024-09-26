@@ -1,0 +1,21 @@
+ apiVersion: networking.k8s.io/v1 
+kind: Ingress 
+metadata: 
+  name: myfood-webapi 
+  namespace: default 
+  labels: 
+    app: myfood-webapi  
+  annotations: 
+    kubernetes.io/ingress.class: "nginx" 
+    ingress.kubernetes.io/rewrite-target: / 
+spec: 
+  rules: 
+  - http: 
+      paths: 
+      - path: /myfood-webapi
+        pathType: Prefix 
+        backend: 
+          service: 
+            name: myfood-webapi 
+            port: 
+              number: 8080

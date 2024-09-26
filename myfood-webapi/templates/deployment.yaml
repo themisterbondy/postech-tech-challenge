@@ -1,0 +1,47 @@
+kind: Deployment 
+apiVersion: apps/v1 
+metadata: 
+  name: myfood-webapi
+  namespace: default 
+  labels: 
+    app: myfood-webapi   
+spec: 
+  replicas: 2 
+  selector: 
+    matchLabels: 
+      app: myfood-webapi   
+  template: 
+    metadata: 
+      name: myfood-webapi  
+      labels: 
+        app: myfood-webapi   
+    spec: 
+      containers: 
+      - name: myfood-webapi   
+        image: hashicorp/http-echo 
+        args: 
+          - "-text=banana" 
+        livenessProbe: 
+          httpGet: 
+            path: /health
+            port: 8080 
+          initialDelaySeconds: 5 
+          periodSeconds: 10 
+          failureThreshold: 3 
+        readinessProbe: 
+          httpGet: 
+            path: /health
+            port: 8080 
+          initialDelaySeconds: 5 
+          periodSeconds: 10 
+          successThreshold: 3 
+          failureThreshold: 3 
+        ports: 
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 80
+            protocol: TCP
+        resources:  
+          limits:  
+            cpu: 250m  
+            memory: 32Mi
