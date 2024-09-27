@@ -9,18 +9,18 @@ public class GetCustomerByCpf
 {
     public class Query : IRequest<Result<CustomerResponse>>
     {
-        public required string CPF { get; set; }
+        public required string Cpf { get; set; }
     }
 
     public class CreateCustomerValidator : AbstractValidator<Query>
     {
         public CreateCustomerValidator()
         {
-            RuleFor(x => x.CPF)
+            RuleFor(x => x.Cpf)
                 .NotEmpty().WithError(Error.Validation("CPF", "CPF is required."))
                 .Matches("^[0-9]*$").WithError(Error.Validation("CPF", "CPF must contain only numbers."))
                 .Length(11).WithError(Error.Validation("CPF", "CPF must have 11 characters."))
-                .Must(GlobalValidations.BeAValidCPF).WithMessage("CPF is invalid.");
+                .Must(GlobalValidations.BeAValidCpf).WithMessage("CPF is invalid.");
         }
     }
 
@@ -30,7 +30,7 @@ public class GetCustomerByCpf
         public async Task<Result<CustomerResponse>> Handle(Query request,
             CancellationToken cancellationToken)
         {
-            var getCustomer = await customerRepository.GetByCPFAsync(request.CPF, cancellationToken);
+            var getCustomer = await customerRepository.GetByCpfAsync(request.Cpf, cancellationToken);
 
             if (getCustomer.IsFailure || getCustomer.Value == null)
                 return Result.Failure<CustomerResponse>(Error.NotFound("GetCustomerByCpfHandler.Handle",
@@ -41,7 +41,7 @@ public class GetCustomerByCpf
                 Id = getCustomer.Value.Id.Value,
                 Name = getCustomer.Value.Name,
                 Email = getCustomer.Value.Email,
-                CPF = getCustomer.Value.CPF
+                Cpf = getCustomer.Value.Cpf
             };
         }
     }

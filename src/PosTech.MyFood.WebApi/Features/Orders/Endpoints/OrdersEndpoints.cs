@@ -14,12 +14,12 @@ public class OrdersEndpoints : ICarterModule
         var group = app.MapGroup("/api/orders");
 
         group.MapPut("/{id:guid}/status",
-                async (Guid id, [FromQuery] OrderQueueStatus Status, IMediator mediator) =>
+                async (Guid id, [FromQuery] OrderQueueStatus status, IMediator mediator) =>
                 {
                     var result = await mediator.Send(new UpdateOrderQueueStatusCommand.Command
                     {
                         Id = id,
-                        Status = Status
+                        Status = status
                     });
                     return result.IsSuccess
                         ? Results.Created($"/Order/{result.Value.Id}", result.Value)
@@ -51,19 +51,6 @@ public class OrdersEndpoints : ICarterModule
             })
             .WithName("ListOrders")
             .Produces<ListOrdersResponse>(200)
-            .WithTags("Orders")
-            .WithOpenApi();
-
-        group.MapPost("/checkout",
-                async ([FromQuery] string CustomerId, ISender sender) =>
-                {
-                    var result = await sender.Send(new FakeCheckout.Command { CustomerId = CustomerId });
-                    return result.IsSuccess
-                        ? Results.Created($"/Order/{result.Value.OrderId}", result.Value)
-                        : result.ToProblemDetails();
-                })
-            .WithName("FakeCheckout")
-            .Produces<CheckoutResponse>(201)
             .WithTags("Orders")
             .WithOpenApi();
     }

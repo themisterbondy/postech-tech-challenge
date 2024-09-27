@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PosTech.MyFood.WebApi.Persistence;
@@ -11,9 +12,11 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240924230636_AddTransactionId")]
+    partial class AddTransactionId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +38,6 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(36)
                         .HasColumnType("character varying(36)");
-
-                    b.Property<string>("PaymentStatus")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("TransactionId")
                         .HasMaxLength(36)
@@ -117,7 +116,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a9bddd75-5d5b-47e6-8044-dbb22ae437f4"),
+                            Id = new Guid("45c39840-fcaf-4446-8b1c-7d27874ae6fb"),
                             Cpf = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
@@ -222,7 +221,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("738dd22a-79db-48e6-a291-d5b8d3b32da6"),
+                            Id = new Guid("fe326405-85e4-431f-8ffa-e5b7d61c6ddd"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -231,7 +230,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a21709b2-ab04-4ec8-933c-44bcf5312aca"),
+                            Id = new Guid("dab397cb-7e9e-4e9d-9602-432156c0ca62"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -240,7 +239,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc843643-5fac-427e-8d2e-3681dada07fe"),
+                            Id = new Guid("efc50969-6416-49de-bb66-df893d87adc1"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -249,7 +248,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("78d7e7e6-afd8-49bb-88a6-076febf8cf5c"),
+                            Id = new Guid("c1073ffe-8887-4e78-b89b-f67b2567dd51"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
