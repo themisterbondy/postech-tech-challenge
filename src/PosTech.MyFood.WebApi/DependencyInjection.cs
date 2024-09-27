@@ -75,6 +75,7 @@ public static class DependencyInjection
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(5)
                     .RepeatForever())
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Minute))
             );
 
             var orderJobKey = new JobKey("OrderCleanupJob");
@@ -85,6 +86,7 @@ public static class DependencyInjection
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(30)
                     .RepeatForever())
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Minute))
             );
         });
 
