@@ -12,31 +12,31 @@ public class GetCustomerByCpfValidatorTests
     [Fact]
     public void Validator_ShouldHaveError_WhenCPFIsEmpty()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "" };
+        var query = new GetCustomerByCpf.Query { Cpf = "" };
         var result = _validator.TestValidate(query);
-        result.ShouldHaveValidationErrorFor(x => x.CPF);
+        result.ShouldHaveValidationErrorFor(x => x.Cpf);
     }
 
     [Fact]
     public void Validator_ShouldHaveError_WhenCPFIsNot11Characters()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "123456789" };
+        var query = new GetCustomerByCpf.Query { Cpf = "123456789" };
         var result = _validator.TestValidate(query);
-        result.ShouldHaveValidationErrorFor(x => x.CPF);
+        result.ShouldHaveValidationErrorFor(x => x.Cpf);
     }
 
     [Fact]
     public void Validator_ShouldHaveError_WhenCPFIsInvalid()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "12345678900" };
+        var query = new GetCustomerByCpf.Query { Cpf = "12345678900" };
         var result = _validator.TestValidate(query);
-        result.ShouldHaveValidationErrorFor(x => x.CPF).WithErrorMessage("CPF is invalid.");
+        result.ShouldHaveValidationErrorFor(x => x.Cpf).WithErrorMessage("CPF is invalid.");
     }
 
     [Fact]
     public void Validator_ShouldNotHaveError_WhenCPFIsValid()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "12345678909" }; // Assuming this is a valid CPF
+        var query = new GetCustomerByCpf.Query { Cpf = "12345678909" }; // Assuming this is a valid CPF
         var result = _validator.TestValidate(query);
         result.ShouldNotHaveAnyValidationErrors();
     }
@@ -55,8 +55,8 @@ public class GetCustomerByCpfHandlerTests
     [Fact]
     public async Task Handle_ReturnsFailure_WhenCustomerNotFound()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "12345678909" };
-        _customerRepository.GetByCPFAsync(query.CPF, CancellationToken.None).Returns(
+        var query = new GetCustomerByCpf.Query { Cpf = "12345678909" };
+        _customerRepository.GetByCpfAsync(query.Cpf, CancellationToken.None).Returns(
             Result.Failure<Customer>(Error.Failure("CustomerRepository.GetByCPFAsync", "CPF is null.")));
 
         var result = await _handler.Handle(query, CancellationToken.None);
@@ -68,9 +68,9 @@ public class GetCustomerByCpfHandlerTests
     [Fact]
     public async Task Handle_ReturnsSuccess_WhenCustomerIsFound()
     {
-        var query = new GetCustomerByCpf.Query { CPF = "12345678909" };
-        var customer = Customer.Create(CustomerId.New(), "John Doe", "", query.CPF);
-        _customerRepository.GetByCPFAsync(query.CPF, CancellationToken.None).Returns(Result.Success(customer));
+        var query = new GetCustomerByCpf.Query { Cpf = "12345678909" };
+        var customer = Customer.Create(CustomerId.New(), "John Doe", "", query.Cpf);
+        _customerRepository.GetByCpfAsync(query.Cpf, CancellationToken.None).Returns(Result.Success(customer));
 
         var result = await _handler.Handle(query, CancellationToken.None);
 
@@ -80,7 +80,7 @@ public class GetCustomerByCpfHandlerTests
             Id = customer.Id.Value,
             Name = customer.Name,
             Email = customer.Email,
-            CPF = customer.CPF
+            Cpf = customer.Cpf
         });
     }
 }
