@@ -7,7 +7,7 @@ public class Customer
         Id = id;
         Name = name;
         Email = email;
-        CPF = cpf;
+        Cpf = cpf;
     }
 
     private Customer()
@@ -17,7 +17,7 @@ public class Customer
     public CustomerId Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public string CPF { get; set; }
+    public string Cpf { get; set; }
 
     public static Customer Create(CustomerId id, string name, string email, string cpf)
     {

@@ -6,19 +6,38 @@ namespace PosTech.MyFood.WebApi.Common.Extensions;
 [ExcludeFromCodeCoverage]
 public static class MigrationExtensions
 {
-    public static async Task ApplyMigrations(this WebApplication app)
+    public static void ApplyMigrations(this WebApplication app)
     {
+        IServiceScope scope = null;
+
         try
         {
-            using var scope = app.Services.CreateScope();
-
+            scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            await dbContext.Database.MigrateAsync();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>>();
+            var pendingMigrations = dbContext.Database.GetPendingMigrations();
+
+            if (pendingMigrations.Any())
+            {
+                logger.LogInformation("Migrações pendentes encontradas: {Migrations}",
+                    string.Join(", ", pendingMigrations));
+                dbContext.Database.Migrate();
+                logger.LogInformation("Migrações aplicadas com sucesso.");
+            }
+            else
+            {
+                logger.LogInformation("Nenhuma migração pendente encontrada.");
+            }
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            var logger = scope?.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>>();
+            logger?.LogError(e, "Ocorreu um erro ao aplicar migrações");
+        }
+        finally
+        {
+            scope?.Dispose();
         }
     }
 }

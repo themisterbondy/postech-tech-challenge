@@ -29,11 +29,11 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 
         builder.HasIndex(l => l.Email).IsUnique();
 
-        builder.Property(c => c.CPF)
+        builder.Property(c => c.Cpf)
             .IsRequired()
             .HasMaxLength(11);
 
-        builder.HasIndex(l => l.CPF).IsUnique();
+        builder.HasIndex(l => l.Cpf).IsUnique();
 
         builder.HasData(
             Customer.Create(new CustomerId(Guid.NewGuid()), "John Doe", "john.doe@email.com", "36697999071")

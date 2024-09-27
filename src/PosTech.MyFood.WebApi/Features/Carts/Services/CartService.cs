@@ -35,10 +35,13 @@ public class CartService(ICartRepository cartRepository) : ICartService
         else
             await cartRepository.AddAsync(cart);
 
+        var totalAmount = cart.Items.Sum(item => item.UnitPrice * item.Quantity);
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
+            TotalAmount = totalAmount,
+            PaymentStatus = cart.PaymentStatus,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
@@ -56,7 +59,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
@@ -82,7 +85,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
@@ -94,9 +97,9 @@ public class CartService(ICartRepository cartRepository) : ICartService
         };
     }
 
-    public async Task<CartResponse> ClearCartAsync(string customerId)
+    public async Task<CartResponse> ClearCartAsync(Guid cartId)
     {
-        var cart = await cartRepository.GetByCustomerIdAsync(customerId);
+        var cart = await cartRepository.GetByIdAsync(new CartId(cartId));
         if (cart == null) return null;
 
         cart.Items.Clear();
@@ -104,7 +107,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {

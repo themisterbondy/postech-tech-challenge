@@ -40,4 +40,11 @@ public class OrderQueueRepository(ApplicationDbContext context) : IOrderQueueRep
         context.OrderQueue.UpdateRange(ordersToCancel);
         await context.SaveChangesAsync();
     }
+
+    public Task<OrderQueue?> GetByTransactionIdAsync(string transactionId)
+    {
+        return context.OrderQueue
+            .AsNoTracking()
+            .FirstOrDefaultAsync(o => o.TransactionId == transactionId);
+    }
 }

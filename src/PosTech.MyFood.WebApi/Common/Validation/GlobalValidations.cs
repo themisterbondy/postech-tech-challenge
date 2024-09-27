@@ -3,7 +3,7 @@ namespace PosTech.MyFood.WebApi.Common.Validation;
 [ExcludeFromCodeCoverage]
 public static class GlobalValidations
 {
-    public static bool BeAValidCPF(string cpf)
+    public static bool BeAValidCpf(string cpf)
     {
         if (cpf.Length != 11)
             return false;
