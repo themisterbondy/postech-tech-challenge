@@ -5,12 +5,12 @@ metadata:
   labels:
     {{- include "webapi.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}  # NodePort ou ClusterIP definido no values.yaml
+  type: {{ .Values.service.type }}
   ports:
     - protocol: TCP
-      port: {{ .Values.service.port }}  # Porta do serviço exposta (8080)
-      targetPort: {{ .Values.service.port }}  # Porta no container (8080)
-      nodePort: {{ .Values.service.nodePort }}  # Porta NodePort (ex: 30000)
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      nodePort: {{ .Values.service.nodePort }}
       name: 'http'
   selector:
     {{- include "webapi.selectorLabels" . | nindent 4 }}
