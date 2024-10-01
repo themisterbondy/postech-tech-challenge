@@ -12,7 +12,7 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240927031611_Initial")]
+    [Migration("20241001222438_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,6 +36,14 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TransactionId")
                         .HasMaxLength(36)
                         .HasColumnType("character varying(36)");
 
@@ -84,7 +92,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<string>("CPF")
+                    b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("character varying(11)");
@@ -101,7 +109,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CPF")
+                    b.HasIndex("Cpf")
                         .IsUnique();
 
                     b.HasIndex("Email")
@@ -112,8 +120,8 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8c304d80-e6ed-4596-b838-2845d56391b9"),
-                            CPF = "36697999071",
+                            Id = new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"),
+                            Cpf = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
                         });
@@ -173,6 +181,10 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("TransactionId")
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Orders", (string)null);
@@ -213,7 +225,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("54af44a4-6897-421d-8f1c-907ecc8fceeb"),
+                            Id = new Guid("81e0a7f0-77e9-433f-9f2c-1b131c3317c3"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -222,7 +234,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b2dbed74-b1d2-4d19-9e84-98500b09ce53"),
+                            Id = new Guid("6937a222-4e5e-4a75-abde-9ab3b9f58b0f"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -231,7 +243,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f4422f5f-2b39-4087-ad8e-6ec0c382e6fb"),
+                            Id = new Guid("84d18030-66cc-4f12-bf5f-988667805bf8"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -240,7 +252,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("939fb55f-cf26-41ec-b929-0e47748b3790"),
+                            Id = new Guid("024fb6ba-5ebe-4131-a27e-d10a4041b32d"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
