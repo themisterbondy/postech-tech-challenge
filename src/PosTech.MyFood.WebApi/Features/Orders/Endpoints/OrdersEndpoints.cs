@@ -42,7 +42,7 @@ public class OrdersEndpoints : ICarterModule
             .WithTags("Orders")
             .WithOpenApi();
 
-        group.MapGet("/{transactionId}", async ([FromQuery]string transactionId, ISender sender) =>
+        group.MapGet("/transaction/{transactionId}", async (string transactionId, ISender sender) =>
             {
                 var result = await sender.Send(new GetOrderQueueByTransactionId.Query
                     { TransactionId = transactionId });

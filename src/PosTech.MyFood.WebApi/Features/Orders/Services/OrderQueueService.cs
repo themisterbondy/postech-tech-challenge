@@ -84,7 +84,7 @@ public class OrderQueueService(
                 ProductName = item.ProductName,
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
-                Category = item.Category
+                Category = item.Category,
             }).ToList()
         };
     }
