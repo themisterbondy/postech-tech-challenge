@@ -41,6 +41,7 @@ public class OrderQueueService(
             return Result.Failure<EnqueueOrderResponse>(Error.Failure("OrderQueueService.UpdateOrderStatusAsync",
                 $"Order with id {id} not found."));
 
+        orderQueue.UpdateStatus(status);
         await orderQueueRepository.UpdateStatusAsync(id, status, cancellationToken);
 
         return new EnqueueOrderResponse

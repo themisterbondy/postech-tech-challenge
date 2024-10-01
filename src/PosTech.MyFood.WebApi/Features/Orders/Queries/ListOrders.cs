@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.MyFood.WebApi.Features.Orders.Contracts;
+using PosTech.MyFood.WebApi.Features.Orders.Entities;
 using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Features.Orders.Queries;
