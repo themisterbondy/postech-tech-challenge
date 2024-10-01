@@ -102,7 +102,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         if (cart == null) return null;
 
         cart.Items.Clear();
-        await cartRepository.UpdateAsync(cart);
+        await cartRepository.Delete(cart);
 
         return new CartResponse
         {

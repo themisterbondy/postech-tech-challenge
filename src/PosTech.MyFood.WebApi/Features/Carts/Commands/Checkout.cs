@@ -50,7 +50,7 @@ public class Checkout
 
             cart.TransactionId = paymentInitiationResult.Value.TransactionId;
             cart.UpdatePaymentStatus(PaymentStatus.Pending);
-            await cartRepository.UpdateAsync(cart);
+            await cartRepository.UpdateStatusAsync(cart);
 
             return Result.Success(new CheckoutResponse
             {

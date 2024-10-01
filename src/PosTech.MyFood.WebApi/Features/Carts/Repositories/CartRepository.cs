@@ -37,6 +37,17 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
         await context.SaveChangesAsync();
     }
 
+    public async Task UpdateStatusAsync(Cart cart)
+    {
+        await context.Carts.Where(c => c.Id == cart.Id)
+            .ExecuteUpdateAsync(
+                c => c
+                    .SetProperty(p => p.PaymentStatus, cart.PaymentStatus)
+                    .SetProperty(p => p.TransactionId, cart.TransactionId)
+            );
+
+    }
+
     public async Task UpdateAsync(Cart cart)
     {
         var cartInContext = await context.Carts
@@ -91,5 +102,11 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
             .AsNoTracking()
             .Include(c => c.Items)
             .FirstOrDefaultAsync(c => c.TransactionId == transactionId);
+    }
+
+    public Task Delete(Cart cart)
+    {
+        context.Carts.Remove(cart);
+        return context.SaveChangesAsync();
     }
 }
