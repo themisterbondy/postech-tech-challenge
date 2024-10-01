@@ -65,7 +65,8 @@ public class Checkout
                     ProductId = item.ProductId.Value,
                     ProductName = item.ProductName,
                     UnitPrice = item.UnitPrice,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    Category = item.Category
                 }).ToList()
             });
         }
