@@ -8,5 +8,5 @@ public interface IOrderQueueRepository
     Task AddAsync(OrderQueue orderQueue, CancellationToken cancellationToken);
     Task UpdateStatusAsync(Guid id, OrderQueueStatus status, CancellationToken cancellationToken);
     Task CancelOrdersNotPreparingWithinAsync(DateTime threshold);
-    Task<OrderQueue?> GetByTransactionIdAsync(string transactionId);
+    Task<OrderQueue?> GetByTransactionIdAsync(string transactionId, CancellationToken cancellationToken);
 }

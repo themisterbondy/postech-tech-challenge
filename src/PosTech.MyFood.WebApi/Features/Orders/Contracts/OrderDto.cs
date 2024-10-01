@@ -4,11 +4,12 @@ namespace PosTech.MyFood.WebApi.Features.Orders.Contracts;
 
 public class OrderDto
 {
-    public Guid Id { get; set; }
+    public Guid OrderId { get; set; }
     public DateTime OrderDate { get; set; }
     public string Status { get; set; }
     public string? CustomerCpf { get; set; }
     public List<OrderItemDto> Items { get; set; }
+    public string? TransactionId { get; set; }
 }
 
 public class OrderItemDto

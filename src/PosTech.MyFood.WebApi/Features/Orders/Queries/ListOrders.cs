@@ -26,10 +26,11 @@ public class ListOrders
             {
                 Orders = orders.Select(o => new OrderDto
                 {
-                    Id = o.Id.Value,
+                    OrderId = o.Id.Value,
                     OrderDate = o.CreatedAt,
                     Status = o.Status.ToString(),
                     CustomerCpf = o.CustomerCpf,
+                    TransactionId = o.TransactionId,
                     Items = o.Items.Select(oi => new OrderItemDto
                     {
                         ProductId = oi.ProductId.Value,

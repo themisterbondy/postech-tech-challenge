@@ -41,10 +41,11 @@ public class OrderQueueRepository(ApplicationDbContext context) : IOrderQueueRep
         await context.SaveChangesAsync();
     }
 
-    public Task<OrderQueue?> GetByTransactionIdAsync(string transactionId)
+    public Task<OrderQueue?> GetByTransactionIdAsync(string transactionId, CancellationToken cancellationToken)
     {
         return context.OrderQueue
             .AsNoTracking()
-            .FirstOrDefaultAsync(o => o.TransactionId == transactionId);
+            .Include(o => o.Items)
+            .FirstOrDefaultAsync(o => o.TransactionId == transactionId, cancellationToken: cancellationToken);
     }
 }
