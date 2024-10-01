@@ -15,6 +15,11 @@ public class ListOrders
         {
             var orders = await context.OrderQueue
                 .Include(o => o.Items)
+                .Where(o => o.Status != OrderQueueStatus.Cancelled && o.Status != OrderQueueStatus.Completed)
+                .OrderBy(o => o.Status == OrderQueueStatus.Ready ? 0
+                    : o.Status == OrderQueueStatus.Preparing ? 1
+                    : 2)
+                .ThenBy(o => o.CreatedAt)
                 .ToListAsync(cancellationToken);
 
             return Result.Success(new ListOrdersResponse
