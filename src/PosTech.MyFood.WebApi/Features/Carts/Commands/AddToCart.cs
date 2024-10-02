@@ -52,7 +52,7 @@ public class AddItensToCart
                 Quantity = request.Quantity
             };
 
-            return await cartService.AddToCartAsync(request.CustomerId, cartItem);
+            return await cartService.AddToCartAsync(request.CustomerId, cartItem, product);
         }
     }
 }

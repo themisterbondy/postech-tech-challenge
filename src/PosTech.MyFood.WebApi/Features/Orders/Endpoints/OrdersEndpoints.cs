@@ -22,7 +22,7 @@ public class OrdersEndpoints : ICarterModule
                         Status = status
                     });
                     return result.IsSuccess
-                        ? Results.Created($"/Order/{result.Value.Id}", result.Value)
+                        ? Results.Created($"/Order/{result.Value.OrderId}", result.Value)
                         : result.ToProblemDetails();
                 })
             .WithName("UpdateOrderStatus")
@@ -34,10 +34,23 @@ public class OrdersEndpoints : ICarterModule
             {
                 var result = await sender.Send(new GetOrderQueueById.Query { Id = id });
                 return result.IsSuccess
-                    ? Results.Created($"/Order/{result.Value.Id}", result.Value)
+                    ? Results.Created($"/order/{result.Value.OrderId}", result.Value)
                     : result.ToProblemDetails();
             })
             .WithName("GetOrder")
+            .Produces<EnqueueOrderResponse>(200)
+            .WithTags("Orders")
+            .WithOpenApi();
+
+        group.MapGet("/transaction/{transactionId}", async (string transactionId, ISender sender) =>
+            {
+                var result = await sender.Send(new GetOrderQueueByTransactionId.Query
+                    { TransactionId = transactionId });
+                return result.IsSuccess
+                    ? Results.Created($"/Order/{result.Value.OrderId}", result.Value)
+                    : result.ToProblemDetails();
+            })
+            .WithName("GetOrderByTransactionId")
             .Produces<EnqueueOrderResponse>(200)
             .WithTags("Orders")
             .WithOpenApi();

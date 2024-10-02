@@ -9,4 +9,6 @@ public interface IOrderQueueService
 
     Task<Result<EnqueueOrderResponse>> UpdateOrderStatusAsync(Guid id, OrderQueueStatus status,
         CancellationToken cancellationToken);
+
+    Task<Result<EnqueueOrderResponse>> GetOrderByTransactionIdAsync(string TransactionId, CancellationToken cancellationToken);
 }

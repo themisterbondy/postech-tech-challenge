@@ -17,10 +17,11 @@ public class OrderQueueService(
 
         return new EnqueueOrderResponse
         {
-            Id = orderQueue.Id.Value,
+            OrderId = orderQueue.Id.Value,
             CreatedAt = orderQueue.CreatedAt,
             CustomerCpf = orderQueue.CustomerCpf,
             Status = orderQueue.Status,
+            TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId.Value,
@@ -41,14 +42,16 @@ public class OrderQueueService(
             return Result.Failure<EnqueueOrderResponse>(Error.Failure("OrderQueueService.UpdateOrderStatusAsync",
                 $"Order with id {id} not found."));
 
+        orderQueue.UpdateStatus(status);
         await orderQueueRepository.UpdateStatusAsync(id, status, cancellationToken);
 
         return new EnqueueOrderResponse
         {
-            Id = orderQueue.Id.Value,
+            OrderId = orderQueue.Id.Value,
             CreatedAt = orderQueue.CreatedAt,
             CustomerCpf = orderQueue.CustomerCpf,
             Status = status,
+            TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId.Value,
@@ -56,6 +59,33 @@ public class OrderQueueService(
                 UnitPrice = item.UnitPrice,
                 Quantity = item.Quantity,
                 Category = item.Category
+            }).ToList()
+        };
+    }
+
+    public async Task<Result<EnqueueOrderResponse>> GetOrderByTransactionIdAsync(string TransactionId,
+        CancellationToken cancellationToken)
+    {
+        var orderQueue = await orderQueueRepository.GetByTransactionIdAsync(TransactionId, cancellationToken);
+
+        if (orderQueue == null)
+            return Result.Failure<EnqueueOrderResponse>(Error.Failure("OrderQueueService.UpdateOrderStatusAsync",
+                $"Order with transactionId {TransactionId} not found."));
+
+        return new EnqueueOrderResponse
+        {
+            OrderId = orderQueue.Id.Value,
+            CreatedAt = orderQueue.CreatedAt,
+            CustomerCpf = orderQueue.CustomerCpf,
+            Status = orderQueue.Status,
+            TransactionId = orderQueue.TransactionId,
+            Items = orderQueue.Items.Select(item => new OrderItemDto
+            {
+                ProductId = item.ProductId.Value,
+                ProductName = item.ProductName,
+                UnitPrice = item.UnitPrice,
+                Quantity = item.Quantity,
+                Category = item.Category,
             }).ToList()
         };
     }
