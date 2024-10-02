@@ -7,5 +7,5 @@ public interface IPaymentService
 {
     Task<Result<PaymentInitiationResponse>> InitiatePaymentAsync(Guid cartId, decimal amount);
     Task<Result<PaymentStatusResponse>> GetPaymentStatusAsync(Guid cartId);
-    Task<Result> ProcessPaymentNotificationAsync(PaymentNotification notification);
+    Task<Result> ProcessPaymentNotificationAsync(PaymentNotification notification, CancellationToken cancellationToken);
 }

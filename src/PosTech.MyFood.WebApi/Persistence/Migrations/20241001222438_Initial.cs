@@ -22,7 +22,9 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CustomerId = table.Column<string>(type: "character varying(36)", maxLength: 36, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "text", nullable: false),
+                    TransactionId = table.Column<string>(type: "character varying(36)", maxLength: 36, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +38,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    CPF = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false)
+                    Cpf = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +52,8 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
-                    CustomerCpf = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: true)
+                    CustomerCpf = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: true),
+                    TransactionId = table.Column<string>(type: "character varying(36)", maxLength: 36, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,18 +124,18 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "CPF", "Email", "Name" },
-                values: new object[] { new Guid("8c304d80-e6ed-4596-b838-2845d56391b9"), "36697999071", "john.doe@email.com", "John Doe" });
+                columns: new[] { "Id", "Cpf", "Email", "Name" },
+                values: new object[] { new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"), "36697999071", "john.doe@email.com", "John Doe" });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Category", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("54af44a4-6897-421d-8f1c-907ecc8fceeb"), "Lanche", "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br", "Big Mac", 5.99m },
-                    { new Guid("939fb55f-cf26-41ec-b929-0e47748b3790"), "Sobremesa", "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br", "Casquinha Chocolate", 1.49m },
-                    { new Guid("b2dbed74-b1d2-4d19-9e84-98500b09ce53"), "Acompanhamento", "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br", "McFritas Média", 2.99m },
-                    { new Guid("f4422f5f-2b39-4087-ad8e-6ec0c382e6fb"), "Bebida", "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br", "Coca-Cola 300ml", 1.99m }
+                    { new Guid("024fb6ba-5ebe-4131-a27e-d10a4041b32d"), "Sobremesa", "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br", "Casquinha Chocolate", 1.49m },
+                    { new Guid("6937a222-4e5e-4a75-abde-9ab3b9f58b0f"), "Acompanhamento", "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br", "McFritas Média", 2.99m },
+                    { new Guid("81e0a7f0-77e9-433f-9f2c-1b131c3317c3"), "Lanche", "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br", "Big Mac", 5.99m },
+                    { new Guid("84d18030-66cc-4f12-bf5f-988667805bf8"), "Bebida", "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.", "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br", "Coca-Cola 300ml", 1.99m }
                 });
 
             migrationBuilder.CreateIndex(
@@ -141,9 +144,9 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_CPF",
+                name: "IX_Customers_Cpf",
                 table: "Customers",
-                column: "CPF",
+                column: "Cpf",
                 unique: true);
 
             migrationBuilder.CreateIndex(

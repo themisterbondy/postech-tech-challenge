@@ -26,7 +26,7 @@ public class ProcessPayment
                 Amount = request.Amount
             };
 
-            var result = await paymentService.ProcessPaymentNotificationAsync(notification);
+            var result = await paymentService.ProcessPaymentNotificationAsync(notification, cancellationToken);
 
             return result.IsSuccess
                 ? Result.Success(new PaymentStatusResponse

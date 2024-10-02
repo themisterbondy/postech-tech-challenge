@@ -38,7 +38,8 @@ public class PaymentService(
         };
     }
 
-    public async Task<Result> ProcessPaymentNotificationAsync(PaymentNotification notification)
+    public async Task<Result> ProcessPaymentNotificationAsync(PaymentNotification notification,
+        CancellationToken cancellationToken)
     {
         // 1. Buscar o carrinho pelo TransactionId
         var cart = await cartRepository.GetByTransactionIdAsync(notification.TransactionId);
@@ -46,15 +47,13 @@ public class PaymentService(
             return Result.Failure(Error.Failure("PaymentService.ProcessPaymentNotificationAsync",
                 "Cart not found or already processed"));
 
-        var order = orderQueueRepository.GetByTransactionIdAsync(notification.TransactionId);
+        var order = await orderQueueRepository.GetByTransactionIdAsync(notification.TransactionId, cancellationToken);
         if (order != null)
             return Result.Failure(Error.Failure("PaymentService.ProcessPaymentNotificationAsync",
                 "Order already exists for this transaction"));
 
         if (notification.Status == PaymentStatus.Accepted)
         {
-            cart.UpdatePaymentStatus(PaymentStatus.Accepted);
-
             var orderId = OrderId.New();
             var orderItems = cart.Items.Select(cartItem =>
                 OrderItem.Create(OrderItemId.New(), orderId, cartItem.ProductId, cartItem.ProductName,
@@ -70,7 +69,7 @@ public class PaymentService(
         else if (notification.Status == PaymentStatus.Rejected)
         {
             cart.UpdatePaymentStatus(PaymentStatus.Rejected);
-            await cartRepository.UpdateAsync(cart);
+            await cartRepository.UpdateStatusAsync(cart);
         }
 
         return Result.Success();

@@ -29,9 +29,12 @@ public class CartServiceTests
             Quantity = 1
         };
 
+        var product = Product.Create(new ProductId(cartItem.ProductId), cartItem.ProductName, "Description", cartItem.UnitPrice,
+            ProductCategory.Lanche, "http://example.com/image.jpg");
+
         _cartRepository.GetByCustomerIdAsync(customerId).Returns((Cart)null);
 
-        var result = await _cartService.AddToCartAsync(customerId, cartItem);
+        var result = await _cartService.AddToCartAsync(customerId, cartItem,product);
 
         result.CustomerId.Should().Be(customerId);
         result.Items.Should().ContainSingle(i => i.ProductId == cartItem.ProductId);
@@ -50,12 +53,15 @@ public class CartServiceTests
             Quantity = 1
         };
 
+        var product = Product.Create(new ProductId(cartItem.ProductId), cartItem.ProductName, "Description", cartItem.UnitPrice,
+            ProductCategory.Lanche, "http://example.com/image.jpg");
+
         var existingCart = Cart.Create(CartId.New(), customerId);
         existingCart.AddItem(CartItem.Create(CartItemId.New(), new ProductId(productId), "Test Product", 10.99m, 1,
             ProductCategory.Lanche));
         _cartRepository.GetByCustomerIdAsync(customerId).Returns(existingCart);
 
-        var result = await _cartService.AddToCartAsync(customerId, cartItem);
+        var result = await _cartService.AddToCartAsync(customerId, cartItem,product);
 
         result.Items.Should().ContainSingle(i => i.ProductId == productId && i.Quantity == 2);
     }

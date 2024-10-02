@@ -117,7 +117,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a9bddd75-5d5b-47e6-8044-dbb22ae437f4"),
+                            Id = new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"),
                             Cpf = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
@@ -222,7 +222,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("738dd22a-79db-48e6-a291-d5b8d3b32da6"),
+                            Id = new Guid("81e0a7f0-77e9-433f-9f2c-1b131c3317c3"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -231,7 +231,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a21709b2-ab04-4ec8-933c-44bcf5312aca"),
+                            Id = new Guid("6937a222-4e5e-4a75-abde-9ab3b9f58b0f"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -240,7 +240,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc843643-5fac-427e-8d2e-3681dada07fe"),
+                            Id = new Guid("84d18030-66cc-4f12-bf5f-988667805bf8"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -249,7 +249,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("78d7e7e6-afd8-49bb-88a6-076febf8cf5c"),
+                            Id = new Guid("024fb6ba-5ebe-4131-a27e-d10a4041b32d"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",

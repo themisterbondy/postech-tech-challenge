@@ -67,7 +67,7 @@ public class UpdateOrderQueueStatusCommandTests
 
         var response = new EnqueueOrderResponse
         {
-            Id = command.Id,
+            OrderId = command.Id,
             CreatedAt = DateTime.UtcNow,
             CustomerCpf = "12345678901",
             Status = OrderQueueStatus.Preparing,

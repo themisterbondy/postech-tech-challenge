@@ -42,7 +42,7 @@ public class AddToCartHandlerTests
 
         var command = new AddItensToCart.Command { CustomerId = "12345678901", ProductId = product.Id.Value, Quantity = 1 };
         _cartService
-            .AddToCartAsync(Arg.Any<string>(), Arg.Any<CartItemDto>())
+            .AddToCartAsync(Arg.Any<string>(), Arg.Any<CartItemDto>(), Arg.Any<Product>())
             .Returns(Task.FromResult(new CartResponse()));
 
 

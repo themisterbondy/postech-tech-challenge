@@ -26,7 +26,7 @@ public class EnqueueOrderResponseTests
         // Act
         var response = new EnqueueOrderResponse
         {
-            Id = id,
+            OrderId = id,
             CreatedAt = createdAt,
             CustomerCpf = customerCpf,
             Status = status,
@@ -35,7 +35,7 @@ public class EnqueueOrderResponseTests
 
         // Assert
         response.Should().NotBeNull();
-        response.Id.Should().Be(id);
+        response.OrderId.Should().Be(id);
         response.CreatedAt.Should().Be(createdAt);
         response.CustomerCpf.Should().Be(customerCpf);
         response.Status.Should().Be(status);
@@ -53,7 +53,7 @@ public class ListOrdersResponseTests
         {
             new()
             {
-                Id = Guid.NewGuid(), OrderDate = DateTime.UtcNow, CustomerCpf = "12345678901", Items =
+                OrderId = Guid.NewGuid(), OrderDate = DateTime.UtcNow, CustomerCpf = "12345678901", Items =
                 [
                     new OrderItemDto
                     {

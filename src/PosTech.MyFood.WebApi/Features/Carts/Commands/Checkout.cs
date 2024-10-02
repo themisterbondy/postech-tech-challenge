@@ -50,7 +50,7 @@ public class Checkout
 
             cart.TransactionId = paymentInitiationResult.Value.TransactionId;
             cart.UpdatePaymentStatus(PaymentStatus.Pending);
-            await cartRepository.UpdateAsync(cart);
+            await cartRepository.UpdateStatusAsync(cart);
 
             return Result.Success(new CheckoutResponse
             {
@@ -65,7 +65,8 @@ public class Checkout
                     ProductId = item.ProductId.Value,
                     ProductName = item.ProductName,
                     UnitPrice = item.UnitPrice,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    Category = item.Category
                 }).ToList()
             });
         }

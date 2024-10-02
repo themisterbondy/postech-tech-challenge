@@ -25,7 +25,7 @@ public class OrderDtoTests
         // Act
         var orderDto = new OrderDto
         {
-            Id = id,
+            OrderId = id,
             OrderDate = orderDate,
             Status = status,
             CustomerCpf = customerCpf,
@@ -34,7 +34,7 @@ public class OrderDtoTests
 
         // Assert
         orderDto.Should().NotBeNull();
-        orderDto.Id.Should().Be(id);
+        orderDto.OrderId.Should().Be(id);
         orderDto.OrderDate.Should().Be(orderDate);
         orderDto.Status.Should().Be(status);
         orderDto.CustomerCpf.Should().Be(customerCpf);
@@ -61,7 +61,7 @@ public class OrderDtoTests
         // Act
         var orderDto = new OrderDto
         {
-            Id = id,
+            OrderId = id,
             OrderDate = orderDate,
             Status = status,
             CustomerCpf = customerCpf,
@@ -70,7 +70,7 @@ public class OrderDtoTests
 
         // Assert
         orderDto.Should().NotBeNull();
-        orderDto.Id.Should().Be(id);
+        orderDto.OrderId.Should().Be(id);
         orderDto.OrderDate.Should().Be(orderDate);
         orderDto.Status.Should().Be(status);
         orderDto.CustomerCpf.Should().BeNull();
@@ -90,7 +90,7 @@ public class OrderDtoTests
         // Act
         var orderDto = new OrderDto
         {
-            Id = id,
+            OrderId = id,
             OrderDate = orderDate,
             Status = status,
             CustomerCpf = customerCpf,
@@ -99,7 +99,7 @@ public class OrderDtoTests
 
         // Assert
         orderDto.Should().NotBeNull();
-        orderDto.Id.Should().Be(id);
+        orderDto.OrderId.Should().Be(id);
         orderDto.OrderDate.Should().Be(orderDate);
         orderDto.Status.Should().Be(status);
         orderDto.CustomerCpf.Should().Be(customerCpf);

@@ -7,7 +7,7 @@ namespace PosTech.MyFood.WebApi.Features.Carts.Services;
 
 public class CartService(ICartRepository cartRepository) : ICartService
 {
-    public async Task<CartResponse> AddToCartAsync(string? customerId, CartItemDto cartItem)
+    public async Task<CartResponse> AddToCartAsync(string? customerId, CartItemDto cartItem, Product product)
     {
         var customer = customerId ?? Guid.NewGuid().ToString();
         var cart = await cartRepository.GetByCustomerIdAsync(customerId) ?? Cart.Create(CartId.New(), customer);
@@ -25,11 +25,10 @@ public class CartService(ICartRepository cartRepository) : ICartService
                 cartItem.ProductName,
                 cartItem.UnitPrice,
                 cartItem.Quantity,
-                ProductCategory.Lanche); // Ajuste a categoria conforme necessário
+                product.Category);
             newItem.CartId = cart.Id;
             cart.AddItem(newItem);
         }
-
         if (await cartRepository.ExistsAsync(cart.Id))
             await cartRepository.UpdateAsync(cart);
         else
@@ -103,7 +102,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
         if (cart == null) return null;
 
         cart.Items.Clear();
-        await cartRepository.UpdateAsync(cart);
+        await cartRepository.Delete(cart);
 
         return new CartResponse
         {
