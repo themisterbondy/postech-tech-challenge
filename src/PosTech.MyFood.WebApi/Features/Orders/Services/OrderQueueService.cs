@@ -51,6 +51,7 @@ public class OrderQueueService(
             CreatedAt = orderQueue.CreatedAt,
             CustomerCpf = orderQueue.CustomerCpf,
             Status = status,
+            TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
             {
                 ProductId = item.ProductId.Value,
