@@ -38,7 +38,7 @@ public class CustomerRepositoryTests
         var context = ApplicationDbContextMock.Create();
         var repository = new CustomerRepository(context);
 
-        var result = await repository.GetByCPFAsync(null, CancellationToken.None);
+        var result = await repository.GetByCpfAsync(null, CancellationToken.None);
 
         result.IsFailure.Should().BeTrue();
         result.Error.Code.Should().Be("CustomerRepository.GetByCPFAsync");
@@ -54,7 +54,7 @@ public class CustomerRepositoryTests
         await context.SaveChangesAsync();
         var repository = new CustomerRepository(context);
 
-        var result = await repository.GetByCPFAsync(customer.CPF, CancellationToken.None);
+        var result = await repository.GetByCpfAsync(customer.Cpf, CancellationToken.None);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(customer);

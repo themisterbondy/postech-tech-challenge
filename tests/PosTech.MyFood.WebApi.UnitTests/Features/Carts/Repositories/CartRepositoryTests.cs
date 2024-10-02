@@ -93,7 +93,7 @@ public class CartRepositoryTests
         await context.SaveChangesAsync();
         var repository = new CartRepository(context);
 
-        await repository.DeleteCartsOlderThanAsync(DateTime.UtcNow.AddDays(-30));
+        await repository.DeleteUnpaidCartsOlderThanAsync(DateTime.UtcNow);
 
         context.Carts.Should().NotContain(c => c.Id == oldCart.Id);
     }

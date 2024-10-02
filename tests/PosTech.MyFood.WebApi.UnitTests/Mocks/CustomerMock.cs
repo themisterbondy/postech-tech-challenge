@@ -16,7 +16,7 @@ public static class CustomerMocks
             .RuleFor(u => u.Id, (f, u) => u.Id)
             .RuleFor(u => u.Name, (f, u) => u.Name)
             .RuleFor(u => u.Email, (f, u) => u.Email)
-            .RuleFor(u => u.CPF, (f, u) => u.CPF);
+            .RuleFor(u => u.Cpf, (f, u) => u.Cpf);
 
         return validCustomerFaker.Generate();
     }
@@ -27,7 +27,7 @@ public static class CustomerMocks
             .RuleFor(u => u.Id, f => new CustomerId(Guid.NewGuid()))
             .RuleFor(u => u.Name, f => f.Random.AlphaNumeric(1)) // Name too short
             .RuleFor(u => u.Email, f => f.Random.Word()) // Invalid email format
-            .RuleFor(u => u.CPF, f => f.Random.Word()); // Invalid CPF format
+            .RuleFor(u => u.Cpf, f => f.Random.Word()); // Invalid CPF format
 
         return invalidCustomerFaker.Generate();
     }

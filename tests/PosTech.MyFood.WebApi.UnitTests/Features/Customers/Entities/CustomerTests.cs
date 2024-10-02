@@ -37,7 +37,7 @@ public class CustomerTests
         customer.Id.Should().Be(id);
         customer.Name.Should().Be(name);
         customer.Email.Should().Be(email);
-        customer.CPF.Should().Be(cpf);
+        customer.Cpf.Should().Be(cpf);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class CustomerTests
         customer.Id.Should().Be(id);
         customer.Name.Should().Be(name);
         customer.Email.Should().BeNull();
-        customer.CPF.Should().Be(cpf);
+        customer.Cpf.Should().Be(cpf);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class CustomerTests
         customer.Id.Should().Be(id);
         customer.Name.Should().Be(name);
         customer.Email.Should().Be(email);
-        customer.CPF.Should().BeNull();
+        customer.Cpf.Should().BeNull();
     }
 
     [Fact]
@@ -85,6 +85,6 @@ public class CustomerTests
         customer.Id.Should().Be(id);
         customer.Name.Should().BeNull();
         customer.Email.Should().Be(email);
-        customer.CPF.Should().Be(cpf);
+        customer.Cpf.Should().Be(cpf);
     }
 }

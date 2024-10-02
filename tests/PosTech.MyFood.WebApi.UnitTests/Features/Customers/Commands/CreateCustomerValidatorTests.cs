@@ -25,17 +25,17 @@ public class CreateCustomerValidatorTests
     [Fact]
     public void Validator_ShouldHaveError_WhenCPFIsEmpty()
     {
-        var command = new CreateCustomer.Command { CPF = string.Empty };
+        var command = new CreateCustomer.Command { Cpf = string.Empty };
         var result = _validator.TestValidate(command);
-        result.ShouldHaveValidationErrorFor(x => x.CPF);
+        result.ShouldHaveValidationErrorFor(x => x.Cpf);
     }
 
     [Fact]
     public void Validator_ShouldHaveError_WhenCPFIsInvalid()
     {
-        var command = new CreateCustomer.Command { CPF = "123" }; // Invalid length
+        var command = new CreateCustomer.Command { Cpf = "123" }; // Invalid length
         var result = _validator.TestValidate(command);
-        result.ShouldHaveValidationErrorFor(x => x.CPF);
+        result.ShouldHaveValidationErrorFor(x => x.Cpf);
     }
 
     [Fact]
@@ -46,13 +46,13 @@ public class CreateCustomerValidatorTests
         {
             Name = "Test Customer",
             Email = "test@example.com",
-            CPF = "12345678901"
+            Cpf = "12345678901"
         };
 
         _customerServices.IsUniqueCustomer(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns(Result.Success(true));
 
-        var customer = Customer.Create(CustomerId.New(), command.Name, command.Email, command.CPF);
+        var customer = Customer.Create(CustomerId.New(), command.Name, command.Email, command.Cpf);
         _customerRepository.CreateAsync(Arg.Any<Customer>(), Arg.Any<CancellationToken>())
             .Returns(Result.Success(customer));
 
@@ -67,7 +67,7 @@ public class CreateCustomerValidatorTests
             Id = customer.Id.Value,
             Name = customer.Name,
             Email = customer.Email,
-            CPF = customer.CPF
+            Cpf = customer.Cpf
         });
     }
 
@@ -79,7 +79,7 @@ public class CreateCustomerValidatorTests
         {
             Name = "Test Customer",
             Email = "test@example.com",
-            CPF = "12345678901"
+            Cpf = "12345678901"
         };
 
         _customerServices.IsUniqueCustomer(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>())
@@ -103,7 +103,7 @@ public class CreateCustomerValidatorTests
         {
             Name = "Test Customer",
             Email = "test@example.com",
-            CPF = "12345678901"
+            Cpf = "12345678901"
         };
 
         _customerServices.IsUniqueCustomer(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>())

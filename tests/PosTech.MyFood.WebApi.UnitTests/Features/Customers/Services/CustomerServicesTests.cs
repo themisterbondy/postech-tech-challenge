@@ -65,7 +65,7 @@ public class CustomerServicesTests
         var customerRepository = Substitute.For<ICustomerRepository>();
         customerRepository.GetByEmailAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(Result.Success(CustomerMocks.GenerateValidCustomer())));
-        customerRepository.GetByCPFAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+        customerRepository.GetByCpfAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(Result.Failure<Customer>(Error.Conflict("CustomerServices.IsUniqueCustomer",
                 "Customer already exists with this CPF."))));
         var service = new CustomerServices(customerRepository);
@@ -86,7 +86,7 @@ public class CustomerServicesTests
         var customerRepository = Substitute.For<ICustomerRepository>();
         customerRepository.GetByEmailAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(Result.Success(CustomerMocks.GenerateValidCustomer())));
-        customerRepository.GetByCPFAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
+        customerRepository.GetByCpfAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns(Task.FromResult(Result.Success(CustomerMocks.GenerateValidCustomer())));
         var service = new CustomerServices(customerRepository);
 

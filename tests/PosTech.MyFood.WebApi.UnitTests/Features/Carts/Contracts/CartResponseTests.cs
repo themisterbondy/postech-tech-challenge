@@ -14,9 +14,9 @@ public class CartResponseTests
             new() { ProductId = Guid.NewGuid(), ProductName = "Product 1", UnitPrice = 10.99m, Quantity = 1 }
         };
 
-        var response = new CartResponse { Id = id, CustomerId = customerId, Items = items };
+        var response = new CartResponse { CartId = id, CustomerId = customerId, Items = items };
 
-        response.Id.Should().Be(id);
+        response.CartId.Should().Be(id);
         response.CustomerId.Should().Be(customerId);
         response.Items.Should().BeEquivalentTo(items);
         response.Items.Should().HaveCount(1);
@@ -38,11 +38,11 @@ public class CartResponseTests
             new() { ProductId = Guid.NewGuid(), ProductName = "Product 1", UnitPrice = 10.99m, Quantity = 1 }
         };
 
-        response.Id = id;
+        response.CartId = id;
         response.CustomerId = customerId;
         response.Items = items;
 
-        response.Id.Should().Be(id);
+        response.CartId.Should().Be(id);
         response.CustomerId.Should().Be(customerId);
         response.Items.Should().HaveCount(1);
         response.Items[0].ProductId.Should().Be(items[0].ProductId);

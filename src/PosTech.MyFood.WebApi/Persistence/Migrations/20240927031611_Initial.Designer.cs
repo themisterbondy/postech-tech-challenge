@@ -12,7 +12,7 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240803225720_Initial")]
+    [Migration("20240927031611_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,7 +26,25 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.CartItem", b =>
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("character varying(36)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts", (string)null);
+                });
+
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.CartItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -57,21 +75,6 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasIndex("CartId");
 
                     b.ToTable("CartItems", (string)null);
-                });
-
-            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("character varying(36)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Customers.Entities.Customer", b =>
@@ -109,7 +112,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bb9ff95d-53ea-4d18-8831-ff6672247f33"),
+                            Id = new Guid("8c304d80-e6ed-4596-b838-2845d56391b9"),
                             CPF = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
@@ -210,7 +213,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ddb4a9a5-66bd-495c-ba95-e19955203500"),
+                            Id = new Guid("54af44a4-6897-421d-8f1c-907ecc8fceeb"),
                             Category = "Lanche",
                             Description = "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br",
@@ -219,7 +222,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("41271808-b044-4880-8d01-8c8e1cbfd524"),
+                            Id = new Guid("b2dbed74-b1d2-4d19-9e84-98500b09ce53"),
                             Category = "Acompanhamento",
                             Description = "A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br",
@@ -228,7 +231,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3eb30302-fcef-410e-902d-b3784ca9b9d4"),
+                            Id = new Guid("f4422f5f-2b39-4087-ad8e-6ec0c382e6fb"),
                             Category = "Bebida",
                             Description = "Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kNXZJR6V/200/200/original?country=br",
@@ -237,7 +240,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("decf08dd-57df-4a2a-abca-c812ed9d0df2"),
+                            Id = new Guid("939fb55f-cf26-41ec-b929-0e47748b3790"),
                             Category = "Sobremesa",
                             Description = "A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.",
                             ImageUrl = "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br",
@@ -246,7 +249,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PosTech.MyFood.Features.Carts.Entities.CartItem", b =>
+            modelBuilder.Entity("PosTech.MyFood.WebApi.Features.Carts.Entities.CartItem", b =>
                 {
                     b.HasOne("PosTech.MyFood.WebApi.Features.Carts.Entities.Cart", null)
                         .WithMany("Items")

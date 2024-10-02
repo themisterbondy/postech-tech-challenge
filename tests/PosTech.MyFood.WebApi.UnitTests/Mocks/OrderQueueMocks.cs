@@ -9,15 +9,15 @@ public static class OrderQueueMocks
     {
         var faker = new Faker();
         var orderId = new OrderId(faker.Random.Guid());
-        var createdAt = faker.Date.Past();
-        var customerCpf = faker.Random.ReplaceNumbers("###########"); // Assuming this generates a valid CPF
+        var customerCpf = faker.Random.ReplaceNumbers("###########");
+        var transactionId = faker.Random.Guid().ToString();
         var items = new List<OrderItem> { OrderItemMocks.GenerateValidOrderItem() };
 
-        return OrderQueue.Create(orderId, createdAt, customerCpf, items);
+        return OrderQueue.Create(orderId, customerCpf, items, transactionId,OrderQueueStatus.Received);
     }
 
     public static OrderQueue GenerateInvalidOrderQueue()
     {
-        return OrderQueue.Create(null, DateTime.MinValue, null, null);
+        return OrderQueue.Create(null, null, null, null, OrderQueueStatus.Received);
     }
 }
