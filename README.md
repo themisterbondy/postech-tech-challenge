@@ -157,6 +157,29 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
 
 4. Acesse o Swagger para explorar as APIs: [https://localhost:8081/swagger](https://localhost:8081/swagger)
 
+
+### Passos para Utilização HELM
+
+1. Criar postgres e namespace:
+    ```shell
+    helm install myfood-postgres .\charts\postgres\ --namespace myfood-namespace --create-namespace
+    ```
+
+2. Cria pods de aplicação: 
+    ```shell
+    helm install myfood-webapi .\charts\webapi\ --namespace myfood-namespace
+    ```
+
+3. Valida estado dos Pods
+    ```shell
+    kubectl get pods --namespace myfood-namespace --watch
+    ```
+
+4. Delete 
+    ```shell
+    kubectl delete namespace myfood-namespace
+    ```
+
 ## Validação da POC
 
 ### Infraestrutura
