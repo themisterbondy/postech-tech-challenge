@@ -1,0 +1,1194 @@
+{
+	"info": {
+		"_postman_id": "9e6deac9-fe83-4f67-9072-a55063ff590d",
+		"name": "PosTech MyFood API",
+		"description": "MyFood is a food ordering system developed using ASP.NET Core Minimal API with a hexagonal architecture. It allows customers to create personalized combos and track the status of their orders. The system also offers administrative features to manage products, categories and promotional campaigns\n\n---\n\n### Step-by-Step\n\n#### Customer Flow\n\n1. [Create Customer](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-cb422483-a562-45ce-a434-695dac761771) or [Get customer by CPF](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-fe964880-6887-49af-9018-3acf9ed4c868)\n    \n2. [Get List Products](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-af7ee20c-a842-46e3-b857-3d5ffdd3d5b4) searching a specfic category ( get by Category )\n    \n3. [Add items to the cart](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-6e3e0b13-2c6a-4025-b4ac-f34564c6eb70)\n    \n4. Finish the [Checkout of your items](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-5f8555df-1bfd-4ed8-ac9c-715ce7d8274d)\n    \n5. Call [Payment Webhook ](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-d2d1d30f-378f-4f52-8a57-97c4f297f4cf) sending status received status\n    \n6. You can find your [Order by TransactionId](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-c4d2e2bd-3930-4b0b-9762-523b557055fd)\n    \n7. Get [status order](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-f0a0ed53-8297-403a-aefd-0917aea48158) by orderId\n    \n\n#### Restaurant Flow\n\n1. [Create Product](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-57b47b17-5ab5-48ac-a45b-a0dd03780e04) ( be creative )\n    \n2. [Update Products](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-a495c634-aa18-4e97-b5b7-72fc85b0cfad) by id\n    \n3. [Delete Products](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-23b1460e-8a36-4924-a031-d48410921572) by id\n    \n4. [Check List for new Orders](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-33b4d17a-0221-41b5-aeb5-2e59481de03c)\n    \n5. [Update Status Orders](https://go.postman.co/workspace/4522236b-f6ff-46cb-8b2f-7ce6f649563f/documentation/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?entity=request-c03c40a9-3bfa-468b-9b17-b8da02a5f3c7) by OrderId\n    \n\n---\n\n#### Authors :\n\n- Alexandre Nascimento\n    \n- Camila Nachbar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "389375"
+	},
+	"item": [
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "1. Product Registration",
+					"item": [
+						{
+							"name": "Category",
+							"item": [
+								{
+									"name": "List Products",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/products/category?request=Lanche",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												"category"
+											],
+											"query": [
+												{
+													"key": "request",
+													"value": "Lanche",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "localhost:30000/api/products/category?request=Lanche",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"products",
+														"category"
+													],
+													"query": [
+														{
+															"key": "request",
+															"value": "Lanche",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"products\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<double>\",\n      \"category\": \"Bebida\",\n      \"imageUrl\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"price\": \"<double>\",\n      \"category\": \"Sobremesa\",\n      \"imageUrl\": \"<string>\"\n    }\n  ]\n}"
+										}
+									]
+								}
+							],
+							"description": "# Pré Created Categorys\n\n- Bebida\n    \n- Lanche\n    \n- Sobremesa\n    \n- Acompanhamento"
+						},
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Update Product",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<uuid>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:30000/api/products/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete Product",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<uuid>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "localhost:30000/api/products/:id",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"description": "Update,"
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:30000/api/products",
+											"host": [
+												"localhost"
+											],
+											"port": "30000",
+											"path": [
+												"api",
+												"products"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"price\": \"<double>\",\n  \"category\": \"Lanche\",\n  \"imageUrl\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"description": "### Product Pré-Created\n\n- **McFritas Média**\n    \n    - Category : Acompanhamento\n        \n    - Description : A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.\n        \n    - Price: $2.99\n        \n- **Casquinha Chocolate**\n    \n    - Category : Sobremesa\n        \n    - Description : A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.\n        \n    - Price: $1.49\n        \n- **Big Mac**\n    \n    - Category : Lanche\n        \n    - Description : Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.\n        \n    - Preço: $5.99\n        \n- **Coca-Cola 300ml**\n    \n    - Category : Bebida\n        \n    - Description : Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.\n        \n    - Price: $1.99"
+				},
+				{
+					"name": "2. Create Customer",
+					"item": [
+						{
+							"name": "customers",
+							"item": [
+								{
+									"name": "{cpf}",
+									"item": [
+										{
+											"name": "Get Customer By Cpf",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/customers/:cpf",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"customers",
+														":cpf"
+													],
+													"variable": [
+														{
+															"key": "cpf",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "localhost:30000/api/customers/:cpf",
+															"host": [
+																"localhost"
+															],
+															"port": "30000",
+															"path": [
+																"api",
+																"customers",
+																":cpf"
+															],
+															"variable": [
+																{
+																	"key": "cpf"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"cpf\": \"<string>\"\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Create Customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/customers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"customers"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Create",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"cpf\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:30000/api/customers",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"customers"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"cpf\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "3. Carts Flow",
+					"item": [
+						{
+							"name": "checkout",
+							"item": [
+								{
+									"name": "Checkout",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/carts/checkout?cartId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"carts",
+												"checkout"
+											],
+											"query": [
+												{
+													"key": "cartId",
+													"value": "<uuid>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Created",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "localhost:30000/api/carts/checkout?cartId=<uuid>",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"carts",
+														"checkout"
+													],
+													"query": [
+														{
+															"key": "cartId",
+															"value": "<uuid>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"cartId\": \"<uuid>\",\n  \"customerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"totalAmount\": \"<double>\",\n  \"items\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Acompanhamento\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    }\n  ],\n  \"qrCodeImageUrl\": \"<string>\",\n  \"transactionId\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Add Items to the Cart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<uuid>\",\n  \"quantity\": \"<integer>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/carts/checkout?cartId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"carts",
+										"checkout"
+									],
+									"query": [
+										{
+											"key": "cartId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"customerId\": \"<string>\",\n  \"productId\": \"<uuid>\",\n  \"quantity\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:30000/api/carts",
+											"host": [
+												"localhost"
+											],
+											"port": "30000",
+											"path": [
+												"api",
+												"carts"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cartId\": \"<uuid>\",\n  \"customerId\": \"<string>\",\n  \"items\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"totalAmount\": \"<double>\",\n  \"paymentStatus\": \"Accepted\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "4. Payment Webhook",
+					"item": [
+						{
+							"name": "webhook",
+							"item": [
+								{
+									"name": "Payment Webhook",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"transactionId\": \"<string>\",\n  \"status\": \"Accepted\",\n  \"amount\": \"<double>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/payments/webhook",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"payments",
+												"webhook"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "webhook send mock payment",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"transactionId\": \"<string>\",\n  \"status\": \"Accepted\",\n  \"amount\": \"<double>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "localhost:30000/api/payments/webhook",
+													"host": [
+														"localhost"
+													],
+													"port": "30000",
+													"path": [
+														"api",
+														"payments",
+														"webhook"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{cartId}",
+							"item": [
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Get Payment Status",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/payments/:cartId/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"payments",
+														":cartId",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "cartId",
+															"value": "<uuid>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/payments/:cartId/status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"payments",
+																":cartId",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "cartId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"cartId\": \"<uuid>\",\n  \"status\": \"NotStarted\",\n  \"transactionId\": \"<string>\"\n}"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "5. Orders Flow",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Update Order Status",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/orders/:id/status?status=Ready",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"orders",
+														":id",
+														"status"
+													],
+													"query": [
+														{
+															"key": "status",
+															"value": "Ready",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<uuid>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/orders/:id/status?status=Ready",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"orders",
+																":id",
+																"status"
+															],
+															"query": [
+																{
+																	"key": "status",
+																	"value": "Ready",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"orderId\": \"<uuid>\",\n  \"createdAt\": \"<dateTime>\",\n  \"customerCpf\": \"<string>\",\n  \"status\": \"Ready\",\n  \"items\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    }\n  ],\n  \"transactionId\": \"<string>\"\n}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Get Order",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/orders/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"orders",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<uuid>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/orders/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"orders",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"orderId\": \"<uuid>\",\n  \"createdAt\": \"<dateTime>\",\n  \"customerCpf\": \"<string>\",\n  \"status\": \"Ready\",\n  \"items\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    }\n  ],\n  \"transactionId\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{transactionId}",
+							"item": [
+								{
+									"name": "Get Order By Transaction Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/orders/:transactionId?transactionId=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"orders",
+												":transactionId"
+											],
+											"query": [
+												{
+													"key": "transactionId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											],
+											"variable": [
+												{
+													"key": "transactionId"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/orders/:transactionId?transactionId=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"orders",
+														":transactionId"
+													],
+													"query": [
+														{
+															"key": "transactionId",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "transactionId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"orderId\": \"<uuid>\",\n  \"createdAt\": \"<dateTime>\",\n  \"customerCpf\": \"<string>\",\n  \"status\": \"Ready\",\n  \"items\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"productName\": \"<string>\",\n      \"productDescription\": \"<string>\",\n      \"unitPrice\": \"<double>\",\n      \"quantity\": \"<integer>\",\n      \"category\": \"Lanche\"\n    }\n  ],\n  \"transactionId\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "List Orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/orders",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"orders"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<uuid>\",\n      \"orderDate\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"customerCpf\": \"<string>\",\n      \"items\": [\n        {\n          \"productId\": \"<uuid>\",\n          \"productName\": \"<string>\",\n          \"productDescription\": \"<string>\",\n          \"unitPrice\": \"<double>\",\n          \"quantity\": \"<integer>\",\n          \"category\": \"Sobremesa\"\n        },\n        {\n          \"productId\": \"<uuid>\",\n          \"productName\": \"<string>\",\n          \"productDescription\": \"<string>\",\n          \"unitPrice\": \"<double>\",\n          \"quantity\": \"<integer>\",\n          \"category\": \"Lanche\"\n        }\n      ],\n      \"transactionId\": \"<string>\"\n    },\n    {\n      \"orderId\": \"<uuid>\",\n      \"orderDate\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"customerCpf\": \"<string>\",\n      \"items\": [\n        {\n          \"productId\": \"<uuid>\",\n          \"productName\": \"<string>\",\n          \"productDescription\": \"<string>\",\n          \"unitPrice\": \"<double>\",\n          \"quantity\": \"<integer>\",\n          \"category\": \"Sobremesa\"\n        },\n        {\n          \"productId\": \"<uuid>\",\n          \"productName\": \"<string>\",\n          \"productDescription\": \"<string>\",\n          \"unitPrice\": \"<double>\",\n          \"quantity\": \"<integer>\",\n          \"category\": \"Sobremesa\"\n        }\n      ],\n      \"transactionId\": \"<string>\"\n    }\n  ]\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"description": "### What you gonna find?\n\n1. Product Registration\n    \n    1. List Products\n        \n    2. Create Product\n        \n    3. Update Products by Id\n        \n    4. Delete Products by Id\n        \n2. Create Customer\n    \n    1. Create new customer\n        \n    2. Find by CPF\n        \n3. Carts Flow\n    \n    1. Add Items to the Cart\n        \n    2. Checkout ( Create a Pre-Order )\n        \n4. Payment webhook\n    \n    1. Webhook send mock payment\n        \n    2. Get Payment Status by CartId\n        \n5. Orders Flow\n    \n    1. Get Order\n        \n    2. Get Order by transactionID\n        \n    3. List Orders"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
