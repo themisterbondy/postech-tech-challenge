@@ -92,6 +92,11 @@ A documentação do sistema foi desenvolvida seguindo os padrões de Domain-Driv
 
 Os desenhos e diagramas do Event Storming podem ser encontrados [https://miro.com/app/board/uXjVK06l1is=/](https://miro.com/app/board/uXjVK06l1is=/).
 
+### Postman
+
+Arquivo para importar a collection pode ser encontrado em: collection/PosTech MyFood API.postman_collection.json
+
+
 ## Migrações e Dados Pré-Incluídos
 
 O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema do banco de dados. As migrações são aplicadas automaticamente durante a inicialização da aplicação.
