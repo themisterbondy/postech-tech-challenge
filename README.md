@@ -180,15 +180,21 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
     kubectl get pods --namespace myfood-namespace --watch
     ```
 
-4. Visualizar Logs de pods 
+4. Url de acesso a aplicação 
+    ```shell
+    http://localhost:30000
+    ```
+
+5. Visualizar Logs de pods 
     ```shell
       kubectl describe pod {{myfood-webapi}} --namespace myfood-namespace
     ```
 
-5. Deletar NameSpace ( deleta todos os recursos criados )
+6. Deletar NameSpace ( deleta todos os recursos criados )
     ```shell
     kubectl delete namespace myfood-namespace
-    ```
+    ```       
+
 
 ## Validação da POC
 
