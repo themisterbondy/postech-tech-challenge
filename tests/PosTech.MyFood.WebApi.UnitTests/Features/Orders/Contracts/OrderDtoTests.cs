@@ -17,7 +17,7 @@ public class OrderDtoTests
         {
             new()
             {
-                ProductId = Guid.NewGuid(), ProductName = "Test Product", ProductDescription = "Test Description",
+                ProductId = Guid.NewGuid(), ProductName = "Test Product",
                 UnitPrice = 10.99m, Quantity = 2, Category = ProductCategory.Lanche
             }
         };
@@ -53,7 +53,7 @@ public class OrderDtoTests
         {
             new()
             {
-                ProductId = Guid.NewGuid(), ProductName = "Test Product", ProductDescription = "Test Description",
+                ProductId = Guid.NewGuid(), ProductName = "Test Product",
                 UnitPrice = 10.99m, Quantity = 2, Category = ProductCategory.Lanche
             }
         };

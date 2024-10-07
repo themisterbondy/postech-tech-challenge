@@ -10,6 +10,7 @@ using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
+    [ExcludeFromCodeCoverage]
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {

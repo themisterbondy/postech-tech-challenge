@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
+    [ExcludeFromCodeCoverage]
     /// <inheritdoc />
     public partial class Initial : Migration
     {

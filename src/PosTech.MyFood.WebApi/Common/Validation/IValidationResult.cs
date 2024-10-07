@@ -8,6 +8,7 @@ public interface IValidationResult
     /// <summary>
     ///     Represents a validation error that occurred during data validation.
     /// </summary>
+    ///
     public static readonly Error ValidationError = Error.Validation(
         "ValidationError",
         "A validation problem occurred.");

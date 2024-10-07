@@ -5,6 +5,7 @@ using PosTech.MyFood.WebApi.Features.Customers.Queries;
 
 namespace PosTech.MyFood.WebApi.Features.Customers.Endpoints;
 
+[ExcludeFromCodeCoverage]
 public class CustomersEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
