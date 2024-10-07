@@ -185,7 +185,7 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
       kubectl describe pod {{myfood-webapi}} --namespace myfood-namespace
     ```
 
-5. Deletar NameSpace ( deleta todos os pods )
+5. Deletar NameSpace ( deleta todos os recursos criados )
     ```shell
     kubectl delete namespace myfood-namespace
     ```
