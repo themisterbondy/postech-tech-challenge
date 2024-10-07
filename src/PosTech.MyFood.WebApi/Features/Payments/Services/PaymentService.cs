@@ -16,10 +16,11 @@ public class PaymentService(
 {
     public async Task<Result<PaymentInitiationResponse>> InitiatePaymentAsync(Guid cartId, decimal amount)
     {
+        var transactionId = Guid.NewGuid().ToString();
         return await Task.FromResult(new PaymentInitiationResponse
         {
-            TransactionId = Guid.NewGuid().ToString(),
-            QrCodeImageUrl = "https://example.com/qrcode.png"
+            TransactionId = transactionId,
+            QrCodeImageUrl = $"https://payment.com/qrcode/{transactionId}.png"
         });
     }
 
