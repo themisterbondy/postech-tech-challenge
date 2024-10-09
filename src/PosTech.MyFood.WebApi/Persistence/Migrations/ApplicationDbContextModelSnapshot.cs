@@ -10,7 +10,6 @@ using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
-    [ExcludeFromCodeCoverage]
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
@@ -118,7 +117,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"),
+                            Id = new Guid("cd01035d-77a2-44a0-88ce-6f88f4a7e06f"),
                             Cpf = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"

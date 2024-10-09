@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
-    [ExcludeFromCodeCoverage]
     /// <inheritdoc />
     public partial class Initial : Migration
     {
@@ -126,7 +125,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Cpf", "Email", "Name" },
-                values: new object[] { new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"), "36697999071", "john.doe@email.com", "John Doe" });
+                values: new object[] { new Guid("cd01035d-77a2-44a0-88ce-6f88f4a7e06f"), "36697999071", "john.doe@email.com", "John Doe" });
 
             migrationBuilder.InsertData(
                 table: "Products",

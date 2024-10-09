@@ -12,7 +12,7 @@ using PosTech.MyFood.WebApi.Persistence;
 namespace PosTech.MyFood.WebApi.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241001222438_Initial")]
+    [Migration("20241009002816_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -120,7 +120,7 @@ namespace PosTech.MyFood.WebApi.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8b95afb7-75ea-4768-af8b-256d243b45c7"),
+                            Id = new Guid("cd01035d-77a2-44a0-88ce-6f88f4a7e06f"),
                             Cpf = "36697999071",
                             Email = "john.doe@email.com",
                             Name = "John Doe"
