@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O MyFood é um sistema de pedidos de comida desenvolvido utilizando ASP.NET Core Minimal API com uma arquitetura hexagonal. Ele permite que os clientes montem combos personalizados e acompanhem o status de seus pedidos. O sistema também oferece funcionalidades administrativas para gerenciar produtos, categorias e campanhas promocionais.
+O MyFood é um sistema de pedidos de comida desenvolvido utilizando ASP.NET Core Minimal API com uma arquitetura Clean Architecture. Ele permite que os clientes montem combos personalizados e acompanhem o status de seus pedidos. O sistema também oferece funcionalidades administrativas para gerenciar produtos, categorias e campanhas promocionais.
 
 ## Sobre o Projeto
 
