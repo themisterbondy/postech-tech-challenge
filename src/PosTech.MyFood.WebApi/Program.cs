@@ -10,13 +10,20 @@ builder.Services.AddWebApi(configuration);
 builder.Services.AddSerilogConfiguration(builder, configuration);
 
 var app = builder.Build();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 app.ApplyMigrations();
 app.UseHealthChecksConfiguration();
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
+
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
 app.UseMiddleware<RequestContextLoggingMiddleware>();
 app.MapCarter();
 app.Run();
+
+[ExcludeFromCodeCoverage]
+public partial class Program;

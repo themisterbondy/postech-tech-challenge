@@ -18,7 +18,7 @@ public class EnqueueOrderResponseTests
         {
             new()
             {
-                ProductId = Guid.NewGuid(), ProductName = "Test Product", ProductDescription = "Test Description",
+                ProductId = Guid.NewGuid(), ProductName = "Test Product",
                 UnitPrice = 10.99m, Quantity = 2, Category = ProductCategory.Lanche
             }
         };
@@ -26,7 +26,7 @@ public class EnqueueOrderResponseTests
         // Act
         var response = new EnqueueOrderResponse
         {
-            Id = id,
+            OrderId = id,
             CreatedAt = createdAt,
             CustomerCpf = customerCpf,
             Status = status,
@@ -35,7 +35,7 @@ public class EnqueueOrderResponseTests
 
         // Assert
         response.Should().NotBeNull();
-        response.Id.Should().Be(id);
+        response.OrderId.Should().Be(id);
         response.CreatedAt.Should().Be(createdAt);
         response.CustomerCpf.Should().Be(customerCpf);
         response.Status.Should().Be(status);
@@ -53,12 +53,12 @@ public class ListOrdersResponseTests
         {
             new()
             {
-                Id = Guid.NewGuid(), OrderDate = DateTime.UtcNow, CustomerCpf = "12345678901", Items =
+                OrderId = Guid.NewGuid(), OrderDate = DateTime.UtcNow, CustomerCpf = "12345678901", Items =
                 [
                     new OrderItemDto
                     {
                         ProductId = Guid.NewGuid(), ProductName = "Test Product",
-                        ProductDescription = "Test Description", UnitPrice = 10.99m, Quantity = 2,
+               UnitPrice = 10.99m, Quantity = 2,
                         Category = ProductCategory.Lanche
                     }
                 ]
@@ -112,7 +112,6 @@ public class OrderItemDtoTests
         {
             ProductId = productId,
             ProductName = productName,
-            ProductDescription = productDescription,
             UnitPrice = unitPrice,
             Quantity = quantity,
             Category = category
@@ -122,7 +121,6 @@ public class OrderItemDtoTests
         orderItemDto.Should().NotBeNull();
         orderItemDto.ProductId.Should().Be(productId);
         orderItemDto.ProductName.Should().Be(productName);
-        orderItemDto.ProductDescription.Should().Be(productDescription);
         orderItemDto.UnitPrice.Should().Be(unitPrice);
         orderItemDto.Quantity.Should().Be(quantity);
         orderItemDto.Category.Should().Be(category);

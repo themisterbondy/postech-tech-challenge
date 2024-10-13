@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.MyFood.WebApi.Features.Orders.Contracts;
+using PosTech.MyFood.WebApi.Features.Orders.Entities;
 using PosTech.MyFood.WebApi.Persistence;
 
 namespace PosTech.MyFood.WebApi.Features.Orders.Queries;
@@ -14,16 +15,22 @@ public class ListOrders
         {
             var orders = await context.OrderQueue
                 .Include(o => o.Items)
+                .Where(o => o.Status != OrderQueueStatus.Cancelled && o.Status != OrderQueueStatus.Completed)
+                .OrderBy(o => o.Status == OrderQueueStatus.Ready ? 0
+                    : o.Status == OrderQueueStatus.Preparing ? 1
+                    : 2)
+                .ThenBy(o => o.CreatedAt)
                 .ToListAsync(cancellationToken);
 
             return Result.Success(new ListOrdersResponse
             {
                 Orders = orders.Select(o => new OrderDto
                 {
-                    Id = o.Id.Value,
+                    OrderId = o.Id.Value,
                     OrderDate = o.CreatedAt,
                     Status = o.Status.ToString(),
                     CustomerCpf = o.CustomerCpf,
+                    TransactionId = o.TransactionId,
                     Items = o.Items.Select(oi => new OrderItemDto
                     {
                         ProductId = oi.ProductId.Value,

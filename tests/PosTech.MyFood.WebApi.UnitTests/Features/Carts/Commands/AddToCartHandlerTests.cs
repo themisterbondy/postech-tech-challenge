@@ -9,14 +9,14 @@ namespace PosTech.MyFood.WebApi.UnitTests.Features.Carts.Commands;
 public class AddToCartHandlerTests
 {
     private readonly ICartService _cartService;
-    private readonly AddToCart.Handler _handler;
+    private readonly AddItensToCart.Handler _handler;
     private readonly IProductRepository _productRepository;
 
     public AddToCartHandlerTests()
     {
         _cartService = Substitute.For<ICartService>();
         _productRepository = Substitute.For<IProductRepository>();
-        _handler = new AddToCart.Handler(_cartService, _productRepository);
+        _handler = new AddItensToCart.Handler(_cartService, _productRepository);
     }
 
     [Fact]
@@ -25,7 +25,7 @@ public class AddToCartHandlerTests
         _productRepository.FindByIdAsync(Arg.Any<ProductId>(), Arg.Any<CancellationToken>())
             .Returns((Product)null);
 
-        var command = new AddToCart.Command { ProductId = Guid.NewGuid(), Quantity = 1 };
+        var command = new AddItensToCart.Command { ProductId = Guid.NewGuid(), Quantity = 1 };
         var result = await _handler.Handle(command, CancellationToken.None);
 
         result.IsFailure.Should().BeTrue();
@@ -40,9 +40,9 @@ public class AddToCartHandlerTests
         _productRepository.FindByIdAsync(Arg.Any<ProductId>(), Arg.Any<CancellationToken>())
             .Returns(product);
 
-        var command = new AddToCart.Command { CustomerId = "12345678901", ProductId = product.Id.Value, Quantity = 1 };
+        var command = new AddItensToCart.Command { CustomerId = "12345678901", ProductId = product.Id.Value, Quantity = 1 };
         _cartService
-            .AddToCartAsync(Arg.Any<string>(), Arg.Any<CartItemDto>())
+            .AddToCartAsync(Arg.Any<string>(), Arg.Any<CartItemDto>(), Arg.Any<Product>())
             .Returns(Task.FromResult(new CartResponse()));
 
 

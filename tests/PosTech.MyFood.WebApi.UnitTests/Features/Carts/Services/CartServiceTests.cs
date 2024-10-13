@@ -29,9 +29,12 @@ public class CartServiceTests
             Quantity = 1
         };
 
+        var product = Product.Create(new ProductId(cartItem.ProductId), cartItem.ProductName, "Description", cartItem.UnitPrice,
+            ProductCategory.Lanche, "http://example.com/image.jpg");
+
         _cartRepository.GetByCustomerIdAsync(customerId).Returns((Cart)null);
 
-        var result = await _cartService.AddToCartAsync(customerId, cartItem);
+        var result = await _cartService.AddToCartAsync(customerId, cartItem,product);
 
         result.CustomerId.Should().Be(customerId);
         result.Items.Should().ContainSingle(i => i.ProductId == cartItem.ProductId);
@@ -50,12 +53,15 @@ public class CartServiceTests
             Quantity = 1
         };
 
+        var product = Product.Create(new ProductId(cartItem.ProductId), cartItem.ProductName, "Description", cartItem.UnitPrice,
+            ProductCategory.Lanche, "http://example.com/image.jpg");
+
         var existingCart = Cart.Create(CartId.New(), customerId);
         existingCart.AddItem(CartItem.Create(CartItemId.New(), new ProductId(productId), "Test Product", 10.99m, 1,
             ProductCategory.Lanche));
         _cartRepository.GetByCustomerIdAsync(customerId).Returns(existingCart);
 
-        var result = await _cartService.AddToCartAsync(customerId, cartItem);
+        var result = await _cartService.AddToCartAsync(customerId, cartItem,product);
 
         result.Items.Should().ContainSingle(i => i.ProductId == productId && i.Quantity == 2);
     }
@@ -99,17 +105,64 @@ public class CartServiceTests
         result.Items.Should().NotContain(i => i.ProductId == productId);
     }
 
-    [Fact]
-    public async Task ShouldClearCart()
-    {
-        var customerId = "12345678901";
-        var existingCart = Cart.Create(CartId.New(), customerId);
-        existingCart.AddItem(CartItem.Create(CartItemId.New(), new ProductId(Guid.NewGuid()), "Test Product", 10.99m, 1,
-            ProductCategory.Lanche));
-        _cartRepository.GetByCustomerIdAsync(customerId).Returns(existingCart);
 
-        var result = await _cartService.ClearCartAsync(customerId);
+        [Fact]
+        public async Task ClearCartAsync_ShouldReturnNull_WhenCartNotFound()
+        {
+            // Arrange
+            var cartService = new CartService(_cartRepository);
+            var cartId = Guid.NewGuid();
 
-        result.Items.Should().BeEmpty();
-    }
+            _cartRepository.GetByIdAsync(Arg.Any<CartId>()).Returns((Cart)null);
+
+            // Act
+            var result = await cartService.ClearCartAsync(cartId);
+
+            // Assert
+            result.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task ClearCartAsync_ShouldClearItemsAndDeleteCart_WhenCartFound()
+        {
+            // Arrange
+            var cartService = new CartService(_cartRepository);
+            var cartId = new CartId(Guid.NewGuid());
+            var cart = Cart.Create(cartId, "customer123");
+            var cartItem = CartItem.Create(CartItemId.New(), ProductId.New(), "Product 1", 10.99m, 1, ProductCategory.Lanche);
+            cart.Items.Add(cartItem);
+
+            _cartRepository.GetByIdAsync(Arg.Is<CartId>(x => x == cartId)).Returns(cart);
+
+            // Act
+            var result = await cartService.ClearCartAsync(cartId.Value);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.CartId.Should().Be(cartId.Value);
+            result.Items.Should().BeEmpty(); // Todos os itens devem ter sido removidos
+
+            // Verifica se os itens foram removidos
+            await _cartRepository.Received(1).Delete(cart);
+        }
+        [Fact]
+        public async Task ClearCartAsync_ShouldReturnCartResponse_WhenCartIsDeleted()
+        {
+            // Arrange
+            var cartService = new CartService(_cartRepository);
+            var cartId = new CartId(Guid.NewGuid());
+            var cart = Cart.Create(cartId, "customer123");
+
+            // Configurando o mock para retornar o carrinho quando solicitado
+            _cartRepository.GetByIdAsync(Arg.Is<CartId>(id => id == cartId)).Returns(cart);
+
+            // Act
+            var result = await cartService.ClearCartAsync(cartId.Value);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.CartId.Should().Be(cartId.Value);
+            result.CustomerId.Should().Be(cart.CustomerId);
+        }
+
 }

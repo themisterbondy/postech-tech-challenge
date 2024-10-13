@@ -7,7 +7,7 @@ namespace PosTech.MyFood.WebApi.Features.Carts.Services;
 
 public class CartService(ICartRepository cartRepository) : ICartService
 {
-    public async Task<CartResponse> AddToCartAsync(string? customerId, CartItemDto cartItem)
+    public async Task<CartResponse> AddToCartAsync(string? customerId, CartItemDto cartItem, Product product)
     {
         var customer = customerId ?? Guid.NewGuid().ToString();
         var cart = await cartRepository.GetByCustomerIdAsync(customerId) ?? Cart.Create(CartId.New(), customer);
@@ -25,20 +25,22 @@ public class CartService(ICartRepository cartRepository) : ICartService
                 cartItem.ProductName,
                 cartItem.UnitPrice,
                 cartItem.Quantity,
-                ProductCategory.Lanche); // Ajuste a categoria conforme necessário
+                product.Category);
             newItem.CartId = cart.Id;
             cart.AddItem(newItem);
         }
-
         if (await cartRepository.ExistsAsync(cart.Id))
             await cartRepository.UpdateAsync(cart);
         else
             await cartRepository.AddAsync(cart);
 
+        var totalAmount = cart.Items.Sum(item => item.UnitPrice * item.Quantity);
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
+            TotalAmount = totalAmount,
+            PaymentStatus = cart.PaymentStatus,
             Items = cart.Items.Select(i => new CartItemDto
             {
                 ProductId = i.ProductId.Value,
@@ -56,7 +58,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
@@ -82,7 +84,7 @@ public class CartService(ICartRepository cartRepository) : ICartService
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {
@@ -94,17 +96,17 @@ public class CartService(ICartRepository cartRepository) : ICartService
         };
     }
 
-    public async Task<CartResponse> ClearCartAsync(string customerId)
+    public async Task<CartResponse> ClearCartAsync(Guid cartId)
     {
-        var cart = await cartRepository.GetByCustomerIdAsync(customerId);
+        var cart = await cartRepository.GetByIdAsync(new CartId(cartId));
         if (cart == null) return null;
 
         cart.Items.Clear();
-        await cartRepository.UpdateAsync(cart);
+        await cartRepository.Delete(cart);
 
         return new CartResponse
         {
-            Id = cart.Id.Value,
+            CartId = cart.Id.Value,
             CustomerId = cart.CustomerId,
             Items = cart.Items.Select(i => new CartItemDto
             {

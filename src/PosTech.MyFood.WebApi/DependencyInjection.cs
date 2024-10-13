@@ -8,15 +8,16 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using PosTech.MyFood.WebApi.Common;
 using PosTech.MyFood.WebApi.Common.Behavior;
+using PosTech.MyFood.WebApi.Features.Carts.Jobs;
 using PosTech.MyFood.WebApi.Features.Carts.Repositories;
 using PosTech.MyFood.WebApi.Features.Carts.Services;
 using PosTech.MyFood.WebApi.Features.Customers.Repositories;
 using PosTech.MyFood.WebApi.Features.Customers.Services;
+using PosTech.MyFood.WebApi.Features.Orders.Jobs;
 using PosTech.MyFood.WebApi.Features.Orders.Repositories;
 using PosTech.MyFood.WebApi.Features.Orders.Services;
 using PosTech.MyFood.WebApi.Features.Payments.Services;
 using PosTech.MyFood.WebApi.Features.Products.Repositories;
-using PosTech.MyFood.WebApi.Jobs;
 using PosTech.MyFood.WebApi.Persistence;
 using Quartz;
 using Quartz.AspNetCore;
@@ -55,7 +56,7 @@ public static class DependencyInjection
         services.AddScoped<IOrderQueueService, OrderQueueService>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<ICartService, CartService>();
-        services.AddScoped<IPaymentService, FakePaymentService>();
+        services.AddScoped<IPaymentService, PaymentService>();
         services.AddJobs();
 
 
@@ -75,6 +76,7 @@ public static class DependencyInjection
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(5)
                     .RepeatForever())
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Minute))
             );
 
             var orderJobKey = new JobKey("OrderCleanupJob");
@@ -85,6 +87,7 @@ public static class DependencyInjection
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(30)
                     .RepeatForever())
+                .StartAt(DateBuilder.FutureDate(5, IntervalUnit.Minute))
             );
         });
 

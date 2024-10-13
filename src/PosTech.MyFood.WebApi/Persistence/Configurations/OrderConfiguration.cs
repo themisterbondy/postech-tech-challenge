@@ -34,5 +34,9 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderQueue>
         builder.HasMany(o => o.Items)
             .WithOne()
             .HasForeignKey(oi => oi.OrderId);
+
+        builder.Property(c => c.TransactionId)
+            .IsRequired(false)
+            .HasMaxLength(36);
     }
 }

@@ -16,9 +16,9 @@ public class CustomerServices(ICustomerRepository customerRepository) : ICustome
             return Result.Failure(Error.Conflict("CustomerServices.IsUniqueCustomer",
                 "Customer already exists with this email."));
 
-        var existingCustomerByCPF = await customerRepository.GetByCPFAsync(cpf, cancellationToken);
+        var existingCustomerByCpf = await customerRepository.GetByCpfAsync(cpf, cancellationToken);
 
-        if (existingCustomerByCPF.IsFailure)
+        if (existingCustomerByCpf.IsFailure)
             return Result.Failure(Error.Conflict("CustomerServices.IsUniqueCustomer",
                 "Customer already exists with this CPF."));
 

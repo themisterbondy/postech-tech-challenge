@@ -1,4 +1,5 @@
 using PosTech.MyFood.WebApi.Features.Carts.Contracts;
+using PosTech.MyFood.WebApi.Features.Payments.Emun;
 
 namespace PosTech.MyFood.WebApi.UnitTests.Features.Carts.Contracts;
 
@@ -14,9 +15,14 @@ public class CartResponseTests
             new() { ProductId = Guid.NewGuid(), ProductName = "Product 1", UnitPrice = 10.99m, Quantity = 1 }
         };
 
-        var response = new CartResponse { Id = id, CustomerId = customerId, Items = items };
+        var response = new CartResponse
+        {
+            CartId = id, CustomerId = customerId, Items = items,
+            TotalAmount = 10.99m,
+            PaymentStatus = PaymentStatus.Accepted
+        };
 
-        response.Id.Should().Be(id);
+        response.CartId.Should().Be(id);
         response.CustomerId.Should().Be(customerId);
         response.Items.Should().BeEquivalentTo(items);
         response.Items.Should().HaveCount(1);
@@ -24,6 +30,8 @@ public class CartResponseTests
         response.Items[0].ProductName.Should().Be(items[0].ProductName);
         response.Items[0].UnitPrice.Should().Be(items[0].UnitPrice);
         response.Items[0].Quantity.Should().Be(items[0].Quantity);
+        response.TotalAmount.Should().Be(10.99m);
+        response.PaymentStatus.Should().Be(PaymentStatus.Accepted);
     }
 
     [Fact]
@@ -33,21 +41,26 @@ public class CartResponseTests
 
         var id = Guid.NewGuid();
         var customerId = "12345678901";
+
         var items = new List<CartItemDto>
         {
             new() { ProductId = Guid.NewGuid(), ProductName = "Product 1", UnitPrice = 10.99m, Quantity = 1 }
         };
 
-        response.Id = id;
+        response.CartId = id;
         response.CustomerId = customerId;
         response.Items = items;
+        response.TotalAmount = 10.99m;
+        response.PaymentStatus = PaymentStatus.Accepted;
 
-        response.Id.Should().Be(id);
+        response.CartId.Should().Be(id);
         response.CustomerId.Should().Be(customerId);
         response.Items.Should().HaveCount(1);
         response.Items[0].ProductId.Should().Be(items[0].ProductId);
         response.Items[0].ProductName.Should().Be(items[0].ProductName);
         response.Items[0].UnitPrice.Should().Be(items[0].UnitPrice);
         response.Items[0].Quantity.Should().Be(items[0].Quantity);
+        response.TotalAmount.Should().Be(10.99m);
+        response.PaymentStatus.Should().Be(PaymentStatus.Accepted);
     }
 }

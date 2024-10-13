@@ -5,6 +5,7 @@ using PosTech.MyFood.WebApi.Features.Customers.Queries;
 
 namespace PosTech.MyFood.WebApi.Features.Customers.Endpoints;
 
+[ExcludeFromCodeCoverage]
 public class CustomersEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
@@ -13,17 +14,17 @@ public class CustomersEndpoints : ICarterModule
 
         group.MapPost("/", async (CustomerRequest request, [FromServices] IMediator mediator) =>
             {
-                var Command = new CreateCustomer.Command
+                var command = new CreateCustomer.Command
                 {
                     Name = request.Name,
                     Email = request.Email,
-                    CPF = request.CPF
+                    Cpf = request.Cpf
                 };
 
-                var result = await mediator.Send(Command);
+                var result = await mediator.Send(command);
 
                 return result.IsSuccess
-                    ? Results.Created($"/Customers/{result.Value.CPF}", result.Value)
+                    ? Results.Created($"/Customers/{result.Value.Cpf}", result.Value)
                     : result.ToProblemDetails();
             })
             .WithName("CreateCustomer")
@@ -34,7 +35,7 @@ public class CustomersEndpoints : ICarterModule
 
         group.MapGet("/{cpf}", async (string cpf, [FromServices] IMediator mediator) =>
             {
-                var query = new GetCustomerByCpf.Query { CPF = cpf };
+                var query = new GetCustomerByCpf.Query { Cpf = cpf };
                 var result = await mediator.Send(query);
                 return result.IsSuccess
                     ? Results.Ok(result.Value)

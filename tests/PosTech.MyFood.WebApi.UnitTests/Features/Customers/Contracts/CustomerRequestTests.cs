@@ -11,11 +11,11 @@ public class CustomerRequestTests
         var email = "john.doe@example.com";
         var cpf = "12345678900";
 
-        var request = new CustomerRequest { Name = name, Email = email, CPF = cpf };
+        var request = new CustomerRequest { Name = name, Email = email, Cpf = cpf };
 
         request.Name.Should().Be(name);
         request.Email.Should().Be(email);
-        request.CPF.Should().Be(cpf);
+        request.Cpf.Should().Be(cpf);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class CustomerRequestTests
         var email = "john.doe@example.com";
         var cpf = "12345678900";
 
-        var request = new CustomerRequest { Email = email, CPF = cpf };
+        var request = new CustomerRequest { Email = email, Cpf = cpf };
 
         request.Name.Should().BeNull();
     }
@@ -35,7 +35,7 @@ public class CustomerRequestTests
         var name = "John Doe";
         var cpf = "12345678900";
 
-        var request = new CustomerRequest { Name = name, CPF = cpf };
+        var request = new CustomerRequest { Name = name, Cpf = cpf };
 
         request.Email.Should().BeNull();
     }
@@ -48,6 +48,6 @@ public class CustomerRequestTests
 
         var request = new CustomerRequest { Name = name, Email = email };
 
-        request.CPF.Should().BeNull();
+        request.Cpf.Should().BeNull();
     }
 }

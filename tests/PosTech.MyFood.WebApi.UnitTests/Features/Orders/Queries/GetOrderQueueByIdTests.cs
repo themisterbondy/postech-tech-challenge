@@ -27,7 +27,7 @@ public class GetOrderQueueByIdTests
 
         var response = new EnqueueOrderResponse
         {
-            Id = query.Id,
+            OrderId = query.Id,
             CreatedAt = DateTime.UtcNow,
             CustomerCpf = "12345678901",
             Status = OrderQueueStatus.Received,

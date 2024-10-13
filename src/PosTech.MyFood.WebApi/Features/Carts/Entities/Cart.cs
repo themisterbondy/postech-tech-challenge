@@ -1,3 +1,5 @@
+using PosTech.MyFood.WebApi.Features.Payments.Emun;
+
 namespace PosTech.MyFood.WebApi.Features.Carts.Entities;
 
 public class Cart
@@ -7,12 +9,15 @@ public class Cart
         Id = id;
         CustomerId = customerId;
         CreatedAt = DateTime.UtcNow;
+        PaymentStatus = PaymentStatus.NotStarted;
     }
 
-    public CartId Id { get; set; }
+    public CartId Id { get; init; }
     public string CustomerId { get; set; }
     public DateTime CreatedAt { get; set; }
-    public List<CartItem> Items { get; set; } = new();
+    public List<CartItem> Items { get; init; } = [];
+    public PaymentStatus PaymentStatus { get; set; }
+    public string? TransactionId { get; set; }
 
     public static Cart Create(CartId id, string customerId)
     {
@@ -27,5 +32,10 @@ public class Cart
     public void RemoveItem(CartItemId itemId)
     {
         Items.RemoveAll(x => x.Id == itemId);
+    }
+
+    public void UpdatePaymentStatus(PaymentStatus status)
+    {
+        PaymentStatus = status;
     }
 }
