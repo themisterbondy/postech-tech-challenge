@@ -94,8 +94,7 @@ Os desenhos e diagramas do Event Storming podem ser encontrados [https://miro.co
 
 ### Postman
 
-Arquivo para importar a collection pode ser encontrado em: collection/PosTech MyFood API.postman_collection.json
-
+Link do Postman [https://www.postman.com/blue-crater-21969/workspace/postech/collection/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?action=share&creator=38874442](https://www.postman.com/blue-crater-21969/workspace/postech/collection/389375-9e6deac9-fe83-4f67-9072-a55063ff590d?action=share&creator=38874442)
 
 ## Migrações e Dados Pré-Incluídos
 
