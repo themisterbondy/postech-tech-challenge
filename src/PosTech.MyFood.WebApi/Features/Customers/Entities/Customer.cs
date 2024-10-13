@@ -10,10 +10,6 @@ public class Customer
         Cpf = cpf;
     }
 
-    private Customer()
-    {
-    }
-
     public CustomerId Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }

@@ -110,24 +110,28 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
 ### Produtos Pré-Incluídos
 
 - **McFritas Média**
+  - Id: 6937a222-4e5e-4a75-abde-9ab3b9f58b0f
   - Categoria: Acompanhamento
   - Descrição: A batata frita mais famosa do mundo. Deliciosas batatas selecionadas, fritas, crocantes por fora, macias por dentro, douradas, irresistíveis, saborosas, famosas, e todos os outros adjetivos positivos que você quiser dar.
   - Preço: $2.99
   - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kUXGZHtB/200/200/original?country=br" alt="McFritas Média" style="width:200px;"/>
 
 - **Casquinha Chocolate**
+  - Id: 024fb6ba-5ebe-4131-a27e-d10a4041b32d
   - Categoria: Sobremesa
   - Descrição: A sobremesa que o Brasil todo adora. Uma casquinha supercrocante, com bebida láctea sabor chocolate que vai bem a qualquer hora.
   - Preço: $1.49
   - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kpXyfJ7k/200/200/original?country=br" alt="Casquinha Chocolate" style="width:200px;"/>
 
 - **Big Mac**
+  - Id: 81e0a7f0-77e9-433f-9f2c-1b131c3317c3
   - Categoria: Lanche
   - Descrição: Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.
   - Preço: $5.99
   - Imagem: <img src="https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br" alt="Big Mac" style="width:200px;"/>
 
 - **Coca-Cola 300ml**
+  - Id: 84d18030-66cc-4f12-bf5f-988667805bf8
   - Categoria: Bebida
   - Descrição: Refrescante e geladinha. Uma bebida assim refresca a vida. Você pode escolher entre Coca-Cola, Coca-Cola Zero, Sprite sem Açúcar, Fanta Guaraná e Fanta Laranja.
   - Preço: $1.99
@@ -180,15 +184,21 @@ O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema 
     kubectl get pods --namespace myfood-namespace --watch
     ```
 
-4. Visualizar Logs de pods 
+4. Url de acesso a aplicação 
+    ```shell
+    http://localhost:30000
+    ```
+
+5. Visualizar Logs de pods 
     ```shell
       kubectl describe pod {{myfood-webapi}} --namespace myfood-namespace
     ```
 
-5. Deletar NameSpace ( deleta todos os pods )
+6. Deletar NameSpace ( deleta todos os recursos criados )
     ```shell
     kubectl delete namespace myfood-namespace
-    ```
+    ```       
+
 
 ## Validação da POC
 

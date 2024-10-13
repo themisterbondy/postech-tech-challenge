@@ -15,10 +15,6 @@ public class CartItem
         Category = category;
     }
 
-    private CartItem()
-    {
-    }
-
     public CartItemId Id { get; set; }
     public ProductId ProductId { get; set; }
     public string ProductName { get; set; }

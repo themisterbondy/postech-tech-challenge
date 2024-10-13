@@ -36,7 +36,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasIndex(l => l.Cpf).IsUnique();
 
         builder.HasData(
-            Customer.Create(new CustomerId(Guid.NewGuid()), "John Doe", "john.doe@email.com", "36697999071")
+            Customer.Create(new CustomerId(Guid.Parse("404912ea-3558-4a6c-8318-3c433f0a4459")), "John Doe", "john.doe@email.com", "36697999071")
         );
     }
 }

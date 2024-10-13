@@ -87,7 +87,6 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
     public async Task DeleteUnpaidCartsOlderThanAsync(DateTime threshold)
     {
         var cartsToDelete = await context.Carts
-            .AsNoTracking()
             .Where(c => c.CreatedAt < threshold
                         && (c.PaymentStatus == PaymentStatus.NotStarted || c.PaymentStatus == PaymentStatus.Pending))
             .ToListAsync();

@@ -18,7 +18,7 @@ public class EnqueueOrderResponseTests
         {
             new()
             {
-                ProductId = Guid.NewGuid(), ProductName = "Test Product", ProductDescription = "Test Description",
+                ProductId = Guid.NewGuid(), ProductName = "Test Product",
                 UnitPrice = 10.99m, Quantity = 2, Category = ProductCategory.Lanche
             }
         };
@@ -58,7 +58,7 @@ public class ListOrdersResponseTests
                     new OrderItemDto
                     {
                         ProductId = Guid.NewGuid(), ProductName = "Test Product",
-                        ProductDescription = "Test Description", UnitPrice = 10.99m, Quantity = 2,
+               UnitPrice = 10.99m, Quantity = 2,
                         Category = ProductCategory.Lanche
                     }
                 ]
@@ -112,7 +112,6 @@ public class OrderItemDtoTests
         {
             ProductId = productId,
             ProductName = productName,
-            ProductDescription = productDescription,
             UnitPrice = unitPrice,
             Quantity = quantity,
             Category = category
@@ -122,7 +121,6 @@ public class OrderItemDtoTests
         orderItemDto.Should().NotBeNull();
         orderItemDto.ProductId.Should().Be(productId);
         orderItemDto.ProductName.Should().Be(productName);
-        orderItemDto.ProductDescription.Should().Be(productDescription);
         orderItemDto.UnitPrice.Should().Be(unitPrice);
         orderItemDto.Quantity.Should().Be(quantity);
         orderItemDto.Category.Should().Be(category);
