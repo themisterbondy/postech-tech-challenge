@@ -19,7 +19,7 @@ public class OrderQueueService(
         {
             OrderId = orderQueue.Id.Value,
             CreatedAt = orderQueue.CreatedAt,
-            CustomerCpf = orderQueue.CustomerCpf,
+            CustomerCpf = orderQueue.CustomerId,
             Status = orderQueue.Status,
             TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
@@ -49,7 +49,7 @@ public class OrderQueueService(
         {
             OrderId = orderQueue.Id.Value,
             CreatedAt = orderQueue.CreatedAt,
-            CustomerCpf = orderQueue.CustomerCpf,
+            CustomerCpf = orderQueue.CustomerId,
             Status = status,
             TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
@@ -76,7 +76,7 @@ public class OrderQueueService(
         {
             OrderId = orderQueue.Id.Value,
             CreatedAt = orderQueue.CreatedAt,
-            CustomerCpf = orderQueue.CustomerCpf,
+            CustomerCpf = orderQueue.CustomerId,
             Status = orderQueue.Status,
             TransactionId = orderQueue.TransactionId,
             Items = orderQueue.Items.Select(item => new OrderItemDto
