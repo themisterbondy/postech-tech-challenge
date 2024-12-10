@@ -67,3 +67,29 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/myfood-webapi:latest
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
+
+      # 9. Autenticação no Azure para Kubernetes
+      - name: Authenticate with Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # 10. Configurar credenciais do Kubernetes
+      - name: Get Kubernetes Config
+        run: |
+          az aks get-credentials --resource-group rg-postech-fiap-k8s --name postech-fiap-k8s-cluster --overwrite-existing
+
+      # 11. Instalar Helm
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+
+      # 12. Deploy no Kubernetes usando Helm
+      - name: Deploy API to Kubernetes
+        run: |
+          helm upgrade --install myfood-webapi ./charts/webapi/ \
+            --namespace myfood-namespace \
+            --set image.repository=my-dockerhub-user/myfood-webapi \
+            --set image.tag=${{ github.sha }} \
+            --create-namespace
