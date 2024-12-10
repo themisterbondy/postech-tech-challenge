@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: myfood-config
-data:
-  ConnectionStrings__SQLConnection: "Host=myfood-postgres;Database=myfooddb;Username=myfooduser;Password=myfooduser"
