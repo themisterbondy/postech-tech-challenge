@@ -62,6 +62,8 @@ jobs:
           context: .
           file: src/PosTech.MyFood.WebApi/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/myfood-webapi:${{ github.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/myfood-webapi:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/myfood-webapi:latest
           labels: |
             org.opencontainers.image.source=${{ github.repository }}
