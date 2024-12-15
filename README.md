@@ -100,6 +100,10 @@ Link do Postman [https://www.postman.com/blue-crater-21969/workspace/postech/col
 
 O sistema utiliza migrações do Entity Framework Core para gerenciar o esquema do banco de dados. As migrações são aplicadas automaticamente durante a inicialização da aplicação.
 
+### Modelagem banco de dados
+
+![Modelagem](db-image.jpg)
+
 ### Clientes Pré-Incluídos
 
 - **John Doe**
