@@ -28,7 +28,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<OrderQueue>
                 v => v.ToString(),
                 v => (OrderQueueStatus)Enum.Parse(typeof(OrderQueueStatus), v));
 
-        builder.Property(o => o.CustomerCpf)
+        builder.Property(o => o.CustomerId)
             .HasMaxLength(11);
 
         builder.HasMany(o => o.Items)

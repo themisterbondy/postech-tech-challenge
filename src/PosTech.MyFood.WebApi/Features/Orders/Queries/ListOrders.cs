@@ -29,7 +29,7 @@ public class ListOrders
                     OrderId = o.Id.Value,
                     OrderDate = o.CreatedAt,
                     Status = o.Status.ToString(),
-                    CustomerCpf = o.CustomerCpf,
+                    CustomerCpf = o.CustomerId,
                     TransactionId = o.TransactionId,
                     Items = o.Items.Select(oi => new OrderItemDto
                     {
